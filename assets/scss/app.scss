@@ -12,20 +12,20 @@ body {
     background-color: $secondary-color;
 }
 
-h1 {
+@mixin text ($font-weight, $font-size) {
     font-family: $main-font;
-    font-weight: bold;
-    font-size: 30px;
+    font-weight: $font-weight;
+    font-size: $font-size;
+}
+
+h1 {
+    @include text (bold, 30px);
 }
 
 h2, h3 {
-    font-family: $main-font;
-    font-weight: 600;
-    font-size: 20px;
+    @include text (600, 20px);
 }
 
 p {
-    font-family: $main-font;
-    font-weight: 400;
-    font-size: 16px;
+    @include text (400, 16px);
 }
