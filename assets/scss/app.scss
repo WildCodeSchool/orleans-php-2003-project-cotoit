@@ -1,9 +1,31 @@
 @import "vars";
 
+$theme-colors: (
+    "primary": $primary-color,
+    "secondary": $secondary-color,
+);
+
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
+
 body {
     background-color: $secondary-color;
 }
 
-a {
-    color: $warm-color;
+h1 {
+    font-family: $main-font;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+h2, h3 {
+    font-family: $main-font;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+p {
+    font-family: $main-font;
+    font-weight: 400;
+    font-size: 16px;
 }
