@@ -1,8 +1,8 @@
 @import "vars";
 
 $theme-colors: (
-"primary": $primary-color,
-"secondary": $secondary-color,
+    "primary": $primary-color,
+    "secondary": $secondary-color,
 );
 
 @import "~bootstrap/scss/bootstrap";
