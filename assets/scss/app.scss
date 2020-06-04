@@ -1,4 +1,5 @@
 @import "vars";
+@import "footer";
 
 $theme-colors: (
     "primary": $primary-color,
@@ -9,7 +10,7 @@ $theme-colors: (
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
 
 body {
-    background-color: $secondary-color;
+    background-color: $secondary-background-color;
 }
 
 h1 {

@@ -1,0 +1,10 @@
+@import "vars";
+
+.footer {
+  height: 50px;
+  background: url('../images/footer.png') repeat-x;
+}
+
+.footer-container {
+  padding: $spacing;
+}
