@@ -9,7 +9,7 @@ $theme-colors: (
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
 
 body {
-    background-color: $secondary-color;
+    background-color: $secondary-background-color;
 }
 
 @mixin text ($font-weight, $font-size) {
