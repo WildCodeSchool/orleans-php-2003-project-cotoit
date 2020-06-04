@@ -20,7 +20,7 @@ class Manual
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="Le manuel doit comporter un titre")
-     * @Assert\Length(max="100", maxMessage="Le titre du manueldoit comporter {{ limit }} caractères maximum")
+     * @Assert\Length(max="100", maxMessage="Le titre du manuel doit comporter {{ limit }} caractères maximum")
      */
     private $title;
 
