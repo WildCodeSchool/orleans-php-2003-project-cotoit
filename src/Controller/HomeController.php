@@ -13,7 +13,7 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        $manuals =  $this->getDoctrine()
+        $manuals = $this->getDoctrine()
             ->getRepository(Manual::class)
             ->findAll();
 

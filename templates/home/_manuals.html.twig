@@ -6,7 +6,7 @@
                     <h3 class="card-title">{{ manual.title }}</h3>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">{{ manual.text }}</p>
+                    <p class="card-text">{{ manual.text | nl2br }}</p>
                 </div>
             </div>
         {% endfor %}
