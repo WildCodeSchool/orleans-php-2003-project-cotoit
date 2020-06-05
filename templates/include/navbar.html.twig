@@ -1,0 +1,22 @@
+{% block header %}
+<nav class="nav navbar-expand-lg">
+    <a class="navbar-brand" href="#"><img class="logo-navbar" src="{{ asset('build/images/Logo-Cotoit.png') }}" alt="Logo-Cotoit"></a>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="navbar-link nav-link" href="{{ path('home') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-link nav-link" href="#">Grille de temps</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-link nav-link" href="https://www.cotoit.fr" target = "_blank">En savoir plus</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-link nav-link" href="#">Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
