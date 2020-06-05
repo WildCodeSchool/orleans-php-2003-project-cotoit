@@ -1,0 +1,25 @@
+@import "vars";
+
+.footer {
+    height: 50px;
+    background: url('../images/footer.png') repeat-x;
+}
+
+.footer-container {
+    margin: $spacing 0;
+    height: 100px;
+}
+
+.footer-container img {
+    height: 60px;
+    margin-right: $spacing;
+}
+
+.logo-ca img {
+    margin-top: 10px;
+    margin-right: 0;
+}
+
+.logo-ca p {
+    margin-bottom: 0;
+}
