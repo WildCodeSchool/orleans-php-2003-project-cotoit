@@ -1,5 +1,6 @@
 @import "vars";
 @import "header";
+@import "navbar";
 @import "manuals";
 @import "footer";
 
@@ -33,3 +34,4 @@ h2, h3 {
 p {
     @include text (400, 16px);
 }
+
