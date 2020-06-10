@@ -21,10 +21,10 @@ class UserFixtures extends Fixture
 
         $subscriber = new User();
         $subscriber->setUsername('CotoitUser');
-        $subscriber->setRoles(['ROLE_SUBSCRIBER']);
+        $subscriber->setRoles(['ROLE_USER']);
         $subscriber->setPassword($this->passwordEncoder->encodePassword(
             $subscriber,
-            'subscriberpassword'
+            'Cotoitpassword'
         ));
 
         $manager->persist($subscriber);
