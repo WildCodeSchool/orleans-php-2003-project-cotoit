@@ -18,7 +18,7 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // Création d’un utilisateur de type “auteur”
+
         $subscriber = new User();
         $subscriber->setUsername('CotoitUser');
         $subscriber->setRoles(['ROLE_SUBSCRIBER']);
