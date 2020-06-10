@@ -15,9 +15,10 @@
             </div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter :</h1>
+        <h1 class="h3 mb-3">Veuillez vous connecter :</h1>
+
         <label for="inputUsername">Nom d'utilisateur</label>
-        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="login-username form-control" required autofocus>
         <label for="inputPassword">Mot de passe</label>
         <input type="password" name="password" id="inputPassword" class="form-control" required>
 
@@ -25,7 +26,7 @@
                value="{{ csrf_token('authenticate') }}"
         >
 
-        <button class="btnLogin mt-3 btn btn-lg" type="submit">
+        <button class="bouton mt-3 mb-3 btn" type="submit">
             Se connecter
         </button>
     </form>
