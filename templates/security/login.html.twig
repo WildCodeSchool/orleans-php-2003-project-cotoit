@@ -3,7 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block main %}
-<main class="container-fluid">
+<section class="login container-fluid">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -26,9 +26,9 @@
                value="{{ csrf_token('authenticate') }}"
         >
 
-        <button class="bouton mt-3 mb-3 btn" type="submit">
+        <button class="btn btn-primary mt-3 mb-3" type="submit">
             Se connecter
         </button>
     </form>
-</main>
+</section>
 {% endblock %}
