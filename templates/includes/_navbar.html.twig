@@ -13,7 +13,9 @@
                 <a class="navbar-link nav-link" href="https://www.cotoit.fr" target = "_blank">En savoir plus</a>
             </li>
             <li class="nav-item">
-                <a class="navbar-link nav-link" href="#">Déconnexion</a>
+                {% if app.user %}
+                    <a class="navbar-link nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                {% endif %}
             </li>
         </ul>
     </div>
