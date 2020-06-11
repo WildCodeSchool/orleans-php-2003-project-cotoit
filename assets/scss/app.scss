@@ -3,6 +3,7 @@
 @import "navbar";
 @import "manuals";
 @import "footer";
+@import "portfolio";
 
 
 $theme-colors: (
@@ -34,4 +35,3 @@ h2, h3 {
 p {
     @include text (400, 16px);
 }
-
