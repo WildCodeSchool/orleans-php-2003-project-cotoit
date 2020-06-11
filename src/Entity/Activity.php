@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ActivityRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ActivityRepository::class)
+ * @UniqueEntity("name")
  */
 class Activity
 {
@@ -27,12 +29,19 @@ class Activity
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Le nombre d'heures allouées à l'activité  doit être définie")
+     * @Assert\NotBlank(message="Le nombre d'heures allouées à l'activité {{ value }} doit être définie")
+     * @Assert\Positive(message="Le nombre d'heures allouées à l'activité {{ value }} doit être positif")
      */
     private $hours;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *     min = 0,
+     *     max = 59,
+     *     minMessage="Le nombre de minutes allouées à l'activité doit être au minimum de {{ min }}"
+     *     maxMessage="Le nombre de minutes allouées à l'activité doit être au maximum de {{ max }}"
+     * )
      */
     private $minutes;
 
