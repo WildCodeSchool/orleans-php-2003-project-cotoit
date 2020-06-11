@@ -6504,7 +6504,6 @@
             "time": "2020-04-02T16:40:37+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "fzaninotto/faker",
             "version": "v1.9.1",
             "source": {
@@ -6555,8 +6554,6 @@
             "time": "2019-12-12T13:22:17+00:00"
         },
         {
-=======
->>>>>>> dev
             "name": "gitonomy/gitlib",
             "version": "v1.2.1",
             "source": {
