@@ -36,6 +36,7 @@ class Activity
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le nombre de minutes allouées à l'activité doit être défini")
      * @Assert\Range(
      *     min = 0,
      *     max = 59,
