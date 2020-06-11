@@ -64,7 +64,7 @@ class AdminActivityController extends AbstractController
             return $this->redirectToRoute('activity_index');
         }
 
-        return $this->render('activity/edit.html.twig', [
+        return $this->render('admin_activity/edit.html.twig', [
             'activity' => $activity,
             'form' => $form->createView(),
         ]);

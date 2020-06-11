@@ -1,14 +1,13 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Activity index{% endblock %}
+{% block title %}Admin - Index activités{% endblock %}
 
 {% block main %}
-    <h1>Activity index</h1>
+    <h1>Administration - Index des activités</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Hours</th>
                 <th>Minutes</th>
@@ -33,5 +32,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('admin_activity_new') }}">Create new</a>
 {% endblock %}
