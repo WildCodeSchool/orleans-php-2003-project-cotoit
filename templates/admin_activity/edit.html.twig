@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Edit Activity{% endblock %}
+{% block title %}Admin - Modification activité{% endblock %}
 
 {% block main %}
-    <h1>Edit Activity</h1>
+    <h1>Modifier {{ activity.name }}</h1>
 
     {{ include('admin_activity/_form.html.twig', {'button_label': 'Update'}) }}
 

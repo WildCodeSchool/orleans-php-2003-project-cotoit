@@ -52,6 +52,9 @@ class AdminActivityController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Activity $activity
+     * @return Response
      */
     public function edit(Request $request, Activity $activity): Response
     {
@@ -61,7 +64,7 @@ class AdminActivityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('activity_index');
+            return $this->redirectToRoute('admin_activity_index');
         }
 
         return $this->render('admin_activity/edit.html.twig', [
