@@ -1,12 +1,12 @@
 @import "../vars";
 
 .admin-activity-form #activity_name {
-  width: 25%;
+    width: 25%;
 }
 
 .admin-activity-form #activity_hours,
 .admin-activity-form #activity_minutes, {
-  width: 8%;
+    width: 8%;
 }
 
 .admin-activity-form .btn.active.focus,
@@ -15,5 +15,5 @@
 .admin-activity-form .btn.focus:active,
 .admin-activity-form .btn:active:focus,
 .admin-activity-form .btn:focus {
-  box-shadow: none;
+    box-shadow: none;
 }
