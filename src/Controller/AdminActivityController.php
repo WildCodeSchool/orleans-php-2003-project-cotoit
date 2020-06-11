@@ -11,24 +11,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/activity")
+ * @Route("/admin/activity", name="admin_activity_")
  */
 class AdminActivityController extends AbstractController
 {
     /**
-     * @Route("/", name="activity_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      * @param ActivityRepository $activityRepository
      * @return Response
      */
     public function index(ActivityRepository $activityRepository): Response
     {
-        return $this->render('activity/index.html.twig', [
+        return $this->render('admin_activity/index.html.twig', [
             'activities' => $activityRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 
     /**
-     * @Route("/new", name="activity_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -51,17 +51,7 @@ class AdminActivityController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="activity_show", methods={"GET"})
-     */
-    public function show(Activity $activity): Response
-    {
-        return $this->render('activity/show.html.twig', [
-            'activity' => $activity,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="activity_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Activity $activity): Response
     {
@@ -81,7 +71,7 @@ class AdminActivityController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="activity_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, Activity $activity): Response
     {

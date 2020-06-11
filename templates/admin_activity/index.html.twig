@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Activity index{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>Activity index</h1>
 
     <table class="table">
@@ -18,13 +18,11 @@
         <tbody>
         {% for activity in activities %}
             <tr>
-                <td>{{ activity.id }}</td>
                 <td>{{ activity.name }}</td>
                 <td>{{ activity.hours }}</td>
                 <td>{{ activity.minutes }}</td>
                 <td>
-                    <a href="{{ path('activity_show', {'id': activity.id}) }}">show</a>
-                    <a href="{{ path('activity_edit', {'id': activity.id}) }}">edit</a>
+                    <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('activity_new') }}">Create new</a>
+    <a href="{{ path('admin_activity_new') }}">Create new</a>
 {% endblock %}
