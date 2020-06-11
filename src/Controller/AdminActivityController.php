@@ -28,29 +28,6 @@ class AdminActivityController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $activity = new Activity();
-        $form = $this->createForm(ActivityType::class, $activity);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($activity);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('activity_index');
-        }
-
-        return $this->render('activity/new.html.twig', [
-            'activity' => $activity,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      * @param Request $request
      * @param Activity $activity
@@ -71,19 +48,5 @@ class AdminActivityController extends AbstractController
             'activity' => $activity,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Activity $activity): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$activity->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($activity);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('activity_index');
     }
 }
