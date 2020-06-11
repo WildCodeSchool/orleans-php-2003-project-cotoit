@@ -26,6 +26,9 @@ class ActivityFixtures extends Fixture
             $activity->setName($faker->words(3, true));
             $activity->setHours($faker->numberBetween(1, 12));
             $activity->setMinutes($faker->randomElement(self::MINUTES));
+
+            $manager->persist($activity);
         }
+        $manager->flush();
     }
 }
