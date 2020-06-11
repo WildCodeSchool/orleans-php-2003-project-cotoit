@@ -23,14 +23,14 @@ class Activity
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="L'activité doit comporter un nom")
-     * @Assert\Length(max="100", maxMessage="Le nom de l'actitivté doit comporter {{ limit }} caractères maximum")
+     * @Assert\Length(max="100", maxMessage="Le nom de l'activité doit comporter {{ limit }} caractères maximum")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Le nombre d'heures allouées à l'activité {{ value }} doit être définie")
-     * @Assert\Positive(message="Le nombre d'heures allouées à l'activité {{ value }} doit être positif")
+     * @Assert\NotBlank(message="Le nombre d'heures allouées à l'activité doit être défini")
+     * @Assert\PositiveOrZero(message="Le nombre d'heures allouées à l'activité doit être égal à 0 ou positif")
      */
     private $hours;
 
