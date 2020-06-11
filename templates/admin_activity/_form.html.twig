@@ -1,7 +1,8 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
-<div class="container">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+<div class="my-4">
+    <button class="btn btn-primary mr-4">Enregistrer</button>
+    <a class="btn btn-primary" href="{{ path('admin_activity_index') }}">Retour</a>
 </div>
+{{ form_end(form) }}

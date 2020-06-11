@@ -3,10 +3,9 @@
 {% block title %}Admin - Modification activité{% endblock %}
 
 {% block main %}
-    <h1>Modifier {{ activity.name }}</h1>
+    <section class="admin-activity-form container my-4">
+        <h1>Modifier {{ activity.name }}</h1>
 
-    {{ include('admin_activity/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('admin_activity_index') }}">back to list</a>
-
+        {{ include('admin_activity/_form.html.twig') }}
+    </section>
 {% endblock %}

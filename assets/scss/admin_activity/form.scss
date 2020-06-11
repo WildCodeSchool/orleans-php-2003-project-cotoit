@@ -1,0 +1,10 @@
+@import "../vars";
+
+.admin-activity-form #activity_name {
+  width: 25%;
+}
+
+.admin-activity-form #activity_hours,
+.admin-activity-form #activity_minutes, {
+  width: 8%;
+}
