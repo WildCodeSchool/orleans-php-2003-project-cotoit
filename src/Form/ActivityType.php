@@ -15,7 +15,10 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Activité'])
+            ->add('name', TextType::class, [
+                'label' => 'Activité',
+                'empty_data' => '',
+            ])
             ->add('hours', IntegerType::class, ['label' => 'Heures'])
             ->add('minutes', ChoiceType::class, [
                 'choices' => [
