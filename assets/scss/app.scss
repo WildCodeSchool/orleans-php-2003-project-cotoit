@@ -5,8 +5,8 @@
 @import "footer";
 @import "admin_activity/index";
 @import "admin_activity/form";
+@import "portfolio";
 @import "login";
-
 
 
 $theme-colors: (
@@ -38,4 +38,3 @@ h2, h3 {
 p {
     @include text (400, 16px);
 }
-
