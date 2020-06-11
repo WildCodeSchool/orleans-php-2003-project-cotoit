@@ -3,8 +3,8 @@
 {% block title %}Admin - Index activités{% endblock %}
 
 {% block main %}
-    <section class="admin-activity-index container-fluid">
-        <h1 class="ml-2 mt-4 mb-3">Administration - Index des activités</h1>
+    <section class="admin-activity-index container my-4">
+        <h1 class="ml-2 mb-3">Administration - Index des activités</h1>
         <table class="table table-hover">
             <thead class="table-primary">
             <tr>
@@ -21,7 +21,7 @@
                     <td class="text-center">{{ activity.hours }}</td>
                     <td class="text-center">{{ activity.minutes }}</td>
                     <td class="text-center">
-                        <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}">edit</a>
+                        <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
             {% else %}
