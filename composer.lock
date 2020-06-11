@@ -4,7 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+
     "content-hash": "34b31bc1abc50dc168b91b787d4d48d5",
+
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -6502,6 +6504,7 @@
             "time": "2020-04-02T16:40:37+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "fzaninotto/faker",
             "version": "v1.9.1",
             "source": {
@@ -6552,6 +6555,8 @@
             "time": "2019-12-12T13:22:17+00:00"
         },
         {
+=======
+>>>>>>> dev
             "name": "gitonomy/gitlib",
             "version": "v1.2.1",
             "source": {
