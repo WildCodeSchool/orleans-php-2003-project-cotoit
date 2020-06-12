@@ -30,15 +30,15 @@ class UserFixtures extends Fixture
         $manager->persist($subscriber);
 
 
-        $subscriber = new User();
-        $subscriber->setUsername('CotoitAdminUser');
-        $subscriber->setRoles(['ROLE_USER']);
-        $subscriber->setPassword($this->passwordEncoder->encodePassword(
-            $subscriber,
+        $admin = new User();
+        $admin->setUsername('CotoitAdminUser');
+        $admin->setRoles(['ROLE_USER']);
+        $admin->setPassword($this->passwordEncoder->encodePassword(
+            $admin,
             'CotoitAdminpassword'
         ));
 
-        $manager->persist($subscriber);
+        $manager->persist($admin);
 
         $manager->flush();
     }
