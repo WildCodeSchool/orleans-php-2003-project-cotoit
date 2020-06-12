@@ -49,4 +49,21 @@ class AdminActivityController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Activity $activity
+     * @return Response
+     */
+    public function delete(Request $request, Activity $activity): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$activity->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($activity);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_activity_index');
+    }
 }
