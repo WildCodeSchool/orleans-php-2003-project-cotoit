@@ -12,8 +12,7 @@
             <thead class="table-primary">
             <tr>
                 <th>Activités</th>
-                <th class="text-center">Heures</th>
-                <th class="text-center">Minutes</th>
+                <th class="text-center">Temps dédié</th>
                 <th class="text-center">Actions</th>
             </tr>
             </thead>
@@ -21,8 +20,7 @@
             {% for activity in activities %}
                 <tr>
                     <td>{{ activity.name }}</td>
-                    <td class="text-center">{{ activity.hours }}</td>
-                    <td class="text-center">{{ activity.minutes }}</td>
+                    <td class="text-center">{{ activity.hours }}:{{ activity.minutes }}</td>
                     <td class="text-center">
                         <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}"><i class="fas fa-edit"></i></a>
                     </td>
