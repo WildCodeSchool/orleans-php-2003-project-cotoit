@@ -29,6 +29,17 @@ class UserFixtures extends Fixture
 
         $manager->persist($subscriber);
 
+
+        $subscriber = new User();
+        $subscriber->setUsername('CotoitAdminUser');
+        $subscriber->setRoles(['ROLE_USER']);
+        $subscriber->setPassword($this->passwordEncoder->encodePassword(
+            $subscriber,
+            'CotoitAdminpassword'
+        ));
+
+        $manager->persist($subscriber);
+
         $manager->flush();
     }
 }
