@@ -13,7 +13,7 @@ class Portfolio
      *     maxSize = "2M",
      *     maxSizeMessage = "Le fichier est trop lourd {{ size }} {{ suffix }}.
      La taille maximum autorisée est de {{ limit }} {{ suffix }}.",
-     *     mimeTypes = "text/csv",
+     *     mimeTypes = {"text/plain", "text/csv"},
      *     mimeTypesMessage = "Le format du fichier n'est pas valide (merci de vous référer au mode d'emploi)."
      * )
      */
