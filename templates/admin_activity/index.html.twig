@@ -20,8 +20,9 @@
                     <td>{{ activity.name }}</td>
                     <td class="text-center">{{ activity.hours }}</td>
                     <td class="text-center">{{ activity.minutes }}</td>
-                    <td class="text-center">
-                        <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}"><i class="fas fa-edit"></i></a>
+                    <td class="text-center row justify-content-center">
+                        <a class="mx-3" href="{{ path('admin_activity_edit', {'id': activity.id}) }}"><i class="fas fa-edit"></i></a>
+                        {{ include('admin_activity/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
