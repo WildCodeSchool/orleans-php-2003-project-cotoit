@@ -32,7 +32,7 @@ class UserFixtures extends Fixture
 
         $admin = new User();
         $admin->setUsername('CotoitAdminUser');
-        $admin->setRoles(['ROLE_USER']);
+        $admin->setRoles(['ROLE_ADMIN']);
         $admin->setPassword($this->passwordEncoder->encodePassword(
             $admin,
             'CotoitAdminpassword'
