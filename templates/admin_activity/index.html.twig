@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Admin - Index activités{% endblock %}
+
+{% block main %}
+    <section class="admin-activity-index container my-4">
+        <h1 class="ml-2 mb-3">Administration - Index des activités</h1>
+        <table class="table table-hover">
+            <thead class="table-primary">
+            <tr>
+                <th>Activités</th>
+                <th class="text-center">Heures</th>
+                <th class="text-center">Minutes</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for activity in activities %}
+                <tr>
+                    <td>{{ activity.name }}</td>
+                    <td class="text-center">{{ activity.hours }}</td>
+                    <td class="text-center">{{ activity.minutes }}</td>
+                    <td class="text-center">
+                        <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}"><i class="fas fa-edit"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucune activité recensée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}

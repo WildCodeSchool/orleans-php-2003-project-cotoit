@@ -1,0 +1,13 @@
+@import "../vars";
+
+.admin-activity-index .table-primary {
+    background-color: $secondary-color;
+}
+
+.admin-activity-index:hover thead th {
+    background-color: $secondary-color;
+}
+
+.admin-activity-index .fa-edit {
+    font-size: 20px;
+}
