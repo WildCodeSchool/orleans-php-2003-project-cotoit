@@ -43,6 +43,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('footer', './assets/scss/footer.scss')
+    .addEntry('portfolio', './assets/js/portfolio.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -84,9 +85,9 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 
-    // uncomment if you use API Platform Admin (composer req api-admin)
+    // uncomment if you use API Platform Admin (composer req api-admin_activity)
     //.enableReactPreset()
-    //.addEntry('admin', './assets/js/admin.js')
+    //.addEntry('admin_activity', './assets/js/admin_activity.js')
 ;
 
 module.exports = Encore.getWebpackConfig();
