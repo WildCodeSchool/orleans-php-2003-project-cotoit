@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('admin_activity_delete', {'id': activity.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer {{ activity.name }} ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">
-    <button class="btn btn-delete mx-3"><i class="fas fa-trash-alt"></i></button>
+    <button class="btn btn-delete"><i class="fas fa-trash-alt"></i></button>
 </form>
