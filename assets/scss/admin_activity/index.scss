@@ -1,13 +1,24 @@
 @import "../vars";
 
 .admin-activity-index .table-primary {
-    background-color: $secondary-color;
+    background-color: $primary-color;
 }
 
 .admin-activity-index:hover thead th {
-    background-color: $secondary-color;
+    background-color: $primary-color;
 }
 
-.admin-activity-index .fa-edit {
+.admin-activity-index .fa-edit,
+.admin-activity-index .fa-trash-alt {
     font-size: 20px;
+    color: $secondary-color;
+}
+
+.admin-activity-index .fa-trash-alt:hover,
+.admin-activity-index .fa-edit:hover {
+    color: $primary-color;
+}
+
+.admin-activity-index .btn-delete {
+    padding: 0;
 }

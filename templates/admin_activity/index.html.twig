@@ -11,9 +11,9 @@
         <table class="table table-hover">
             <thead class="table-primary">
             <tr>
-                <th>Activités</th>
+                <th>Activité</th>
                 <th class="text-center">Temps dédié</th>
-                <th class="text-center">Actions</th>
+                <th class="text-center" colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -21,8 +21,11 @@
                 <tr>
                     <td>{{ activity.name }}</td>
                     <td class="text-center">{{ activity.hours }}h {{ activity.minutes }}m</td>
-                    <td class="text-center">
+                    <td class="text-right">
                         <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td class="text-left">
+                        {{ include('admin_activity/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
