@@ -10,8 +10,7 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
-     * @IsGranted("ROLE_ADMIN", message="No access! Get out!")
-     * @IsGranted("ROLE_ADMIN", statusCode=404, message="Post not found")
+     * @IsGranted("ROLE_ADMIN", statusCode=404)
      */
     public function index()
     {
