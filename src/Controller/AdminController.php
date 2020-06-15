@@ -10,7 +10,6 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
-     * @IsGranted("ROLE_ADMIN", statusCode=404)
      */
     public function index()
     {

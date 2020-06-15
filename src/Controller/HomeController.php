@@ -15,7 +15,6 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/home", name="home")
-     * @IsGranted({"ROLE_USER", "ROLE_ADMIN"})
      * @param Request $request
      * @return Response
      */
