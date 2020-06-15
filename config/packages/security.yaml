@@ -41,4 +41,3 @@ security:
     - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/home, role: ROLE_USER }
     - { path: ^/admin, role: ROLE_ADMIN }
-
