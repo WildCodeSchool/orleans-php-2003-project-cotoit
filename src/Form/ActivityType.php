@@ -19,7 +19,10 @@ class ActivityType extends AbstractType
                 'label' => 'Activité',
                 'empty_data' => '',
             ])
-            ->add('hours', IntegerType::class, ['label' => 'Heures'])
+            ->add('hours', IntegerType::class, [
+                'label' => 'Heures',
+                'empty_data' => '0',
+                ])
             ->add('minutes', ChoiceType::class, [
                 'choices' => [
                     '00' => 00,

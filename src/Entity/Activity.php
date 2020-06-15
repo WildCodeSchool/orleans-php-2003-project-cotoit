@@ -29,7 +29,6 @@ class Activity
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Le nombre d'heures allouées à l'activité doit être défini")
      * @Assert\PositiveOrZero(message="Le nombre d'heures allouées à l'activité doit être égal à 0 ou positif")
      */
     private $hours;
