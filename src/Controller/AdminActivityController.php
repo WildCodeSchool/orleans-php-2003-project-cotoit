@@ -49,4 +49,29 @@ class AdminActivityController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/new", name="new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function new(Request $request): Response
+    {
+        $activity = new Activity();
+        $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($activity);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_activity_index');
+        }
+
+        return $this->render('admin_activity/new.html.twig', [
+            'activity' => $activity,
+            'form' => $form->createView(),
+        ]);
+    }
 }
