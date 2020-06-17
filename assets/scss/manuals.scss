@@ -10,6 +10,10 @@
     margin: $spacing $spacing-xl;
 }
 
-.adminManuals .container h1{
+.adminManuals h1{
     padding: $spacing;
+}
+
+.container {
+    width: 90%;
 }
