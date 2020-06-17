@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\UserActivity;
 use App\Form\UserActivityType;
 use App\Repository\ActivityRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,10 +21,13 @@ class ActivityController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function customise(ActivityRepository $activityRepository, Request $request): Response
+    public function customise(ActivityRepository $activityRepository, Request $request)
+    : Response
     {
-        $activities = $activityRepository->findBy([], ['name' => 'ASC']);
-        $form = $this->createForm(UserActivityType::class, ['activities' => $activities]);
+        $userActivity = new UserActivity();
+        $userActivity->setActivities($activityRepository->findBy([], ['name' => 'ASC']));
+
+        $form = $this->createForm(UserActivityType::class, $userActivity);
         $form->handleRequest($request);
 
         return $this->render('activity/_customise_form.html.twig', [
