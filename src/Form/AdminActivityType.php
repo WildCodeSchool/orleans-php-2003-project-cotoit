@@ -23,14 +23,9 @@ class AdminActivityType extends AbstractType
                 'label' => 'Heures',
                 'empty_data' => '0',
                 ])
-            ->add('minutes', ChoiceType::class, [
-                'choices' => [
-                    '00' => 00,
-                    '15' => 15,
-                    '30' => 30,
-                    '45' => 45,
-                ],
-                'label' => 'Minutes'
+            ->add('minutes', IntegerType::class, [
+                'label' => 'Minutes',
+                'empty_data' => '0',
             ])
         ;
     }
