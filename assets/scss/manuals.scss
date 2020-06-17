@@ -5,3 +5,11 @@
 .manuals h3 {
     color: $secondary-color;
 }
+
+.adminManuals .card {
+    margin: $spacing $spacing-xl;
+}
+
+.adminManuals .container h1{
+    padding: $spacing;
+}
