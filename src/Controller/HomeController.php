@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Form\PortfolioType;
+use phpDocumentor\Reflection\DocBlock\Serializer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Manual;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class HomeController extends AbstractController
 {
@@ -27,6 +30,10 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $portfolioFile = $form->get('portfolioFileName')->getData();
+//            if ($portfolioFile) {
+//                var_dump($portfolioFile);
+//            }
             return $this->redirectToRoute('home');
         }
 
