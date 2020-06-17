@@ -31,9 +31,9 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $portfolioFile = $form->get('portfolioFileName')->getData();
-//            if ($portfolioFile) {
-//                var_dump($portfolioFile);
-//            }
+            if ($portfolioFile) {
+                var_dump($portfolioFile);
+            }
             return $this->redirectToRoute('home');
         }
 
