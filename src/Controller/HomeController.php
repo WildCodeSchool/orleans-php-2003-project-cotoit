@@ -2,16 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Portfolio;
 use App\Form\PortfolioType;
-use phpDocumentor\Reflection\DocBlock\Serializer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Manual;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class HomeController extends AbstractController
 {
@@ -26,14 +25,14 @@ class HomeController extends AbstractController
             ->getRepository(Manual::class)
             ->findAll();
 
-        $form = $this->createForm(PortfolioType::class);
+        $portfolio = new Portfolio();
+        $form = $this->createForm(PortfolioType::class, $portfolio);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $portfolioFile = $form->get('portfolioFileName')->getData();
-            if ($portfolioFile) {
-                var_dump($portfolioFile);
-            }
+//            $serializer = new Serializer();
+//            $serializer->decode(file_get_contents($portfolio->getPortfolioFileName()), 'csv');
+            $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('home');
         }
 
