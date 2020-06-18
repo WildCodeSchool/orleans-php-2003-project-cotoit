@@ -8,7 +8,7 @@ use App\Repository\ActivityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,10 +20,10 @@ class ActivityController extends AbstractController
      * @Route("/")
      * @param ActivityRepository $activityRepository
      * @param Request $request
-     * @param Session $session
+     * @param SessionInterface $session
      * @return Response
      */
-    public function customise(ActivityRepository $activityRepository, Request $request, Session $session)
+    public function customise(ActivityRepository $activityRepository, Request $request, SessionInterface $session)
     : Response
     {
         $userActivity = new UserActivity();
@@ -35,6 +35,8 @@ class ActivityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $session->set('userActivities', $userActivity);
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('activity/_customise_form.html.twig', [

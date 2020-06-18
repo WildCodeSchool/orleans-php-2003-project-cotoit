@@ -9,7 +9,6 @@ class UserActivity
 {
 
     /**
-     * @Assert\Type(type="App\Entity\Activity")
      * @Assert\Valid
      */
     private $activities;
