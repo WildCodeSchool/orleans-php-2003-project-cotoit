@@ -29,7 +29,7 @@ class Activity
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\PositiveOrZero(message="Le nombre d'heures allouées à l'activité doit être égal à 0 ou positif")
+     * @Assert\PositiveOrZero(message="Le nombre d'heures allouées à une activité doit être égal à 0 ou positif")
      */
     private $hours;
 
@@ -38,8 +38,8 @@ class Activity
      * @Assert\Range(
      *     min = 0,
      *     max = 59,
-     *     minMessage="Le nombre de minutes allouées à l'activité doit être au minimum de {{ limit }}",
-     *     maxMessage="Le nombre de minutes allouées à l'activité doit être au maximum de {{ limit }}",
+     *     minMessage="Le nombre de minutes allouées à une activité doit être au minimum de {{ limit }}",
+     *     maxMessage="Le nombre de minutes allouées à une activité doit être au maximum de {{ limit }}",
      * )
      */
     private $minutes;
