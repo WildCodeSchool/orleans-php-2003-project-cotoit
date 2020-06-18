@@ -21,10 +21,12 @@ class AdminActivityType extends AbstractType
             ->add('hours', IntegerType::class, [
                 'label' => 'Heures',
                 'empty_data' => '0',
+                'error_bubbling' => true,
             ])
             ->add('minutes', IntegerType::class, [
                 'label' => 'Minutes',
                 'empty_data' => '0',
+                'error_bubbling' => true,
             ]);
     }
 

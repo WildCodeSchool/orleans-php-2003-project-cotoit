@@ -3,7 +3,9 @@
 
 namespace App\Form;
 
+use App\Entity\Activity;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ActivityType extends AdminActivityType
 {
