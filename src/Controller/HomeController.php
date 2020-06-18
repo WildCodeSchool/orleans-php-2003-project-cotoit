@@ -10,16 +10,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Manual;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/home", name="home")
      * @param Request $request
+     * @param SerializerInterface $serializer
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SerializerInterface $serializer)
     {
         $manuals = $this->getDoctrine()
             ->getRepository(Manual::class)
@@ -30,7 +31,6 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $serializer = new Serializer();
 //            $serializer->decode(file_get_contents($portfolio->getPortfolioFileName()), 'csv');
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('home');
