@@ -1,7 +1,6 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
-{#    {{ dump(_post) }}#}
     {{ form_start(form) }}
     {% for activity in form.activities %}
         {{ form_row(activity, {'label': activity.vars.data.name}) }}

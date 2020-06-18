@@ -8,6 +8,7 @@ use App\Repository\ActivityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -19,9 +20,10 @@ class ActivityController extends AbstractController
      * @Route("/")
      * @param ActivityRepository $activityRepository
      * @param Request $request
+     * @param Session $session
      * @return Response
      */
-    public function customise(ActivityRepository $activityRepository, Request $request)
+    public function customise(ActivityRepository $activityRepository, Request $request, Session $session)
     : Response
     {
         $userActivity = new UserActivity();
@@ -29,6 +31,10 @@ class ActivityController extends AbstractController
 
         $form = $this->createForm(UserActivityType::class, $userActivity);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $session->set('userActivities', $_POST);
+        }
 
         return $this->render('activity/_customise_form.html.twig', [
             'form' => $form->createView(),
