@@ -3,8 +3,15 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class UserActivity
 {
+
+    /**
+     * @Assert\Type(type="App\Entity\Activity")
+     * @Assert\Valid
+     */
     private $activities;
 
     /**

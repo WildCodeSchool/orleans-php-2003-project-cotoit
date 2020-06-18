@@ -38,8 +38,8 @@ class Activity
      * @Assert\Range(
      *     min = 0,
      *     max = 59,
-     *     minMessage="Le nombre de minutes allouées à l'activité doit être au minimum de {{ min }}",
-     *     maxMessage="Le nombre de minutes allouées à l'activité doit être au maximum de {{ max }}",
+     *     minMessage="Le nombre de minutes allouées à l'activité doit être au minimum de {{ limit }}",
+     *     maxMessage="Le nombre de minutes allouées à l'activité doit être au maximum de {{ limit }}",
      * )
      */
     private $minutes;

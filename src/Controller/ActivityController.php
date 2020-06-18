@@ -34,6 +34,7 @@ class ActivityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $session->set('userActivities', $userActivity);
+            $this->addFlash('success', 'Le temps dédié pour chaque activité ont bien');
         }
 
         return $this->render('activity/_customise_form.html.twig', [
