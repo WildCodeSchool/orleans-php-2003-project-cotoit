@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/activity")
+ * @Route("/activity", name="activity_")
  */
 class ActivityController extends AbstractController
 {
     /**
-     * @Route("/", name="activity")
+     * @Route("/", name="user_form")
      * @param ActivityRepository $activityRepository
      * @param Request $request
      * @param SessionInterface $session
