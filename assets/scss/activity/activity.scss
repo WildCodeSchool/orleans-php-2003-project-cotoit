@@ -1,22 +1,16 @@
 @import "../vars";
 
-.user-activity-form input {
-    width: 33%;
-}
-
-.user-activity-form .card {
-    overflow: hidden;
-}
-
-.user-activity-form .card-title {
+.user-activity-form .table-primary {
     background-color: $primary-color;
-    font-family: $main-font;
-    font-weight: bold;
-    font-size: 20px;
 }
 
-.user-activity-form .card-title label {
-    margin: auto 0;
+.user-activity-form:hover thead th {
+    background-color: $primary-color;
+}
+
+.user-activity-form .form-fields, {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .user-activity-form div[id*="user_activity_activities"],
@@ -26,12 +20,12 @@
     justify-content: center;
 }
 
-.user-activity-form div[id*="user_activity_activities"] div {
-    margin-bottom: $spacing-sm;
-}
-
 .user-activity-form div[id*="user_activity_activities"] div label, {
     margin-bottom: 0;
     margin-right: $spacing-sm;
     align-self: center;
+}
+
+.user-activity-form input {
+    width: 33%;
 }
