@@ -33,7 +33,7 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $session->set('userActivities', $_POST);
+            $session->set('userActivities', $userActivity);
         }
 
         return $this->render('activity/_customise_form.html.twig', [
