@@ -21,12 +21,17 @@ class AdminActivityType extends AbstractType
             ->add('hours', IntegerType::class, [
                 'label' => 'Heures',
                 'empty_data' => '0',
-                ])
+                'attr' => [
+                    'class' => 'hours-row'
+                ],
+            ])
             ->add('minutes', IntegerType::class, [
                 'label' => 'Minutes',
                 'empty_data' => '0',
-            ])
-        ;
+                'attr' => [
+                    'class' => 'minutes-row'
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

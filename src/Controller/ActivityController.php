@@ -39,7 +39,7 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('activity/_customise_form.html.twig', [
+        return $this->render('activity/userActivity.html.twig', [
             'form' => $form->createView(),
         ]);
     }
