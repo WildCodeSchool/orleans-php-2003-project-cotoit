@@ -87,9 +87,9 @@ class Portfolio
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getSecondTrimesterFile(): string
+    public function getSecondTrimesterFile()
     {
         return $this->secondTrimesterFile;
     }
@@ -103,9 +103,9 @@ class Portfolio
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getThirdTrimesterFile(): string
+    public function getThirdTrimesterFile()
     {
         return $this->thirdTrimesterFile;
     }
@@ -119,9 +119,9 @@ class Portfolio
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getFourthTrimesterFile(): string
+    public function getFourthTrimesterFile()
     {
         return $this->fourthTrimesterFile;
     }
@@ -135,9 +135,9 @@ class Portfolio
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getActivityFile(): string
+    public function getActivityFile()
     {
         return $this->activityFile;
     }
