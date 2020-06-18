@@ -9,6 +9,10 @@
         {% endblock %}
     </head>
     <body>
+        {% block flash %}
+            {% include 'includes/_flashMessage.html.twig' %}
+        {% endblock %}
+
         {% block header %}
         {% endblock %}
 
