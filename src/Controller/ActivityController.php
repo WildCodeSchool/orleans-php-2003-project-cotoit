@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActivityController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="activity")
      * @param ActivityRepository $activityRepository
      * @param Request $request
      * @param SessionInterface $session

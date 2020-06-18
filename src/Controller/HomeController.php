@@ -27,7 +27,7 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('activity');
         }
 
         return $this->render('home/index.html.twig', [
