@@ -53,7 +53,7 @@ class HomeController extends AbstractController
                 'csv'
             );
             $this->addFlash('success', 'Le fichier a bien été envoyé');
-            //return $this->redirectToRoute('home');
+            return $this->redirectToRoute('activity_user_form');
         }
 
         return $this->render('home/index.html.twig', [
