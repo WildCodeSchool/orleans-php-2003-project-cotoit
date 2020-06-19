@@ -33,3 +33,12 @@
 .user-activity-form input {
     width: 33%;
 }
+
+.user-activity-form .btn.active.focus,
+.user-activity-form .btn.active:focus,
+.user-activity-form .btn.focus,
+.user-activity-form .btn.focus:active,
+.user-activity-form .btn:active:focus,
+.user-activity-form .btn:focus {
+    box-shadow: none;
+}
