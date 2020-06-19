@@ -23,7 +23,7 @@ class ActivityFixtures extends Fixture
 
         for ($i = 0; $i < 15; $i++) {
             $activity = new Activity();
-            $activity->setName($faker->words(3, true));
+            $activity->setName(ucfirst($faker->words(3, true)));
             $activity->setHours($faker->numberBetween(1, 12));
             $activity->setMinutes($faker->randomElement(self::MINUTES));
 

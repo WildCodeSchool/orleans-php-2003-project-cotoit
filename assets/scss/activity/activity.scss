@@ -1,0 +1,44 @@
+@import "../vars";
+
+.user-activity-form .table-primary {
+    background-color: $primary-color;
+}
+
+.user-activity-form:hover thead th {
+    background-color: $primary-color;
+}
+
+.user-activity-form .form-fields, {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.user-activity-form .form-group {
+    margin-bottom: 0;
+}
+
+.user-activity-form div[id*="user_activity_activities"],
+.user-activity-form div[id*="user_activity_activities"] div,
+{
+    display: flex;
+    justify-content: center;
+}
+
+.user-activity-form div[id*="user_activity_activities"] div label, {
+    margin-bottom: 0;
+    margin-right: $spacing-sm;
+    align-self: center;
+}
+
+.user-activity-form input {
+    width: 33%;
+}
+
+.user-activity-form .btn.active.focus,
+.user-activity-form .btn.active:focus,
+.user-activity-form .btn.focus,
+.user-activity-form .btn.focus:active,
+.user-activity-form .btn:active:focus,
+.user-activity-form .btn:focus {
+    box-shadow: none;
+}
