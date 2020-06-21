@@ -20,40 +20,9 @@ class ManualController extends AbstractController
      */
     public function index(ManualRepository $manualRepository): Response
     {
+
+        $manual = $manualRepository->findOneBy([]);
         return $this->render('manual/index.html.twig', [
-            'manuals' => $manualRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="manual_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $manual = new Manual();
-        $form = $this->createForm(ManualType::class, $manual);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($manual);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('manual_index');
-        }
-
-        return $this->render('manual/new.html.twig', [
-            'manual' => $manual,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="manual_show", methods={"GET"})
-     */
-    public function show(Manual $manual): Response
-    {
-        return $this->render('manual/show.html.twig', [
             'manual' => $manual,
         ]);
     }
@@ -76,19 +45,5 @@ class ManualController extends AbstractController
             'manual' => $manual,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="manual_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Manual $manual): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$manual->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($manual);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('manual_index');
     }
 }

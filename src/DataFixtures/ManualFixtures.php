@@ -22,8 +22,8 @@ class ManualFixtures extends Fixture
 
         foreach (self::TITLES as $title) {
             $manual = new Manual();
-            $manual->setTitle($title);
-            $manual->setText($faker->text(700));
+            $manual->setInstruction($title);
+            $manual->setCalculation($faker->text(700));
 
             $manager->persist($manual);
         }

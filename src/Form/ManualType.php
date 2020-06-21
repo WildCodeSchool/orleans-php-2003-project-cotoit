@@ -14,8 +14,8 @@ class ManualType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('text', TextareaType::class)
+            ->add('instruction')
+            ->add('calculation')
         ;
     }
 
