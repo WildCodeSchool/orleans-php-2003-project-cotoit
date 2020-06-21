@@ -1,7 +1,11 @@
-.manuals .row {
+.manuals .manual {
     margin: $spacing $spacing-xl;
 }
 
 .manuals h3 {
     color: $secondary-color;
+}
+
+.manuals .card {
+    width: 45%;
 }

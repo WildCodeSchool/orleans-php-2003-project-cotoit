@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Manual;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
+use App\Repository\ManualRepository;
 
 class HomeController extends AbstractController
 {
@@ -21,11 +22,9 @@ class HomeController extends AbstractController
      * @param DecoderInterface $decoder
      * @return Response
      */
-    public function index(Request $request, DecoderInterface $decoder)
+    public function index(Request $request, DecoderInterface $decoder, ManualRepository $manualRepository)
     {
-        $manuals = $this->getDoctrine()
-            ->getRepository(Manual::class)
-            ->findAll();
+        $manual = $manualRepository->findOneBy([]);
 
         $portfolio = new Portfolio();
         $form = $this->createForm(PortfolioType::class, $portfolio);
@@ -57,7 +56,7 @@ class HomeController extends AbstractController
         }
 
         return $this->render('home/index.html.twig', [
-            'manuals' => $manuals,
+            'manual' => $manual,
             'form' => $form->createView(),
         ]);
     }
