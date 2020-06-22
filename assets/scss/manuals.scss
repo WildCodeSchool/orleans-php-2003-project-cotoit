@@ -1,4 +1,4 @@
-.manuals .row {
+.manuals .manual {
     margin: $spacing $spacing-xl;
 }
 
@@ -20,4 +20,8 @@
 
 .container {
     width: 90%;
+}
+
+.manuals .card {
+    width: 45%;
 }

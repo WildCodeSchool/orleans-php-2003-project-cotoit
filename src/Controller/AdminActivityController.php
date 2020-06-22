@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
-use App\Form\ActivityType;
+use App\Form\UserActivityType;
+use App\Form\AdminActivityType;
 use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +36,7 @@ class AdminActivityController extends AbstractController
      */
     public function edit(Request $request, Activity $activity): Response
     {
-        $form = $this->createForm(ActivityType::class, $activity);
+        $form = $this->createForm(AdminActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,6 +52,23 @@ class AdminActivityController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Activity $activity
+     * @return Response
+     */
+    public function delete(Request $request, Activity $activity): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $activity->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($activity);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_activity_index');
+    }
+
+    /**
      * @Route("/new", name="new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
@@ -58,7 +76,7 @@ class AdminActivityController extends AbstractController
     public function new(Request $request): Response
     {
         $activity = new Activity();
-        $form = $this->createForm(ActivityType::class, $activity);
+        $form = $this->createForm(AdminActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -13,8 +13,24 @@ class PortfolioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('portfolioFileName', FileType::class, [
-                'label' => 'Mon portefeuille de copropriété',
+            ->add('firstTrimesterFile', FileType::class, [
+                'label' => '1er trimestre',
+                'required' => true,
+                ])
+            ->add('secondTrimesterFile', FileType::class, [
+                'label' => '2ème trimestre',
+                'required' => true,
+                ])
+            ->add('thirdTrimesterFile', FileType::class, [
+                'label' => '3ème trimestre',
+                'required' => true,
+                ])
+            ->add('fourthTrimesterFile', FileType::class, [
+                'label' => '4ème trimestre',
+                'required' => true,
+                ])
+            ->add('activityFile', FileType::class, [
+                'label' => 'Fichier événements',
                 'required' => true,
                 ]);
     }
