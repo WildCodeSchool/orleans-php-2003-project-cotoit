@@ -10,27 +10,44 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PortfolioType extends AbstractType
 {
+    const PLACEHOLDER = 'Aucun fichier sélectionné';
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('firstTrimesterFile', FileType::class, [
                 'label' => '1er trimestre',
+                'attr' => [
+                    'placeholder' => self::PLACEHOLDER,
+                ],
                 'required' => true,
                 ])
             ->add('secondTrimesterFile', FileType::class, [
-                'label' => '2ème trimestre',
+                'label' => '2e trimestre',
+                'attr' => [
+                    'placeholder' => self::PLACEHOLDER,
+                ],
                 'required' => true,
                 ])
             ->add('thirdTrimesterFile', FileType::class, [
-                'label' => '3ème trimestre',
+                'label' => '3e trimestre',
+                'attr' => [
+                    'placeholder' => self::PLACEHOLDER,
+                ],
                 'required' => true,
                 ])
             ->add('fourthTrimesterFile', FileType::class, [
-                'label' => '4ème trimestre',
+                'label' => '4e trimestre',
+                'attr' => [
+                    'placeholder' => self::PLACEHOLDER,
+                ],
                 'required' => true,
                 ])
             ->add('activityFile', FileType::class, [
                 'label' => 'Fichier événements',
+                'attr' => [
+                    'placeholder' => self::PLACEHOLDER,
+                ],
                 'required' => true,
                 ]);
     }
