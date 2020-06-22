@@ -10,8 +10,12 @@
             {% endif %}
 
             {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                <div class="mb-3 mt-5">
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <p>Vous etes déjà connecter en tant qu'administrateur</p>
+                    {%elseif is_granted("ROLE_USER")%}
+                        <p>Vous etes déjà connecter en tant qu'utilisateur</p>
+                    {%endif%}
                 </div>
             {% endif %}
 
