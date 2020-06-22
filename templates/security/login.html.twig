@@ -19,6 +19,7 @@
                 </div>
             {% endif %}
 
+            {% if not app.user %}
             <h1 class="h3 mb-3 mt-4">Veuillez vous connecter :</h1>
 
             <label for="inputUsername">Nom d'utilisateur</label>
@@ -35,6 +36,8 @@
                 Se connecter
             </button>
         </form>
+        {% endif %}
+
 
         <img class="logo-login" src="{{ asset('build/images/coach-home-app.png') }}" alt="Logo-login">
     </section>
