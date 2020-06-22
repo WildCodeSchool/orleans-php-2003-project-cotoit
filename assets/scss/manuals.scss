@@ -6,6 +6,22 @@
     color: $secondary-color;
 }
 
+.adminManuals h2 {
+    color: $secondary-color;
+}
+
+.adminManuals .card {
+    margin: $spacing $spacing-xl;
+}
+
+.adminManuals h1{
+    padding: $spacing;
+}
+
+.container {
+    width: 90%;
+}
+
 .manuals .card {
     width: 45%;
 }

@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Edit Manual{% endblock %}
+
+{% block main %}
+    <h1>Edit Manual</h1>
+
+    {{ include('manual/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('manual_index') }}">back to list</a>
+
+{% endblock %}
