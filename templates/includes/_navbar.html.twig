@@ -11,9 +11,6 @@
                 <li class="nav-item">
                         <a class="navbar-link nav-link" href="{{ path('home') }}">Accueil</a>
                 </li>
-                <li class="nav-item">
-                        <a class="navbar-link nav-link" href="#">Grille de temps</a>
-                </li>
                 <li>
                     {% if is_granted("ROLE_ADMIN") %}
                         <a class="navbar-link nav-link" href="{{ path('admin') }}">Administration</a>
