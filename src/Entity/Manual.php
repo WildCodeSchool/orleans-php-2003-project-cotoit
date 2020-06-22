@@ -19,43 +19,42 @@ class Manual
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="Le manuel doit comporter un titre")
-     * @Assert\Length(max="100", maxMessage="Le titre du manuel doit comporter {{ limit }} caractères maximum")
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Le manuel doit comporter un texte")
      */
-    private $title;
+    private $instruction;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Le manuel doit comporter un texte")
      */
-    private $text;
+    private $calculation;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getInstruction(): ?string
     {
-        return $this->title;
+        return $this->instruction;
     }
 
-    public function setTitle(string $title): self
+    public function setInstruction(string $instruction): self
     {
-        $this->title = $title;
+        $this->instruction = $instruction;
 
         return $this;
     }
 
-    public function getText(): ?string
+    public function getCalculation(): ?string
     {
-        return $this->text;
+        return $this->calculation;
     }
 
-    public function setText(string $text): self
+    public function setCalculation(string $calculation): self
     {
-        $this->text = $text;
+        $this->calculation = $calculation;
 
         return $this;
     }
