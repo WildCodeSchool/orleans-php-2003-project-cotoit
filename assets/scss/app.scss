@@ -18,8 +18,15 @@ $theme-colors: (
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
 
+html {
+    height: 100%;
+}
+
 body {
     background-color: $secondary-background-color;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 200px;
 }
 
 @mixin text ($font-weight, $font-size) {
