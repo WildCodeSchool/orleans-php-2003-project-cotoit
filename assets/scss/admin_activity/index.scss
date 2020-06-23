@@ -1,16 +1,16 @@
 @import "../vars";
 
-.admin-activity-index .table-primary {
-    background-color: $primary-color;
+.admin-activity-index thead tr th {
+    background-color: $secondary-color;
 }
 
-.admin-activity-index:hover thead th {
-    background-color: $primary-color;
+.admin-activity-index:hover thead tr th {
+    background-color: $secondary-color;
 }
 
 .admin-activity-index .fa-edit,
 .admin-activity-index .fa-trash-alt {
-    font-size: 20px;
+    font-size: 16px;
     color: $secondary-color;
 }
 
