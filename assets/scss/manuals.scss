@@ -33,4 +33,10 @@
 
 .manuals .card {
     width: 45%;
+    border: none;
+}
+
+.manuals .card-header {
+    background-color: $secondary-background-color;
+    border: 0;
 }
