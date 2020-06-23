@@ -1,11 +1,11 @@
 @import "../vars";
 
-.user-activity-form .table-primary {
-    background-color: $primary-color;
+.user-activity-form thead tr th {
+    background-color: $secondary-color;
 }
 
-.user-activity-form:hover thead th {
-    background-color: $primary-color;
+.user-activity-form:hover thead tr th {
+    background-color: $secondary-color;
 }
 
 .user-activity-form .form-fields, {

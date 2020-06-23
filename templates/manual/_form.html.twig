@@ -1,4 +1,39 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="row justify-content-md-center">
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="adminManuals col-6">
+        <h1>Administration - Modifier le texte</h1>
+
+        {{ form_start(form) }}
+
+        <div class="adminManuals card">
+            <div class="card-header">
+                <h2 class="card-title my-auto">Mode d'emploi</h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    {{ form_widget(form.instruction) }}
+                    {{ form_errors(form.instruction) }}
+                </p>
+            </div>
+        </div>
+        <div class="adminManuals card">
+            <div class="card-header">
+                <h2 class="card-title my-auto">Mode de calcul</h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    {{ form_widget(form.calculation) }}
+                    {{ form_errors(form.calculation) }}
+                </p>
+            </div>
+        </div>
+        <button class="btn btn-secondary float-right">Enregistrer</button>
+        <a class="btn text-primary float-right" href="{{ path('manual_index') }}">Retour</a>
+
+
+        {{ form_end(form) }}
+    </div>
+    <div class="image">
+        <img src="{{ asset('build/images/girl_with_headphones.png') }}" alt="girl with headphones">
+    </div>
+</div>

@@ -27,6 +27,8 @@ body {
     position: relative;
     min-height: 100%;
     padding-bottom: 200px;
+    background-color: $secondary-background-color;
+    @include text (400, 14px);
 }
 
 @mixin text ($font-weight, $font-size) {
@@ -36,17 +38,17 @@ body {
 }
 
 h1 {
-    @include text (bold, 30px);
+    @include text (400, 30px);
 }
 
 h2, h3 {
-    @include text (600, 20px);
-}
-
-p {
-    @include text (400, 16px);
+    @include text (500, 20px);
 }
 
 label {
     font-family: $main-font;
+}
+
+.btn.btn-primary {
+    border-radius: 30px;
 }

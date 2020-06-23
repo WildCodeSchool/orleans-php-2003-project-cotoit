@@ -18,10 +18,25 @@
     padding: $spacing;
 }
 
+.card-text {
+    min-height: 100px;
+}
+
+.card-text textarea {
+    min-height: 170px;
+    resize: none;
+}
+
 .container {
     width: 90%;
 }
 
 .manuals .card {
     width: 45%;
+    border: none;
+}
+
+.manuals .card-header {
+    background-color: $secondary-background-color;
+    border: 0;
 }
