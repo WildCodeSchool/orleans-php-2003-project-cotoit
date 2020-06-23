@@ -39,3 +39,7 @@ h2, h3 {
 p {
     @include text (400, 16px);
 }
+
+label {
+    font-family: $main-font;
+}
