@@ -12,9 +12,9 @@
             {% if app.user %}
                 <div class="mb-3 mt-5">
                     {% if is_granted("ROLE_ADMIN") %}
-                        <p>Vous etes déjà connecter en tant qu'administrateur</p>
+                        <p>Vous êtes déjà connecté en tant qu'administrateur</p>
                     {%elseif is_granted("ROLE_USER")%}
-                        <p>Vous etes déjà connecter en tant qu'utilisateur</p>
+                        <p>Vous êtes déjà connecté en tant qu'utilisateur</p>
                     {%endif%}
                 </div>
             {% endif %}
