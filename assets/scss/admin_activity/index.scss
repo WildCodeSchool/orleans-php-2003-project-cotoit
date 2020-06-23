@@ -1,11 +1,11 @@
 @import "../vars";
 
 .admin-activity-index .table-primary {
-    background-color: $primary-color;
+    background-color: $secondary-color;
 }
 
 .admin-activity-index:hover thead th {
-    background-color: $primary-color;
+    background-color: $secondary-color;
 }
 
 .admin-activity-index .fa-edit,
