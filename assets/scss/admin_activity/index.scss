@@ -1,10 +1,10 @@
 @import "../vars";
 
-.admin-activity-index .table-primary {
+.admin-activity-index thead tr th {
     background-color: $secondary-color;
 }
 
-.admin-activity-index:hover thead th {
+.admin-activity-index:hover thead tr th {
     background-color: $secondary-color;
 }
 
