@@ -63,13 +63,11 @@ class ActivityFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $faker = Faker\Factory::create('fr_FR');
-
-        for ($i = 0; $i < 15; $i++) {
+        foreach (self::ACTIVITIES as $activityName => $time) {
             $activity = new Activity();
-            $activity->setName(ucfirst($faker->words(3, true)));
-            $activity->setHours($faker->numberBetween(1, 12));
-            $activity->setMinutes($faker->randomElement(self::MINUTES));
+            $activity->setName($activityName);
+            $activity->setHours($time['hours']);
+            $activity->setMinutes($time['minutes']);
 
             $manager->persist($activity);
         }
