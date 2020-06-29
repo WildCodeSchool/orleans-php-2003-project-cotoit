@@ -1,11 +1,31 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
-<section class="container-fluid my-5 w-25">
-    <h3>Charger les fichiers</h3>
-    <br>
+<section class="portfolio my-5">
+    <h3 class="mb-3 text-center">Charger les fichiers</h3>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <div class="inner-form">
+        <div class="my-3">
+            {{ form_label(form.firstTrimesterFile)|replace({'1er': '1<sup>er</sup>'})|raw }}
+            {{ form_widget(form.firstTrimesterFile) }}
+        </div>
+        <div class="my-3">
+            {{ form_label(form.secondTrimesterFile)|replace({'2e': '2<sup>e</sup>'})|raw }}
+            {{ form_widget(form.secondTrimesterFile) }}
+        </div>
+        <div class="my-3">
+            {{ form_label(form.thirdTrimesterFile)|replace({'3e': '3<sup>e</sup>'})|raw }}
+            {{ form_widget(form.thirdTrimesterFile) }}
+        </div>
+        <div class="my-3">
+            {{ form_label(form.fourthTrimesterFile)|replace({'4e': '4<sup>e</sup>'})|raw }}
+            {{ form_widget(form.fourthTrimesterFile) }}
+        </div>
+        <div class="my-3">
+            {{ form_label(form.activityFile) }}
+            {{ form_widget(form.activityFile) }}
+        </div>
+    </div>
     <div class="d-flex justify-content-around">
-        <button class="btn btn-lg btn-primary">{{ button_label|default('Valider') }}</button>
+        <button class="btn btn-lg btn-primary px-5 mt-3">{{ button_label|default('Valider') }}</button>
     </div>
     {{ form_end(form) }}
 </section>

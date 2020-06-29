@@ -1,3 +1,23 @@
-.custom-file-input ~ .custom-file-label::after {
+.portfolio .inner-form {
+    margin-left: 40%;
+    margin-right: 30%;
+}
+
+label.custom-file-label::after {
+    right: 100%;
     content: "Parcourir...";
+    background-color: $secondary-background-color;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    font-family: $main-font;
+    border-radius: 30px;
+}
+
+.custom-file-input:hover {
+    cursor: pointer;
+}
+
+label.custom-file-label {
+    left: 100px;
+    border: none;
 }

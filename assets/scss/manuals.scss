@@ -1,7 +1,42 @@
-.manuals .row {
+.manuals .manual {
     margin: $spacing $spacing-xl;
 }
 
 .manuals h3 {
     color: $secondary-color;
+}
+
+.adminManuals h2 {
+    color: $secondary-color;
+}
+
+.adminManuals .card {
+    margin: $spacing $spacing-xl;
+}
+
+.adminManuals h1{
+    padding: $spacing;
+}
+
+.card-text {
+    min-height: 100px;
+}
+
+.card-text textarea {
+    min-height: 170px;
+    resize: none;
+}
+
+.container {
+    width: 90%;
+}
+
+.manuals .card {
+    width: 45%;
+    border: none;
+}
+
+.manuals .card-header {
+    background-color: $secondary-background-color;
+    border: 0;
 }
