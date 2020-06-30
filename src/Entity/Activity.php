@@ -44,6 +44,11 @@ class Activity
      */
     private $minute;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $number;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,6 +86,18 @@ class Activity
     public function setMinute(int $minute): self
     {
         $this->minute = $minute;
+
+        return $this;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?int $number): self
+    {
+        $this->number = $number;
 
         return $this;
     }
