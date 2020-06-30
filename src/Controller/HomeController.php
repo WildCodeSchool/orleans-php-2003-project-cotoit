@@ -32,23 +32,7 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $decoder->decode(
-                ((string)file_get_contents($portfolio->getFirstTrimesterFile())),
-                'csv'
-            );
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getSecondTrimesterFile())),
-                'csv'
-            );
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getThirdTrimesterFile())),
-                'csv'
-            );
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getFourthTrimesterFile())),
-                'csv'
-            );
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getActivityFile())),
+                ((string)file_get_contents($portfolio->getPortfolioFileName())),
                 'csv'
             );
             $this->addFlash('success', 'Le fichier a bien été envoyé');

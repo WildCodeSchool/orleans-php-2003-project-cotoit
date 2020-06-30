@@ -17,136 +17,20 @@ class Portfolio
      *     mimeTypesMessage = "Le format du fichier n'est pas valide (merci de vous référer au mode d'emploi)."
      * )
      */
-    private $firstTrimesterFile;
-
-    /**
-     * @var string
-     * @Assert\NotBlank
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     maxSizeMessage = "Le fichier est trop lourd {{ size }} {{ suffix }}.
-    La taille maximum autorisée est de {{ limit }} {{ suffix }}.",
-     *     mimeTypes = {"text/plain", "text/csv"},
-     *     mimeTypesMessage = "Le format du fichier n'est pas valide (merci de vous référer au mode d'emploi)."
-     * )
-     */
-    private $secondTrimesterFile;
-
-    /**
-     * @var string
-     * @Assert\NotBlank
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     maxSizeMessage = "Le fichier est trop lourd {{ size }} {{ suffix }}.
-    La taille maximum autorisée est de {{ limit }} {{ suffix }}.",
-     *     mimeTypes = {"text/plain", "text/csv"},
-     *     mimeTypesMessage = "Le format du fichier n'est pas valide (merci de vous référer au mode d'emploi)."
-     * )
-     */
-    private $thirdTrimesterFile;
-
-    /**
-     * @var string
-     * @Assert\NotBlank
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     maxSizeMessage = "Le fichier est trop lourd {{ size }} {{ suffix }}.
-    La taille maximum autorisée est de {{ limit }} {{ suffix }}.",
-     *     mimeTypes = {"text/plain", "text/csv"},
-     *     mimeTypesMessage = "Le format du fichier n'est pas valide (merci de vous référer au mode d'emploi)."
-     * )
-     */
-    private $fourthTrimesterFile;
-
-    /**
-     * @var string
-     * @Assert\NotBlank
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     maxSizeMessage = "Le fichier est trop lourd {{ size }} {{ suffix }}.
-    La taille maximum autorisée est de {{ limit }} {{ suffix }}.",
-     *     mimeTypes = {"text/plain", "text/csv"},
-     *     mimeTypesMessage = "Le format du fichier n'est pas valide (merci de vous référer au mode d'emploi)."
-     * )
-     */
-    private $activityFile;
+    private $portfolioFileName;
 
     /**
      * @return mixed
      */
-    public function getFirstTrimesterFile()
+    public function getPortfolioFileName()
     {
-        return $this->firstTrimesterFile;
+        return $this->portfolioFileName;
     }
 
-    public function setFirstTrimesterFile($firstTrimesterFile)
+    public function setPortfolioFileName($portfolioFileName)
     {
-        $this->firstTrimesterFile = $firstTrimesterFile;
+        $this->portfolioFileName = $portfolioFileName;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSecondTrimesterFile()
-    {
-        return $this->secondTrimesterFile;
-    }
-
-    /**
-     * @param string $secondTrimesterFile
-     */
-    public function setSecondTrimesterFile(string $secondTrimesterFile): void
-    {
-        $this->secondTrimesterFile = $secondTrimesterFile;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getThirdTrimesterFile()
-    {
-        return $this->thirdTrimesterFile;
-    }
-
-    /**
-     * @param string $thirdTrimesterFile
-     */
-    public function setThirdTrimesterFile(string $thirdTrimesterFile): void
-    {
-        $this->thirdTrimesterFile = $thirdTrimesterFile;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFourthTrimesterFile()
-    {
-        return $this->fourthTrimesterFile;
-    }
-
-    /**
-     * @param string $fourthTrimesterFile
-     */
-    public function setFourthTrimesterFile(string $fourthTrimesterFile): void
-    {
-        $this->fourthTrimesterFile = $fourthTrimesterFile;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getActivityFile()
-    {
-        return $this->activityFile;
-    }
-
-    /**
-     * @param string $activityFile
-     */
-    public function setActivityFile(string $activityFile): void
-    {
-        $this->activityFile = $activityFile;
     }
 }
