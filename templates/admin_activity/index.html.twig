@@ -20,7 +20,7 @@
             {% for activity in activities %}
                 <tr>
                     <td>{{ activity.name }}</td>
-                    <td class="text-center">{{ activity.hours }}h {{ activity.minutes }}m</td>
+                    <td class="text-center">{{ activity.hour }}h {{ activity.minute }}m</td>
                     <td class="text-right">
                         <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}"><i class="fas fa-edit"></i></a>
                     </td>

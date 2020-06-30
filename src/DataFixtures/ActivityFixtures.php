@@ -12,52 +12,52 @@ class ActivityFixtures extends Fixture
 {
     const ACTIVITIES = [
         'Visite' => [
-            'hours' => 2,
-            'minutes' => 30,
+            'hour' => 2,
+            'minute' => 30,
         ],
         'Immeuble de moins de 2 ans' => [
-            'hours' => 10,
-            'minutes' => 0,
+            'hour' => 10,
+            'minute' => 0,
         ],
         'Réunion du conseil syndical' => [
-            'hours' => 4,
-            'minutes' => 0,
+            'hour' => 4,
+            'minute' => 0,
         ],
         'Tenue assemblée générale' => [
-            'hours' => 3,
-            'minutes' => 0,
+            'hour' => 3,
+            'minute' => 0,
         ],
         'Résolution travaux' => [
-            'hours' => 1,
-            'minutes' => 0,
+            'hour' => 1,
+            'minute' => 0,
         ],
         'Ordre de service' => [
-            'hours' => 0,
-            'minutes' => 30,
+            'hour' => 0,
+            'minute' => 30,
         ],
         'Vente' => [
-            'hours' => 0,
-            'minutes' => 30,
+            'hour' => 0,
+            'minute' => 30,
         ],
         'Relance' => [
-            'hours' => 0,
-            'minutes' => 1,
+            'hour' => 0,
+            'minute' => 1,
         ],
         'Sinistre MRH' => [
-            'hours' => 2,
-            'minutes' => 0,
+            'hour' => 2,
+            'minute' => 0,
         ],
         'Sinistre DO' => [
-            'hours' => 2,
-            'minutes' => 0,
+            'hour' => 2,
+            'minute' => 0,
         ],
         'Expertise avec présence gestionnaire' => [
-            'hours' => 1,
-            'minutes' => 30,
+            'hour' => 1,
+            'minute' => 30,
         ],
         'Suivi et transmission avocat/huissier dossier contentieux' => [
-            'hours' => 1,
-            'minutes' => 0,
+            'hour' => 1,
+            'minute' => 0,
         ],
     ];
 
@@ -66,8 +66,8 @@ class ActivityFixtures extends Fixture
         foreach (self::ACTIVITIES as $activityName => $time) {
             $activity = new Activity();
             $activity->setName($activityName);
-            $activity->setHours($time['hours']);
-            $activity->setMinutes($time['minutes']);
+            $activity->setHour($time['hour']);
+            $activity->setMinute($time['minute']);
 
             $manager->persist($activity);
         }
