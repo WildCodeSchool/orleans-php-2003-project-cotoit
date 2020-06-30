@@ -37,12 +37,10 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $decoder->decode(
+            $session->set('portfolio', $decoder->decode(
                 ((string)file_get_contents($portfolio->getPortfolioFileName())),
                 'csv'
-            );
-
-            $session->set('portfolio', $data);
+            ));
 
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('activity_user_form');
