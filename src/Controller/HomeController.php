@@ -20,10 +20,16 @@ class HomeController extends AbstractController
      * @Route("/home", name="home")
      * @param Request $request
      * @param DecoderInterface $decoder
+     * @param ManualRepository $manualRepository
+     * @param SessionInterface $session
      * @return Response
      */
-    public function index(Request $request, DecoderInterface $decoder, ManualRepository $manualRepository)
-    {
+    public function index(
+        Request $request,
+        DecoderInterface $decoder,
+        ManualRepository $manualRepository,
+        SessionInterface $session
+    ) {
         $manual = $manualRepository->findOneBy([]);
 
         $portfolio = new Portfolio();
@@ -31,10 +37,13 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $decoder->decode(
+            $data = $decoder->decode(
                 ((string)file_get_contents($portfolio->getPortfolioFileName())),
                 'csv'
             );
+
+            $session->set('portfolio', $data);
+
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('activity_user_form');
         }
