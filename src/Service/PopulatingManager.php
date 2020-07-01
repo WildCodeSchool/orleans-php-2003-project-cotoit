@@ -6,7 +6,7 @@ use App\Entity\Housing;
 
 class PopulatingManager
 {
-    public function activityToArray(array $housingData)
+    private function activityToArray(array $housingData)
     {
         $housingActivities = [];
         for ($i = 5; $i < count($housingData); $i++) {
