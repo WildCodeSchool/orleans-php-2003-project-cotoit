@@ -3,7 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block main %}
-    <section class="login container">
+    <section class="login mt-5 container">
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
