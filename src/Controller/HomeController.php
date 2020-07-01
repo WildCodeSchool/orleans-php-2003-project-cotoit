@@ -45,7 +45,8 @@ class HomeController extends AbstractController
                 'csv'
             ));
 
-            $populatingManager->populateHousing($session->get('portfolio'));
+            $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
+            dd($session);
 
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('activity_user_form');
