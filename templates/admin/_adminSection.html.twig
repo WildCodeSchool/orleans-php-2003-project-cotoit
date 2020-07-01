@@ -1,6 +1,10 @@
 <section class="manuals container-fluid">
+
+    <img class="logo-edit mt-5" src="{{ asset('build/images/edit.png') }}" alt="Logo-Cotoit">
+
     <div class="row">
-            <div class="card col mx-3 px-0 col-5 mb-5 ml-5 mt-5 text-center">
+
+        <div class="card col mx-3 px-0 col-5 mb-5 ml-5 mt-5 text-center">
                 <div class="card-body">
                     <a href="{{ path('admin_activity_index') }}" class="card-text">Modifier les activités</a>
                 </div>
@@ -8,7 +12,7 @@
 
             <div class="card col mx-3 px-0 col-5 mb-5 ml-5 mt-5 text-center">
                 <div class="card-body">
-                    <a href="#" class="card-text">Modifier le manuel</a>
+                    <a href="{{ path('admin_manual_index') }}" class="card-text">Modifier le manuel</a>
                 </div>
             </div>
     </div>
