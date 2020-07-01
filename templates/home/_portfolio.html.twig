@@ -3,6 +3,7 @@
     <h3 class="mb-4 text-center">Charger mon portefeuille de copropriété</h3>
     {{ form_start(form) }}
     <div class="inner-form">
+        {{ form_errors(form.portfolioFileName) }}
         <div class="my-3">
             {{ form_widget(form.portfolioFileName) }}
         </div>

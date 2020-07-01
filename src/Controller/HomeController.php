@@ -46,7 +46,7 @@ class HomeController extends AbstractController
             ));
 
             $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
-
+          
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('activity_user_form');
         }
