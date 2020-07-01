@@ -14,7 +14,7 @@ class PopulatingManager
 //        }
 //        return $housingActivities;
 //    }
-//
+
 //    private function removeSpecialCharacters(string $input)
 //    {
 //        $characters = [
@@ -40,24 +40,19 @@ class PopulatingManager
 
 //    private function regexArrayKey(array $property)
 //    {
-//        $keys = [];
-//        foreach ($property as $key => $value) {
-//            $keys .= trim(strtolower(preg_replace(
+//        $oldKeys = array_keys($property);
+//        $newKeys = [];
+//        foreach ($oldKeys as $oldKey) {
+//            array_push($newKeys, strtolower(preg_replace(
 //                '#[^A-Za-z0-9 \']+#',
 //                ' ',
-//                $this->removeSpecialCharacters($key)
+//                $this->removeSpecialCharacters($oldKey)
 //            )));
 //        }
-//        $keys = array_flip($keys);
-
-//        $array = [];
-//        foreach ($property as $value) {
-//            $array = array_fill_keys($keys, $value);
-//        }
 //
-//        return $property;
+//        return array_combine($newKeys, $property);
 //    }
-//
+
 //    public function populateHousing(array $housings)
 //    {
 //        for ($i = 0; $i <= count($housings); $i++) {
