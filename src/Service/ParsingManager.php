@@ -38,10 +38,14 @@ class ParsingManager
                 trim(
                     strtolower(
                         preg_replace(
-                            ['#[^A-Za-z0-9 \']+#',
-                                '#[\s-]+#'],
-                            ['',
-                                '-'],
+                            [
+                                '#[^A-Za-z0-9 \']+#',
+                                '#[\s-]+#'
+                            ],
+                            [
+                                '',
+                                '-'
+                            ],
                             $this->removeSpecialCharacters($oldKey)
                         )
                     ),
@@ -77,10 +81,14 @@ class ParsingManager
         return trim(
             strtolower(
                 preg_replace(
-                    ['#[^A-Za-z0-9 \']+#',
-                        '#[\s-]+#'],
-                    ['',
-                        '-'],
+                    [
+                        '#[^A-Za-z0-9 \']+#',
+                        '#[\s-]+#'
+                    ],
+                    [
+                        '',
+                        '-'
+                    ],
                     $this->removeSpecialCharacters($input)
                 )
             ),
