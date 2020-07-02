@@ -10,7 +10,7 @@ class PopulatingManager
     const FIXED_COLUMNS = [
         'nom-de-la-copro',
         'cp',
-        'nombre-de lots',
+        'nombre-de-lots',
         'hono',
         'immeuble-de-moins-de-2-ans',
     ];
@@ -36,8 +36,18 @@ class PopulatingManager
             return $array;
         }
 
+        $length = 0;
+        $keys = array_keys($array);
+        foreach ($keys as $key) {
+            if ($key == $find) {
+                break;
+            } else {
+                $length += 1;
+            }
+        }
+
         $elem = [$move => $array[$move]];
-        $start = array_splice($array, 0, count($array), [array_search($find, array_keys($array))]);
+        $start = array_splice($array, 0, $length);
         unset($start[$move]);
 
         return $start + $elem + $array;
@@ -48,8 +58,7 @@ class PopulatingManager
         $userHousings = [];
         foreach ($housings as $property) {
             $property = $this->slugify->slugArrayKey($property);
-            $this->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
-            dd($property);
+            $property = $this->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
 
             $activities = array_slice($property, count(self::FIXED_COLUMNS) + 1, null, true);
             $activities = $this->stringToInteger($activities);
