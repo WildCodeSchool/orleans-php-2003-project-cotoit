@@ -42,6 +42,11 @@ class AdminActivityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash(
+                'notice',
+                'La modification de l\'activité est un succès.'
+            );
+
             return $this->redirectToRoute('admin_activity_index');
         }
 
@@ -63,6 +68,11 @@ class AdminActivityController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($activity);
             $entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'La suppression de l\'activité est un succès.'
+            );
         }
 
         return $this->redirectToRoute('admin_activity_index');
@@ -83,6 +93,11 @@ class AdminActivityController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($activity);
             $entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'L\'ajout de l\'activité est un succès.'
+            );
 
             return $this->redirectToRoute('admin_activity_index');
         }

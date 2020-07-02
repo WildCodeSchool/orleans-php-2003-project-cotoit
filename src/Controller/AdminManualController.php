@@ -40,7 +40,12 @@ class AdminManualController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('manual_index');
+            $this->addFlash(
+                'notice',
+                'La modification du manuel est un succès.'
+            );
+
+            return $this->redirectToRoute('admin_manual_index');
         }
 
         return $this->render('manual/edit.html.twig', [
