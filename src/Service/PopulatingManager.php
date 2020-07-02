@@ -57,11 +57,11 @@ class PopulatingManager
     {
         $userHousings = [];
         foreach ($housings as $property) {
+            array_shift($property);
             $property = $this->slugify->slugArrayKey($property);
             $property = $this->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
 
-            $activities = array_slice($property, count(self::FIXED_COLUMNS) + 1, null, true);
-            $activities = $this->stringToInteger($activities);
+            $activities = $this->stringToInteger(array_slice($property, count(self::FIXED_COLUMNS), null, true));
 
             $property['hono'] = str_replace(',', '.', $property['hono']);
 
@@ -81,6 +81,7 @@ class PopulatingManager
             array_push($userHousings, $housing);
         }
         array_pop($userHousings);
+        dd($userHousings);
         return $userHousings;
     }
 }
