@@ -8,10 +8,10 @@ class PopulatingManager
 {
 
     const FIXED_COLUMNS = [
-        'nom-de-la-copropriete',
-        'cp',
-        'nombre-de-lots',
-        'honoraires',
+        'HOUSING_NAME' => 'nom-de-la-copropriete',
+        'POSTAL_CODE' => 'cp',
+        'NUMBER_LOTS' => 'nombre-de-lots',
+        'FEES' => 'honoraires',
     ];
 
     /**
@@ -41,24 +41,24 @@ class PopulatingManager
                 $this->parsing->convertToZeroOrOne($property['immeuble-de-moins-de-2-ans']);
             $activities = $this->stringToInteger(array_slice($property, count(self::FIXED_COLUMNS), null, true));
 
-            $property[self::FIXED_COLUMNS[3]] = str_replace(',', '.', $property[self::FIXED_COLUMNS[3]]);
+            $property[self::FIXED_COLUMNS['FEES']] = str_replace(',', '.', $property[self::FIXED_COLUMNS['FEES']]);
 
             //this is a whitespace used for numbers (different of the usual whitespace)
             //careful when modifying this line
             //unicode(\u202F)
-            $property[self::FIXED_COLUMNS[3]] = ltrim(str_replace(' ', '', $property[self::FIXED_COLUMNS[3]]));
+            $property[self::FIXED_COLUMNS['FEES']] =
+                ltrim(str_replace(' ', '', $property[self::FIXED_COLUMNS['FEES']]));
 
             $housing = new Housing();
-            $housing->setName($property[self::FIXED_COLUMNS[0]]);
-            $housing->setPostCode($property[self::FIXED_COLUMNS[1]]);
-            $housing->setNumberLot(intval($property[self::FIXED_COLUMNS[2]]));
-            $housing->setFee(floatval($property[self::FIXED_COLUMNS[3]]));
+            $housing->setName($property[self::FIXED_COLUMNS['HOUSING_NAME']]);
+            $housing->setPostCode($property[self::FIXED_COLUMNS['POSTAL_CODE']]);
+            $housing->setNumberLot(intval($property[self::FIXED_COLUMNS['NUMBER_LOTS']]));
+            $housing->setFee(floatval($property[self::FIXED_COLUMNS['FEES']]));
             $housing->setHousingActivities($activities);
 
             array_push($userHousings, $housing);
         }
         array_pop($userHousings);
-        dd($userHousings);
         return $userHousings;
     }
 }
