@@ -18,7 +18,7 @@
             {{ form_errors(form) }}
             {% for activity in form.activities %}
                 <tr>
-                    <td>{{ form_label(activity, activity.vars.data.name) }}</td>
+                    <td>{{ form_label(activity, activity.vars.data.activity) }}</td>
                     <td class="form-fields">{{ form_widget(activity) }}</td>
                 </tr>
             {% endfor %}

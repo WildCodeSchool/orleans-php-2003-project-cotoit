@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\HousingActivity;
 use App\Entity\UserActivity;
-use App\Form\UserActivityType;
+use App\Form\HousingActivityType;
 use App\Repository\ActivityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,12 +38,12 @@ class ActivityController extends AbstractController
 
             $housingActivity->addActivity($userActivity);
         }
-
-        $form = $this->createForm(UserActivityType::class, $housingActivity);
+        $form = $this->createForm(HousingActivityType::class, $housingActivity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $session->set('userActivities', $housingActivity);
+            $session->set('housingActivities', $housingActivity);
+            dd($session->get('housingActivities'));
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
 
 
