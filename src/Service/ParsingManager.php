@@ -61,4 +61,14 @@ class ParsingManager
             return 0;
         }
     }
+
+    public function moneyToFloat(string $input): float
+    {
+        $output = str_replace(',', '.', $input);
+
+        //this is a whitespace used for numbers (different of the usual whitespace)
+        //careful when modifying this line
+        //unicode(\u202F)
+        return floatval(ltrim(str_replace(' ', '', $output)));
+    }
 }
