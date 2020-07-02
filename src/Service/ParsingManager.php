@@ -53,26 +53,12 @@ class ParsingManager
         return array_combine($newKeys, $input);
     }
 
-    public function moveKeyBefore(array $input, $find, $move)
+    public function convertToBoolean(string $input)
     {
-        if (!isset($input[$find], $input[$move])) {
-            return $input;
+        if (!empty($input)) {
+            return 1;
+        } else {
+            return 0;
         }
-
-        $length = 0;
-        $keys = array_keys($input);
-        foreach ($keys as $key) {
-            if ($key == $find) {
-                break;
-            } else {
-                $length += 1;
-            }
-        }
-
-        $element = [$move => $input[$move]];
-        $start = array_splice($input, 0, $length);
-        unset($start[$move]);
-
-        return $start + $element + $input;
     }
 }

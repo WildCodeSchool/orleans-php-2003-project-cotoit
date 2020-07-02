@@ -8,11 +8,10 @@ class PopulatingManager
 {
 
     const FIXED_COLUMNS = [
-        'nom-de-la-copro',
+        'nom-de-la-copropriete',
         'cp',
         'nombre-de-lots',
-        'hono',
-        'immeuble-de-moins-de-2-ans',
+        'honoraires',
     ];
 
     /**
@@ -37,25 +36,23 @@ class PopulatingManager
             array_shift($property);
             $property = $this->parsing->slugArrayKey($property);
 
-            //inverted order of those two keys so all fixed columns come first
-            //makes using count(self::FIXED_COLUMNS) possible for the array_slice offset to populate activities
-            $property = $this->parsing->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
 
+            $property['immeuble-de-moins-de-2-ans'] =
+                $this->parsing->convertToBoolean($property['immeuble-de-moins-de-2-ans']);
             $activities = $this->stringToInteger(array_slice($property, count(self::FIXED_COLUMNS), null, true));
 
-            $property['hono'] = str_replace(',', '.', $property['hono']);
+            $property[self::FIXED_COLUMNS[3]] = str_replace(',', '.', $property[self::FIXED_COLUMNS[3]]);
 
             //this is a whitespace used for numbers (different of the usual whitespace)
             //careful when modifying this line
             //unicode(\u202F)
-            $property['hono'] = ltrim(str_replace(' ', '', $property['hono']));
+            $property[self::FIXED_COLUMNS[3]] = ltrim(str_replace(' ', '', $property[self::FIXED_COLUMNS[3]]));
 
             $housing = new Housing();
             $housing->setName($property[self::FIXED_COLUMNS[0]]);
             $housing->setPostCode($property[self::FIXED_COLUMNS[1]]);
             $housing->setNumberLot(intval($property[self::FIXED_COLUMNS[2]]));
             $housing->setFee(floatval($property[self::FIXED_COLUMNS[3]]));
-            $housing->setIsLessThanTwoYears(!empty($property[self::FIXED_COLUMNS[4]]));
             $housing->setHousingActivities($activities);
 
             array_push($userHousings, $housing);

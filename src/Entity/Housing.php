@@ -32,11 +32,6 @@ class Housing
     private $numberLot;
 
     /**
-     * @var bool
-     */
-    private $isLessThanTwoYears;
-
-    /**
      * @var array
      */
     private $housingActivities = [];
@@ -90,18 +85,6 @@ class Housing
     public function setNumberLot(int $numberLot): self
     {
         $this->numberLot = $numberLot;
-
-        return $this;
-    }
-
-    public function getIsLessThanTwoYears(): ?bool
-    {
-        return $this->isLessThanTwoYears;
-    }
-
-    public function setIsLessThanTwoYears(bool $isLessThanTwoYears): self
-    {
-        $this->isLessThanTwoYears = $isLessThanTwoYears;
 
         return $this;
     }
