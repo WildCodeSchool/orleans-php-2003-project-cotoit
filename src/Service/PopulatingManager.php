@@ -38,7 +38,7 @@ class PopulatingManager
 
 
             $property['immeuble-de-moins-de-2-ans'] =
-                $this->parsing->convertToBoolean($property['immeuble-de-moins-de-2-ans']);
+                $this->parsing->convertToZeroOrOne($property['immeuble-de-moins-de-2-ans']);
             $activities = $this->stringToInteger(array_slice($property, count(self::FIXED_COLUMNS), null, true));
 
             $property[self::FIXED_COLUMNS[3]] = str_replace(',', '.', $property[self::FIXED_COLUMNS[3]]);
@@ -58,6 +58,7 @@ class PopulatingManager
             array_push($userHousings, $housing);
         }
         array_pop($userHousings);
+        dd($userHousings);
         return $userHousings;
     }
 }

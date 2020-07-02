@@ -53,7 +53,7 @@ class ParsingManager
         return array_combine($newKeys, $input);
     }
 
-    public function convertToBoolean(string $input)
+    public function convertToZeroOrOne(string $input): int
     {
         if (!empty($input)) {
             return 1;
