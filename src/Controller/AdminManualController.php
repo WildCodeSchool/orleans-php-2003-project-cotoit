@@ -41,7 +41,7 @@ class AdminManualController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 'Le manuel a bien été modifié.'
             );
 

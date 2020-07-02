@@ -43,7 +43,7 @@ class AdminActivityController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 'L\'activité a bien été modifiée.'
             );
 
@@ -70,7 +70,7 @@ class AdminActivityController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 'L\'activité a bien été supprimée.'
             );
         }
@@ -95,7 +95,7 @@ class AdminActivityController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 'L\'activité a bien été ajoutée.'
             );
 
