@@ -13,6 +13,8 @@ class UserActivity
 
     private $minute;
 
+    private $number;
+
     /**
      * @return mixed
      */
@@ -59,5 +61,21 @@ class UserActivity
     public function setMinute($minute): void
     {
         $this->minute = $minute;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param mixed $number
+     */
+    public function setNumber($number): void
+    {
+        $this->number = $number;
     }
 }

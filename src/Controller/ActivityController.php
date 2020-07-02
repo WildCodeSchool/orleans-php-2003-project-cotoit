@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\HousingActivity;
 use App\Entity\UserActivity;
 use App\Form\UserActivityType;
 use App\Repository\ActivityRepository;
@@ -26,13 +27,23 @@ class ActivityController extends AbstractController
     public function customise(ActivityRepository $activityRepository, Request $request, SessionInterface $session)
     : Response
     {
-        $userActivity = new UserActivity();
+        $activities = $activityRepository->findBy([], ['name' => 'ASC']);
 
-        $form = $this->createForm(UserActivityType::class, $userActivity);
+        $housingActivity = new HousingActivity();
+        foreach ($activities as $activity) {
+            $userActivity = new UserActivity();
+            $userActivity->setActivity($activity->getName());
+            $userActivity->setHour($activity->getHour());
+            $userActivity->setMinute($activity->getMinute());
+
+            $housingActivity->addActivity($userActivity);
+        }
+
+        $form = $this->createForm(UserActivityType::class, $housingActivity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $session->set('userActivities', $userActivity);
+            $session->set('userActivities', $housingActivity);
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
 
 

@@ -1,43 +1,29 @@
 <?php
 
-
 namespace App\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
 
 class HousingActivity
 {
-    private $userActivity;
+    private $activities;
 
-    private $number;
-
-    /**
-     * @return mixed
-     */
-    public function getUserActivity()
+    public function __construct()
     {
-        return $this->userActivity;
+        $this->activities = new ArrayCollection();
     }
 
-    /**
-     * @param mixed $userActivity
-     */
-    public function setUserActivity($userActivity): void
+    public function getActivities()
     {
-        $this->userActivity = $userActivity;
+        return $this->activities;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNumber()
+    public function addActivity(UserActivity $userActivity): self
     {
-        return $this->number;
-    }
+        if (!$this->activities->contains($userActivity)) {
+            $this->activities[] = $userActivity;
+        }
 
-    /**
-     * @param mixed $number
-     */
-    public function setNumber($number): void
-    {
-        $this->number = $number;
+        return $this;
     }
 }
