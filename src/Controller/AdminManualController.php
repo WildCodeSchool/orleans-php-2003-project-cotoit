@@ -42,7 +42,7 @@ class AdminManualController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'La modification du manuel est un succès.'
+                'Le manuel a bien été modifié.'
             );
 
             return $this->redirectToRoute('admin_manual_index');

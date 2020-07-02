@@ -44,7 +44,7 @@ class AdminActivityController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'La modification de l\'activité est un succès.'
+                'L\'activité a bien été modifiée.'
             );
 
             return $this->redirectToRoute('admin_activity_index');
@@ -71,7 +71,7 @@ class AdminActivityController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'La suppression de l\'activité est un succès.'
+                'L\'activité a bien été supprimée.'
             );
         }
 
@@ -96,7 +96,7 @@ class AdminActivityController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'L\'ajout de l\'activité est un succès.'
+                'L\'activité a bien été ajoutée.'
             );
 
             return $this->redirectToRoute('admin_activity_index');
