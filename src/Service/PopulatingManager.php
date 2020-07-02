@@ -31,13 +31,26 @@ class PopulatingManager
         return $activities = array_map('intval', $activities);
     }
 
+    private function moveKeyBefore($array, $find, $move)
+    {
+        if (!isset($array[$find], $array[$move])) {
+            return $array;
+        }
+
+        $elem = [$move => $array[$move]];
+        $start = array_splice($array, 0, count($array), [array_search($find, array_keys($array))]);
+        unset($start[$move]);
+
+        return $start + $elem + $array;
+    }
+
     public function populateHousing(array $housings)
     {
         $userHousings = [];
         foreach ($housings as $property) {
             $property = $this->slugify->slugArrayKey($property);
+            $this->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
             dd($property);
-
 
             $activities = $this->stringToInteger($property);
             $activities['nombre de visites'] = intval($property['nombre de visites']);
