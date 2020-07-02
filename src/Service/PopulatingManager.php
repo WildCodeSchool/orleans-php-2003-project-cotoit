@@ -6,6 +6,15 @@ use App\Entity\Housing;
 
 class PopulatingManager
 {
+
+    const FIXED_COLUMNS = [
+        'nom de la copro',
+        'cp',
+        'nombre de lots',
+        'hono',
+        'immeuble de moins de 2 ans',
+    ];
+
     private function removeSpecialCharacters(string $input)
     {
         $characters = [
@@ -67,16 +76,17 @@ class PopulatingManager
             $property['hono'] = ltrim(str_replace(' ', '', $property['hono']));
 
             $housing = new Housing();
-            $housing->setName($property['nom de la copro']);
-            $housing->setPostCode($property['cp']);
-            $housing->setNumberLot(intval($property['nombre de lots']));
-            $housing->setFee(floatval($property['hono']));
-            $housing->setIsLessThanTwoYears(!empty($property['immeuble de moins de 2 ans']));
+            $housing->setName($property[self::FIXED_COLUMNS[0]]);
+            $housing->setPostCode($property[self::FIXED_COLUMNS[1]]);
+            $housing->setNumberLot(intval($property[self::FIXED_COLUMNS[2]]));
+            $housing->setFee(floatval($property[self::FIXED_COLUMNS[3]]));
+            $housing->setIsLessThanTwoYears(!empty($property[self::FIXED_COLUMNS[4]]));
             $housing->setHousingActivities($activities);
 
             array_push($userHousings, $housing);
         }
         array_pop($userHousings);
+        dd($userHousings);
         return $userHousings;
     }
 }
