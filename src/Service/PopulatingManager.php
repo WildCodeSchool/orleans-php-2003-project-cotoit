@@ -16,13 +16,13 @@ class PopulatingManager
     ];
 
     /**
-     * @var Slugify
+     * @var ParsingManager
      */
-    private $slugify;
+    private $parsing;
 
-    public function __construct(Slugify $slugify)
+    public function __construct(ParsingManager $parsing)
     {
-        $this->slugify = $slugify;
+        $this->parsing = $parsing;
     }
 
     private function stringToInteger(array $activities)
@@ -30,36 +30,13 @@ class PopulatingManager
         return $activities = array_map('intval', $activities);
     }
 
-    private function moveKeyBefore($array, $find, $move)
-    {
-        if (!isset($array[$find], $array[$move])) {
-            return $array;
-        }
-
-        $length = 0;
-        $keys = array_keys($array);
-        foreach ($keys as $key) {
-            if ($key == $find) {
-                break;
-            } else {
-                $length += 1;
-            }
-        }
-
-        $elem = [$move => $array[$move]];
-        $start = array_splice($array, 0, $length);
-        unset($start[$move]);
-
-        return $start + $elem + $array;
-    }
-
     public function populateHousing(array $housings)
     {
         $userHousings = [];
         foreach ($housings as $property) {
             array_shift($property);
-            $property = $this->slugify->slugArrayKey($property);
-            $property = $this->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
+            $property = $this->parsing->slugArrayKey($property);
+            $property = $this->parsing->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
 
             $activities = $this->stringToInteger(array_slice($property, count(self::FIXED_COLUMNS), null, true));
 
@@ -81,7 +58,6 @@ class PopulatingManager
             array_push($userHousings, $housing);
         }
         array_pop($userHousings);
-        dd($userHousings);
         return $userHousings;
     }
 }

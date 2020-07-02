@@ -3,7 +3,7 @@
 
 namespace App\Service;
 
-class Slugify
+class ParsingManager
 {
     private function removeSpecialCharacters(string $input)
     {
@@ -51,5 +51,28 @@ class Slugify
         }
 
         return array_combine($newKeys, $input);
+    }
+
+    public function moveKeyBefore($array, $find, $move)
+    {
+        if (!isset($array[$find], $array[$move])) {
+            return $array;
+        }
+
+        $length = 0;
+        $keys = array_keys($array);
+        foreach ($keys as $key) {
+            if ($key == $find) {
+                break;
+            } else {
+                $length += 1;
+            }
+        }
+
+        $element = [$move => $array[$move]];
+        $start = array_splice($array, 0, $length);
+        unset($start[$move]);
+
+        return $start + $element + $array;
     }
 }
