@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
-use App\Service\PopulatingManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,15 +22,13 @@ class HomeController extends AbstractController
      * @param DecoderInterface $decoder
      * @param ManualRepository $manualRepository
      * @param SessionInterface $session
-     * @param PopulatingManager $populatingManager
      * @return Response
      */
     public function index(
         Request $request,
         DecoderInterface $decoder,
         ManualRepository $manualRepository,
-        SessionInterface $session,
-        PopulatingManager $populatingManager
+        SessionInterface $session
     ) {
         $manual = $manualRepository->findOneBy([]);
 
@@ -44,8 +41,6 @@ class HomeController extends AbstractController
                 ((string)file_get_contents($portfolio->getPortfolioFileName())),
                 'csv'
             ));
-
-            $populatingManager->populateHousing($session->get('portfolio'));
 
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('activity_user_form');
