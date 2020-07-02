@@ -25,9 +25,8 @@ class PopulatingManager
         $this->slugify = $slugify;
     }
 
-    private function stringToInteger(array $property)
+    private function stringToInteger(array $activities)
     {
-        $activities = array_slice($property, 7, null, true);
         return $activities = array_map('intval', $activities);
     }
 
@@ -52,8 +51,8 @@ class PopulatingManager
             $this->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
             dd($property);
 
-            $activities = $this->stringToInteger($property);
-            $activities['nombre de visites'] = intval($property['nombre de visites']);
+            $activities = array_slice($property, count(self::FIXED_COLUMNS) + 1, null, true);
+            $activities = $this->stringToInteger($activities);
 
             $property['hono'] = str_replace(',', '.', $property['hono']);
 
