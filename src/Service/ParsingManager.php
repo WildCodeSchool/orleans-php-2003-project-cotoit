@@ -71,4 +71,20 @@ class ParsingManager
         //unicode(\u202F)
         return floatval(ltrim(str_replace(' ', '', $output)));
     }
+
+    public function slugString($input)
+    {
+        return trim(
+            strtolower(
+                preg_replace(
+                    ['#[^A-Za-z0-9 \']+#',
+                        '#[\s-]+#'],
+                    ['',
+                        '-'],
+                    $this->removeSpecialCharacters($input)
+                )
+            ),
+            '-'
+        );
+    }
 }
