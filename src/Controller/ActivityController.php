@@ -35,6 +35,7 @@ class ActivityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $session->set('userActivities', $userActivity);
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
+            dd($session->get('userActivities'));
 
             return $this->redirectToRoute('home');
         }
