@@ -53,14 +53,14 @@ class ParsingManager
         return array_combine($newKeys, $input);
     }
 
-    public function moveKeyBefore($array, $find, $move)
+    public function moveKeyBefore(array $input, $find, $move)
     {
-        if (!isset($array[$find], $array[$move])) {
-            return $array;
+        if (!isset($input[$find], $input[$move])) {
+            return $input;
         }
 
         $length = 0;
-        $keys = array_keys($array);
+        $keys = array_keys($input);
         foreach ($keys as $key) {
             if ($key == $find) {
                 break;
@@ -69,10 +69,10 @@ class ParsingManager
             }
         }
 
-        $element = [$move => $array[$move]];
-        $start = array_splice($array, 0, $length);
+        $element = [$move => $input[$move]];
+        $start = array_splice($input, 0, $length);
         unset($start[$move]);
 
-        return $start + $element + $array;
+        return $start + $element + $input;
     }
 }
