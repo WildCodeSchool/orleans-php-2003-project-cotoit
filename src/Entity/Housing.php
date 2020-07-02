@@ -13,21 +13,25 @@ class Housing
 
     /**
      * @var string
+     * @Assert\Length(max = 255)
      */
     private $name;
 
     /**
      * @var string
+     * @Assert\Length(max = 100)
      */
     private $postCode;
 
     /**
      * @var float
+     * @Assert\PositiveOrZero
      */
     private $fee;
 
     /**
      * @var int
+     * @Assert\PositiveOrZero
      */
     private $numberLot;
 
