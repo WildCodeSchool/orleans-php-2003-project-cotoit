@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 class ActivityFixtures extends Fixture
 {
     const ACTIVITIES = [
-        'Visite' => [
+        'Visites' => [
             'hour' => 2,
             'minute' => 30,
         ],
@@ -18,11 +18,11 @@ class ActivityFixtures extends Fixture
             'hour' => 10,
             'minute' => 0,
         ],
-        'Réunion du conseil syndical' => [
+        'Réunion du CS' => [
             'hour' => 4,
             'minute' => 0,
         ],
-        'Tenue assemblée générale' => [
+        'Tenue AG' => [
             'hour' => 3,
             'minute' => 0,
         ],
@@ -30,31 +30,31 @@ class ActivityFixtures extends Fixture
             'hour' => 1,
             'minute' => 0,
         ],
-        'Ordre de service' => [
+        'OS' => [
             'hour' => 0,
             'minute' => 30,
         ],
-        'Vente' => [
+        'Ventes' => [
             'hour' => 0,
             'minute' => 30,
         ],
-        'Relance' => [
+        'Relances' => [
             'hour' => 0,
             'minute' => 1,
         ],
-        'Sinistre MRH' => [
+        'Sinistres MRH' => [
             'hour' => 2,
             'minute' => 0,
         ],
-        'Sinistre DO' => [
+        'Sinistres DO' => [
             'hour' => 2,
             'minute' => 0,
         ],
-        'Expertise avec présence gestionnaire' => [
+        'Expertises avec présence d\'un gestionnaire' => [
             'hour' => 1,
             'minute' => 30,
         ],
-        'Suivi et transmission avocat/huissier dossier contentieux' => [
+        'Suivi dossiers contentieux avant avocat puis transmission dossier à l\'avocat ou huissier' => [
             'hour' => 1,
             'minute' => 0,
         ],
