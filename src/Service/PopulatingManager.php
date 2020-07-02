@@ -36,6 +36,9 @@ class PopulatingManager
         foreach ($housings as $property) {
             array_shift($property);
             $property = $this->parsing->slugArrayKey($property);
+
+            //inverted order of those two keys so all fixed columns come first
+            //makes using count(self::FIXED_COLUMNS) possible for the array_slice offset to populate activities
             $property = $this->parsing->moveKeyBefore($property, 'nombre-de-visites', self::FIXED_COLUMNS[4]);
 
             $activities = $this->stringToInteger(array_slice($property, count(self::FIXED_COLUMNS), null, true));
