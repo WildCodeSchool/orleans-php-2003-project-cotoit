@@ -8,49 +8,21 @@ class PopulatingManager
 {
 
     const FIXED_COLUMNS = [
-        'nom de la copro',
+        'nom-de-la-copro',
         'cp',
-        'nombre de lots',
+        'nombre-de lots',
         'hono',
-        'immeuble de moins de 2 ans',
+        'immeuble-de-moins-de-2-ans',
     ];
 
-    private function removeSpecialCharacters(string $input)
+    /**
+     * @var Slugify
+     */
+    private $slugify;
+
+    public function __construct(Slugify $slugify)
     {
-        $characters = [
-            '/[áàâãªä]/u' => 'a',
-            '/[ÁÀÂÃÄ]/u' => 'A',
-            '/[ÍÌÎÏ]/u' => 'I',
-            '/[íìîï]/u' => 'i',
-            '/[éèêë]/u' => 'e',
-            '/[ÉÈÊË]/u' => 'E',
-            '/[óòôõºö]/u' => 'o',
-            '/[ÓÒÔÕÖ]/u' => 'O',
-            '/[úùûü]/u' => 'u',
-            '/[ÚÙÛÜ]/u' => 'U',
-            '/ç/' => 'c',
-            '/Ç/' => 'C',
-            '/ñ/' => 'n',
-            '/Ñ/' => 'N',
-            '/[«»]/u' => '',
-        ];
-
-        return preg_replace(array_keys($characters), array_values($characters), $input);
-    }
-
-    private function regexArrayKey(array $property)
-    {
-        $oldKeys = array_keys($property);
-        $newKeys = [];
-        foreach ($oldKeys as $oldKey) {
-            array_push($newKeys, trim(strtolower(preg_replace(
-                '#[^A-Za-z0-9 \']+#',
-                ' ',
-                $this->removeSpecialCharacters($oldKey)
-            ))));
-        }
-
-        return array_combine($newKeys, $property);
+        $this->slugify = $slugify;
     }
 
     private function stringToInteger(array $property)
@@ -63,7 +35,7 @@ class PopulatingManager
     {
         $userHousings = [];
         foreach ($housings as $property) {
-            $property = $this->regexArrayKey($property);
+            $property = $this->slugify->slugArrayKey($property);
 
             $activities = $this->stringToInteger($property);
             $activities['nombre de visites'] = intval($property['nombre de visites']);
@@ -86,7 +58,6 @@ class PopulatingManager
             array_push($userHousings, $housing);
         }
         array_pop($userHousings);
-        dd($userHousings);
         return $userHousings;
     }
 }
