@@ -33,13 +33,21 @@ class Slugify
         $oldKeys = array_keys($input);
         $newKeys = [];
         foreach ($oldKeys as $oldKey) {
-            array_push($newKeys, trim(strtolower(preg_replace(
-                ['#[^A-Za-z0-9 \']+#',
-                    '#[\s-]+#'],
-                ['',
-                    '-'],
-                $this->removeSpecialCharacters($oldKey)
-            ))));
+            array_push(
+                $newKeys,
+                trim(
+                    strtolower(
+                        preg_replace(
+                            ['#[^A-Za-z0-9 \']+#',
+                                '#[\s-]+#'],
+                            ['',
+                                '-'],
+                            $this->removeSpecialCharacters($oldKey)
+                        )
+                    ),
+                    '-'
+                )
+            );
         }
 
         return array_combine($newKeys, $input);

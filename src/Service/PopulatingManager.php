@@ -36,6 +36,8 @@ class PopulatingManager
         $userHousings = [];
         foreach ($housings as $property) {
             $property = $this->slugify->slugArrayKey($property);
+            dd($property);
+
 
             $activities = $this->stringToInteger($property);
             $activities['nombre de visites'] = intval($property['nombre de visites']);
