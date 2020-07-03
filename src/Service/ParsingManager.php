@@ -76,12 +76,12 @@ class ParsingManager
         return floatval(ltrim(str_replace(' ', '', $output)));
     }
 
-    public function activityToKey(array $input)
+    public function activityToKey(array $activities)
     {
         $newKeys = [];
-        foreach ($input as $value) {
-            array_push($newKeys, $value->getActivity());
+        foreach ($activities as $activity) {
+            array_push($newKeys, $activity->getActivity());
         }
-        return array_combine($newKeys, $input);
+        return array_combine($newKeys, $activities);
     }
 }
