@@ -76,7 +76,7 @@ class ParsingManager
         return floatval(ltrim(str_replace(' ', '', $output)));
     }
 
-    public function slugString($input)
+    public function slugString(string $input)
     {
         return trim(
             strtolower(

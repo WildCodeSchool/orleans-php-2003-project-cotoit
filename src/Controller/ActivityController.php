@@ -38,7 +38,7 @@ class ActivityController extends AbstractController
         $housingActivity = new HousingActivity();
         foreach ($activities as $activity) {
             $userActivity = new UserActivity();
-            $userActivity->setActivity($parsingManager->slugString($activity->getName()));
+            $userActivity->setActivity($activity->getName());
             $userActivity->setHour($activity->getHour());
             $userActivity->setMinute($activity->getMinute());
 
@@ -49,7 +49,13 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $session->set('housingActivities', $housingActivity);
+            $housingActivities = $housingActivity->getActivities()->toArray();
+
+            foreach ($housingActivities as $housingTask) {
+                $housingTask->setActivity($parsingManager->slugString($housingTask->getActivity()));
+            }
+
+            $session->set('housingActivities', $housingActivities);
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
 
 
