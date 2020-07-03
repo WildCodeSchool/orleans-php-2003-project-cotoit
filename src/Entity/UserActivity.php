@@ -3,8 +3,6 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 class UserActivity
 {
     private $activity;
@@ -16,7 +14,7 @@ class UserActivity
     private $number;
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getActivity()
     {
@@ -24,7 +22,7 @@ class UserActivity
     }
 
     /**
-     * @param mixed $activity
+     * @param string $activity
      */
     public function setActivity($activity): void
     {
@@ -32,7 +30,7 @@ class UserActivity
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getHour()
     {
@@ -40,7 +38,7 @@ class UserActivity
     }
 
     /**
-     * @param mixed $hour
+     * @param integer $hour
      */
     public function setHour($hour): void
     {
@@ -48,7 +46,7 @@ class UserActivity
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getMinute()
     {
@@ -56,7 +54,7 @@ class UserActivity
     }
 
     /**
-     * @param mixed $minute
+     * @param integer $minute
      */
     public function setMinute($minute): void
     {
@@ -64,7 +62,7 @@ class UserActivity
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getNumber()
     {
@@ -72,7 +70,7 @@ class UserActivity
     }
 
     /**
-     * @param mixed $number
+     * @param integer $number
      */
     public function setNumber($number): void
     {
