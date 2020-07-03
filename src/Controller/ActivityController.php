@@ -55,7 +55,7 @@ class ActivityController extends AbstractController
             $session->set('housingActivities', $housingActivities);
 
             $session->set(
-                'condominiums',
+                'condos',
                 $parsingManager->mergeActivitiesIntoHousing(
                     $session->get('userHousing'),
                     $session->get('housingActivities')
