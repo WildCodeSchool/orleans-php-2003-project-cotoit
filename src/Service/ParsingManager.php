@@ -84,4 +84,22 @@ class ParsingManager
         }
         return array_combine($newKeys, $activities);
     }
+
+    public function mergeActivitiesIntoHousing(array $housings, array $activities)
+    {
+        foreach ($housings as $housing) {
+            $housingActivities = $housing->getHousingActivities();
+
+            $newHousingActivities = [];
+            foreach ($activities as $activityKey => $activityValue) {
+                $activityValue->setNumber($housingActivities[$activityKey]);
+                array_push($newHousingActivities, clone $activityValue);
+            }
+            $newHousingActivities = $this->slugArrayKey($this->activityToKey($newHousingActivities));
+
+            $housing->setHousingActivities($newHousingActivities);
+            array_push($housings, $housing);
+        }
+        return $housings;
+    }
 }
