@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\HousingActivity;
 use App\Entity\UserActivity;
-use App\Form\UserActivityType;
+use App\Form\HousingActivityType;
 use App\Repository\ActivityRepository;
+use App\Service\ParsingManager;
+use App\Service\PopulatingManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,20 +24,37 @@ class ActivityController extends AbstractController
      * @param ActivityRepository $activityRepository
      * @param Request $request
      * @param SessionInterface $session
+     * @param ParsingManager $parsingManager
      * @return Response
      */
-    public function customise(ActivityRepository $activityRepository, Request $request, SessionInterface $session)
-    : Response
-    {
-        $userActivity = new UserActivity();
-        $userActivity->setActivities($activityRepository->findBy([], ['name' => 'ASC']));
+    public function customise(
+        ActivityRepository $activityRepository,
+        Request $request,
+        SessionInterface $session,
+        ParsingManager $parsingManager
+    ): Response {
+        $activities = $activityRepository->findBy([], ['name' => 'ASC']);
 
-        $form = $this->createForm(UserActivityType::class, $userActivity);
+        $housingActivity = new HousingActivity();
+        foreach ($activities as $activity) {
+            $userActivity = new UserActivity();
+            $userActivity->setActivity($activity->getName());
+            $userActivity->setHour($activity->getHour());
+            $userActivity->setMinute($activity->getMinute());
+
+            $housingActivity->addActivity($userActivity);
+        }
+
+        $form = $this->createForm(HousingActivityType::class, $housingActivity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $session->set('userActivities', $userActivity);
+            $housingActivities = $housingActivity->getActivities()->toArray();
+            $housingActivities = $parsingManager->slugArrayKey($parsingManager->activityToKey($housingActivities));
+
+            $session->set('housingActivities', $housingActivities);
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
+
 
             return $this->redirectToRoute('home');
         }

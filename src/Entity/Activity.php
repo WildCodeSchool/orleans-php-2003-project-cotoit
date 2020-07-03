@@ -31,7 +31,7 @@ class Activity
      * @ORM\Column(type="integer")
      * @Assert\PositiveOrZero(message="Le nombre d'heures allouées à une activité doit être égal à 0 ou positif")
      */
-    private $hours;
+    private $hour;
 
     /**
      * @ORM\Column(type="integer")
@@ -42,7 +42,7 @@ class Activity
      *     maxMessage="Le nombre de minutes allouées à une activité doit être au maximum de {{ limit }}",
      * )
      */
-    private $minutes;
+    private $minute;
 
     public function getId(): ?int
     {
@@ -61,26 +61,26 @@ class Activity
         return $this;
     }
 
-    public function getHours(): ?int
+    public function getHour(): ?int
     {
-        return $this->hours;
+        return $this->hour;
     }
 
-    public function setHours(int $hours): self
+    public function setHour(int $hour): self
     {
-        $this->hours = $hours;
+        $this->hour = $hour;
 
         return $this;
     }
 
-    public function getMinutes(): ?int
+    public function getMinute(): ?int
     {
-        return $this->minutes;
+        return $this->minute;
     }
 
-    public function setMinutes(int $minutes): self
+    public function setMinute(int $minute): self
     {
-        $this->minutes = $minutes;
+        $this->minute = $minute;
 
         return $this;
     }
