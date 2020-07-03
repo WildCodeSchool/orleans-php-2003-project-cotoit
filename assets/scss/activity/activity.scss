@@ -1,44 +1,44 @@
 @import "../vars";
 
-.user-activity-form thead tr th {
+.housing-activity-form thead tr th {
     background-color: $secondary-color;
 }
 
-.user-activity-form:hover thead tr th {
+.housing-activity-form:hover thead tr th {
     background-color: $secondary-color;
 }
 
-.user-activity-form .form-fields, {
+.housing-activity-form .form-fields, {
     display: flex;
     justify-content: flex-end;
 }
 
-.user-activity-form .form-group {
+.housing-activity-form .form-group {
     margin-bottom: 0;
 }
 
-.user-activity-form div[id*="user_activity_activities"],
-.user-activity-form div[id*="user_activity_activities"] div,
+.housing-activity-form div[id*="housing_activity_activities"],
+.housing-activity-form div[id*="housing_activity_activities"] div,
 {
     display: flex;
     justify-content: center;
 }
 
-.user-activity-form div[id*="user_activity_activities"] div label, {
+.housing-activity-form div[id*="housing_activity_activities"] div label, {
     margin-bottom: 0;
     margin-right: $spacing-sm;
     align-self: center;
 }
 
-.user-activity-form input {
+.housing-activity-form input {
     width: 33%;
 }
 
-.user-activity-form .btn.active.focus,
-.user-activity-form .btn.active:focus,
-.user-activity-form .btn.focus,
-.user-activity-form .btn.focus:active,
-.user-activity-form .btn:active:focus,
-.user-activity-form .btn:focus {
+.housing-activity-form .btn.active.focus,
+.housing-activity-form .btn.active:focus,
+.housing-activity-form .btn.focus,
+.housing-activity-form .btn.focus:active,
+.housing-activity-form .btn:active:focus,
+.housing-activity-form .btn:focus {
     box-shadow: none;
 }

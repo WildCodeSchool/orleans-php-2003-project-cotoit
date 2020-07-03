@@ -7,25 +7,75 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UserActivity
 {
+    private $activity;
 
-    /**
-     * @Assert\Valid
-     */
-    private $activities;
+    private $hour;
+
+    private $minute;
+
+    private $number;
 
     /**
      * @return mixed
      */
-    public function getActivities()
+    public function getActivity()
     {
-        return $this->activities;
+        return $this->activity;
     }
 
     /**
-     * @param mixed $activities
+     * @param mixed $activity
      */
-    public function setActivities($activities): void
+    public function setActivity($activity): void
     {
-        $this->activities = $activities;
+        $this->activity = $activity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHour()
+    {
+        return $this->hour;
+    }
+
+    /**
+     * @param mixed $hour
+     */
+    public function setHour($hour): void
+    {
+        $this->hour = $hour;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinute()
+    {
+        return $this->minute;
+    }
+
+    /**
+     * @param mixed $minute
+     */
+    public function setMinute($minute): void
+    {
+        $this->minute = $minute;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param mixed $number
+     */
+    public function setNumber($number): void
+    {
+        $this->number = $number;
     }
 }

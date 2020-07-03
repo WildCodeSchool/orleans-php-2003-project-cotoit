@@ -38,10 +38,14 @@ class ParsingManager
                 trim(
                     strtolower(
                         preg_replace(
-                            ['#[^A-Za-z0-9 \']+#',
-                                '#[\s-]+#'],
-                            ['',
-                                '-'],
+                            [
+                                '#[^A-Za-z0-9 \']+#',
+                                '#[\s-]+#'
+                            ],
+                            [
+                                '',
+                                '-'
+                            ],
                             $this->removeSpecialCharacters($oldKey)
                         )
                     ),
@@ -70,5 +74,14 @@ class ParsingManager
         //careful when modifying this line
         //unicode(\u202F)
         return floatval(ltrim(str_replace(' ', '', $output)));
+    }
+
+    public function activityToKey(array $activities)
+    {
+        $newKeys = [];
+        foreach ($activities as $activity) {
+            array_push($newKeys, $activity->getActivity());
+        }
+        return array_combine($newKeys, $activities);
     }
 }
