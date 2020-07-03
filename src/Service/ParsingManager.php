@@ -76,23 +76,12 @@ class ParsingManager
         return floatval(ltrim(str_replace(' ', '', $output)));
     }
 
-    public function slugString(string $input)
+    public function activityToKey(array $input)
     {
-        return trim(
-            strtolower(
-                preg_replace(
-                    [
-                        '#[^A-Za-z0-9 \']+#',
-                        '#[\s-]+#'
-                    ],
-                    [
-                        '',
-                        '-'
-                    ],
-                    $this->removeSpecialCharacters($input)
-                )
-            ),
-            '-'
-        );
+        $newKeys = [];
+        foreach ($input as $value) {
+            array_push($newKeys, $value->getActivity());
+        }
+        return array_combine($newKeys, $input);
     }
 }

@@ -50,10 +50,7 @@ class ActivityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $housingActivities = $housingActivity->getActivities()->toArray();
-
-            foreach ($housingActivities as $housingTask) {
-                $housingTask->setActivity($parsingManager->slugString($housingTask->getActivity()));
-            }
+            $housingActivities = $parsingManager->slugArrayKey($parsingManager->activityToKey($housingActivities));
 
             $session->set('housingActivities', $housingActivities);
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
