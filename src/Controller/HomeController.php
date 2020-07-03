@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\PopulatingManager;
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -20,10 +21,18 @@ class HomeController extends AbstractController
      * @Route("/home", name="home")
      * @param Request $request
      * @param DecoderInterface $decoder
+     * @param ManualRepository $manualRepository
+     * @param SessionInterface $session
+     * @param PopulatingManager $populatingManager
      * @return Response
      */
-    public function index(Request $request, DecoderInterface $decoder, ManualRepository $manualRepository)
-    {
+    public function index(
+        Request $request,
+        DecoderInterface $decoder,
+        ManualRepository $manualRepository,
+        SessionInterface $session,
+        PopulatingManager $populatingManager
+    ) {
         $manual = $manualRepository->findOneBy([]);
 
         $portfolio = new Portfolio();
@@ -31,26 +40,13 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getFirstTrimesterFile())),
+            $session->set('portfolio', $decoder->decode(
+                ((string)file_get_contents($portfolio->getPortfolioFileName())),
                 'csv'
-            );
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getSecondTrimesterFile())),
-                'csv'
-            );
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getThirdTrimesterFile())),
-                'csv'
-            );
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getFourthTrimesterFile())),
-                'csv'
-            );
-            $decoder->decode(
-                ((string)file_get_contents($portfolio->getActivityFile())),
-                'csv'
-            );
+            ));
+
+            $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
+
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('activity_user_form');
         }

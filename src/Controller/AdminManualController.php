@@ -11,12 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/manual")
+ * @Route("/admin/manual", name="admin_manual_")
  */
-class ManualController extends AbstractController
+class AdminManualController extends AbstractController
 {
     /**
-     * @Route("/", name="manual_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
+     * @param ManualRepository $manualRepository
+     * @return Response
      */
     public function index(ManualRepository $manualRepository): Response
     {
@@ -28,7 +30,7 @@ class ManualController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="manual_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Manual $manual): Response
     {
@@ -38,7 +40,12 @@ class ManualController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('manual_index');
+            $this->addFlash(
+                'success',
+                'Le manuel a bien été modifié.'
+            );
+
+            return $this->redirectToRoute('admin_manual_index');
         }
 
         return $this->render('manual/edit.html.twig', [
