@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\ColumnManager;
 use App\Service\PopulatingManager;
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
@@ -34,7 +35,8 @@ class HomeController extends AbstractController
         ManualRepository $manualRepository,
         SessionInterface $session,
         ValidatingManager $validatingManager,
-        PopulatingManager $populatingManager
+        PopulatingManager $populatingManager,
+        ColumnManager $columnManager
     ) {
         $manual = $manualRepository->findOneBy([]);
 
@@ -47,6 +49,15 @@ class HomeController extends AbstractController
                 ((string)file_get_contents($portfolio->getPortfolioFileName())),
                 'csv'
             ));
+
+            $errorColumn = $columnManager->sameColumn($session->get('portfolio'));
+            if (!empty($errorColumn)) {
+                return $this->render('home/index.html.twig', [
+                    'form' => $form->createView(),
+                    'manual' => $manual,
+                    'errors' => $errorColumn,
+                ]);
+            }
 
             $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
 

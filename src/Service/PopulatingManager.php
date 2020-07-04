@@ -52,4 +52,9 @@ class PopulatingManager
         array_pop($userHousings);
         return $userHousings;
     }
+
+    public function getFixedColumn()
+    {
+        return self::FIXED_COLUMNS;
+    }
 }
