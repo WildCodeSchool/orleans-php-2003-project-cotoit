@@ -7,7 +7,8 @@ use App\Entity\UserActivity;
 use App\Form\HousingActivityType;
 use App\Repository\ActivityRepository;
 use App\Service\ParsingManager;
-use App\Service\PopulatingManager;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,7 @@ class ActivityController extends AbstractController
      * @param ActivityRepository $activityRepository
      * @param Request $request
      * @param SessionInterface $session
+     * @param ValidatorInterface $validator
      * @param ParsingManager $parsingManager
      * @return Response
      */
@@ -31,6 +33,7 @@ class ActivityController extends AbstractController
         ActivityRepository $activityRepository,
         Request $request,
         SessionInterface $session,
+        ValidatorInterface $validator,
         ParsingManager $parsingManager
     ): Response {
         $activities = $activityRepository->findBy([], ['name' => 'ASC']);
@@ -48,8 +51,20 @@ class ActivityController extends AbstractController
         $form = $this->createForm(HousingActivityType::class, $housingActivity);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $housingActivities = $housingActivity->getActivities()->toArray();
+
+            $errors = new ConstraintViolationList();
+            foreach ($housingActivities as $userActivity) {
+                $errors = $validator->validate($userActivity);
+            }
+
+            if (count($errors) > 0) {
+                return $this->render('activity/_validation.html.twig', [
+                    'errors' => $errors,
+                ]);
+            }
+
             $housingActivities = $parsingManager->slugArrayKey($parsingManager->activityToKey($housingActivities));
 
             $session->set('housingActivities', $housingActivities);

@@ -3,16 +3,12 @@
 
 namespace App\Entity;
 
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @UniqueEntity("activity")
- */
 class UserActivity
 {
     /**
-     * @Assert\NotBlank("L'activité doit porter un nom")
+     * @Assert\NotBlank(message="L'activité doit comporter un nom")
      * @Assert\Length(max="100", maxMessage="Le nom de l'activité doit comporter {{ limit }} caractères maximum")
      */
     private $activity;
