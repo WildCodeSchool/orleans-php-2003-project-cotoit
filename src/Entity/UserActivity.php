@@ -3,16 +3,38 @@
 
 namespace App\Entity;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @UniqueEntity("activity")
+ */
 class UserActivity
 {
+    /**
+     * @Assert\NotBlank("L'activité doit porter un nom")
+     * @Assert\Length(max="100", maxMessage="Le nom de l'activité doit comporter {{ limit }} caractères maximum")
+     */
     private $activity;
 
+    /**
+     * @Assert\PositiveOrZero(message="Le nombre d'heures allouées à une activité doit être égal à 0 ou positif")
+     */
     private $hour;
 
+    /**
+     * @Assert\Range(
+     *     min = 0,
+     *     max = 59,
+     *     minMessage="Le nombre de minutes allouées à une activité doit être au minimum de {{ limit }}",
+     *     maxMessage="Le nombre de minutes allouées à une activité doit être au maximum de {{ limit }}",
+     * )
+     */
     private $minute;
 
+    /**
+     * @Assert\PositiveOrZero(message="Le nombre d'activités allouées doit être égal à 0 ou positif")
+     */
     private $number;
 
     /**
