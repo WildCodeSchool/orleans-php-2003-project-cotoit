@@ -54,14 +54,20 @@ class ActivityController extends AbstractController
         if ($form->isSubmitted()) {
             $housingActivities = $housingActivity->getActivities()->toArray();
 
-            $errors = new ConstraintViolationList();
+            $errorMessages = [];
             foreach ($housingActivities as $userActivity) {
                 $errors = $validator->validate($userActivity);
+                for ($i = 0; $i < $errors->count(); $i++) {
+                    $error = $errors->get($i);
+                    $errorRoot = $error->getRoot();
+                    $errorMessages[$errorRoot->getActivity()] = $error->getMessage();
+                }
             }
 
-            if (count($errors) > 0) {
-                return $this->render('activity/_validation.html.twig', [
-                    'errors' => $errors,
+            if (!empty($errorMessages)) {
+                return $this->render('activity/userActivity.html.twig', [
+                    'form' => $form->createView(),
+                    'errors' => $errorMessages,
                 ]);
             }
 
