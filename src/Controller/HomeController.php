@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\PopulatingManager;
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
+use App\Service\ValidatingManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +24,7 @@ class HomeController extends AbstractController
      * @param DecoderInterface $decoder
      * @param ManualRepository $manualRepository
      * @param SessionInterface $session
+     * @param ValidatingManager $validatingManager
      * @param PopulatingManager $populatingManager
      * @return Response
      */
@@ -31,6 +33,7 @@ class HomeController extends AbstractController
         DecoderInterface $decoder,
         ManualRepository $manualRepository,
         SessionInterface $session,
+        ValidatingManager $validatingManager,
         PopulatingManager $populatingManager
     ) {
         $manual = $manualRepository->findOneBy([]);
@@ -46,6 +49,15 @@ class HomeController extends AbstractController
             ));
 
             $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
+
+            $errorMessages = $validatingManager->validationLoopForPortfolio($session->get('userHousing'));
+            if (!empty($errorMessages)) {
+                return $this->render('home/index.html.twig', [
+                    'form' => $form->createView(),
+                    'manual' => $manual,
+                    'errors' => $errorMessages,
+                ]);
+            }
 
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('activity_user_form');
