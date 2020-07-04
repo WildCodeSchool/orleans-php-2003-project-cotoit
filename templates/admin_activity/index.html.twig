@@ -3,7 +3,7 @@
 {% block title %}Admin - Index activités{% endblock %}
 
 {% block main %}
-    <section class="admin-activity-index container mt-5">
+    <section class="admin-activity-index container my-5">
         <div class="row justify-content-between">
             <h1 class="ml-3 mt-4 mb-5">Administration - Index des activités</h1>
             <a class="btn btn-primary mr-3 my-auto" href="{{ path('admin_activity_new') }}">Ajouter activité</a>
@@ -20,7 +20,7 @@
             {% for activity in activities %}
                 <tr>
                     <td>{{ activity.name }}</td>
-                    <td class="text-center">{{ activity.hours }}h {{ activity.minutes }}m</td>
+                    <td class="text-center">{{ activity.hour }}h {{ activity.minute }}m</td>
                     <td class="text-right">
                         <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}"><i class="fas fa-edit"></i></a>
                     </td>

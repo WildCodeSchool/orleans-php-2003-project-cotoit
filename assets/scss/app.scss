@@ -49,6 +49,16 @@ label {
     font-family: $main-font;
 }
 
-.btn.btn-primary {
+.btn {
     border-radius: 30px;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn:active:focus,
+.btn:focus,
+.btn:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
 }
