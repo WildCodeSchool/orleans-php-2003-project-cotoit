@@ -24,6 +24,7 @@ class ActivityController extends AbstractController
      * @param ActivityRepository $activityRepository
      * @param Request $request
      * @param SessionInterface $session
+     * @param ValidatingManager $validatingManager
      * @param ParsingManager $parsingManager
      * @return Response
      */
@@ -65,7 +66,6 @@ class ActivityController extends AbstractController
 
             $session->set('housingActivities', $housingActivities);
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
-
 
             return $this->redirectToRoute('home');
         }
