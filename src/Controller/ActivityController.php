@@ -7,8 +7,7 @@ use App\Entity\UserActivity;
 use App\Form\HousingActivityType;
 use App\Repository\ActivityRepository;
 use App\Service\ParsingManager;
-use Symfony\Component\Validator\ConstraintViolationList;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Service\ValidatingManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +24,6 @@ class ActivityController extends AbstractController
      * @param ActivityRepository $activityRepository
      * @param Request $request
      * @param SessionInterface $session
-     * @param ValidatorInterface $validator
      * @param ParsingManager $parsingManager
      * @return Response
      */
@@ -33,7 +31,7 @@ class ActivityController extends AbstractController
         ActivityRepository $activityRepository,
         Request $request,
         SessionInterface $session,
-        ValidatorInterface $validator,
+        ValidatingManager $validatingManager,
         ParsingManager $parsingManager
     ): Response {
         $activities = $activityRepository->findBy([], ['name' => 'ASC']);
@@ -54,15 +52,7 @@ class ActivityController extends AbstractController
         if ($form->isSubmitted()) {
             $housingActivities = $housingActivity->getActivities()->toArray();
 
-            $errorMessages = [];
-            foreach ($housingActivities as $userActivity) {
-                $errors = $validator->validate($userActivity);
-                for ($i = 0; $i < $errors->count(); $i++) {
-                    $error = $errors->get($i);
-                    $errorRoot = $error->getRoot();
-                    $errorMessages[$errorRoot->getActivity()] = $error->getMessage();
-                }
-            }
+            $errorMessages = $validatingManager->validationLoop($housingActivities);
 
             if (!empty($errorMessages)) {
                 return $this->render('activity/userActivity.html.twig', [
