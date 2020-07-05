@@ -1,11 +1,5 @@
 @import "../vars";
 
-@mixin text ($font-weight, $font-size) {
-    font-family: $main-font;
-    font-weight: $font-weight;
-    font-size: $font-size;
-}
-
 .mce-content-body table tbody tr td,
 .mce-content-body table tbody tr th, {
     @include text (400, 14px);
