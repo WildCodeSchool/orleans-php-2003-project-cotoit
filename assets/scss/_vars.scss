@@ -11,3 +11,9 @@ $main-font: "Raleway", sans-serif;
 $spacing: 14px;
 $spacing-sm: 8px;
 $spacing-xl: 28px;
+
+@mixin text ($font-weight, $font-size) {
+  font-family: $main-font;
+  font-weight: $font-weight;
+  font-size: $font-size;
+}
