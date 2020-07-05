@@ -37,3 +37,6 @@
         <img src="{{ asset('build/images/girl_with_headphones.png') }}" alt="girl with headphones">
     </div>
 </div>
+{{ tinymce_init({
+    theme: {'advanced':{'language': app.request.locale, 'height': 500 }},})
+}}
