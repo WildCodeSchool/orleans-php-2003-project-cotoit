@@ -3,6 +3,11 @@ $secondary-color: rgba(231, 71, 94, 0.7);
 $dark-color: #333333;
 $border-color: #ececec;
 
+$theme-colors: (
+        "primary": $primary-color,
+        "secondary": $secondary-color,
+);
+
 $background-color: #FAC31B;
 $secondary-background-color: #FFFFFF;
 
