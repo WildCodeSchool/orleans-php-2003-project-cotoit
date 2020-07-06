@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-use App\Entity\HourlyRate;
 use App\Repository\HourlyRateRepository;
 
 class CalculatingManager
