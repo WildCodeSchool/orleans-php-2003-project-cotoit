@@ -38,5 +38,11 @@
 
 .manuals .card-header {
     background-color: $secondary-background-color;
-    border: 0;
+    border: none;
+}
+
+.admin_manual_edit .card,
+.admin_manual_edit .card-header {
+    border: none;
+    background-color: $secondary-background-color;
 }

@@ -240,6 +240,9 @@
             "phpcs.xml.dist"
         ]
     },
+    "stfalcon/tinymce-bundle": {
+        "version": "v2.5.0"
+    },
     "symfony/asset": {
         "version": "v4.2.8"
     },
