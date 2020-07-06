@@ -53,8 +53,16 @@ class ActivityController extends AbstractController
             $housingActivities = $parsingManager->slugArrayKey($parsingManager->activityToKey($housingActivities));
 
             $session->set('housingActivities', $housingActivities);
-            $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
 
+            $session->set(
+                'condos',
+                $parsingManager->mergeActivitiesIntoHousing(
+                    $session->get('userHousing'),
+                    $session->get('housingActivities')
+                )
+            );
+
+            $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
 
             return $this->redirectToRoute('home');
         }
