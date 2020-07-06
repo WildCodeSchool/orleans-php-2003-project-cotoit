@@ -16,13 +16,16 @@ class ResultController extends AbstractController
     /**
      * @Route("/", name="index")
      * @param SessionInterface $session
+     * @param CalculatingManager $calculatingManager
      * @return Response
      */
     public function index(
-        SessionInterface $session
+        SessionInterface $session,
+        CalculatingManager $calculatingManager
     ) {
         $condos = $session->get('condos');
-        dd($condos);
+        $profit = $calculatingManager->profitLot($condos);
+        dd($profit);
 
         return $this->render('result/index.html.twig', [
             'controller_name' => 'ResultController',

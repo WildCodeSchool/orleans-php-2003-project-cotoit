@@ -5,11 +5,15 @@ namespace App\Service;
 
 class CalculatingManager
 {
-    public function profitLot(array $housings)
+    public function profitLot(array $housings): array
     {
-        $this->profit($housings);
+        $profit = $this->profit($housings);
         $totalTime = $this->totalTime($housings);
-        dd($totalTime);
+        $totalLots = $this->totalLots($housings);
+        dd($profit, $totalTime, $totalLots);
+
+
+        return $housings;
     }
 
     private function profit(array $housings)
@@ -37,6 +41,17 @@ class CalculatingManager
             $totalTime += $hours;
         }
         return round($totalTime, 2);
+    }
+
+    private function totalLots(array $housings)
+    {
+        $totalLots = 0;
+        dd($housings);
+        foreach ($housings as $housing) {
+            $totalLots += $housing->getNumberLot();
+            var_dump($totalLots);
+        }
+        exit();
     }
 
 
