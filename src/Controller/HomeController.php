@@ -27,6 +27,7 @@ class HomeController extends AbstractController
      * @param SessionInterface $session
      * @param ValidatingManager $validatingManager
      * @param PopulatingManager $populatingManager
+     * @param ColumnManager $columnManager
      * @return Response
      */
     public function index(
@@ -51,6 +52,7 @@ class HomeController extends AbstractController
             ));
 
             $errorColumn = $columnManager->sameColumn($session->get('portfolio'));
+
             if (!empty($errorColumn)) {
                 return $this->render('home/index.html.twig', [
                     'form' => $form->createView(),

@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
+use App\Repository\ActivityRepository;
+
 class ColumnManager
 {
-    const ERROR_MESSAGE = 'Le nom de la colonne ne correspond pas au modèle.';
-
     /**
      * @var ParsingManager
      */
@@ -16,25 +16,55 @@ class ColumnManager
      */
     private $populate;
 
-    public function __construct(ParsingManager $parsing, PopulatingManager $populate)
+    /**
+     * @var ActivityRepository
+     */
+    private $activityRepository;
+
+    public function __construct(ParsingManager $parsing, PopulatingManager $populate, ActivityRepository $activity)
     {
         $this->parsing = $parsing;
         $this->populate = $populate;
+        $this->activityRepository = $activity;
     }
 
-    public function sameColumn(array $input)
+    /**
+     * @param array $input
+     * @return array
+     */
+    public function sameColumn(array $input): array
     {
-        $errorColumn = [];
         $columns = $this->populate->getFixedColumn();
+
+        $activities = $this->activityRepository->findBy([]);
+        foreach ($activities as $activity) {
+            array_push($columns, $activity->getName());
+        }
+
+        $columns = array_flip($columns);
+        $columns = $this->parsing->slugArrayKey($columns);
+        $columns = array_flip($columns);
 
         foreach ($input as $data) {
             $input = $this->parsing->slugArrayKey($data);
         }
+
+        $errorColumn = [];
         foreach ($columns as $column) {
             if (!array_key_exists($column, $input)) {
-                array_push($errorColumn, $column);
+                $column = $this->unslugify($column);
+                array_push($errorColumn, 'Le nom de la colonne pour "'.$column.'" ne correspond pas au modèle.');
             }
         }
         return $errorColumn;
+    }
+
+    /**
+     * @param string $input
+     * @return string
+     */
+    private function unslugify(string $input): string
+    {
+        return str_replace('-', ' ', $input);
     }
 }
