@@ -40,7 +40,7 @@ class CalculatingManager
      * @param float $cost
      * @return float
      */
-    private function profit(float $revenue, float $cost)
+    private function profit(float $revenue, float $cost): float
     {
         return $revenue - $cost;
     }
@@ -48,9 +48,9 @@ class CalculatingManager
     /**
      * Compute total revenue of portfolio
      * @param array $housings
-     * @return int
+     * @return float
      */
-    private function revenue(array $housings)
+    private function revenue(array $housings): float
     {
         $profit = 0;
         foreach ($housings as $housing) {
@@ -62,9 +62,9 @@ class CalculatingManager
     /**
      * Compute total hours spent on activities for the whole portfolio
      * @param array $housings
-     * @return false|float
+     * @return float
      */
-    private function totalTime(array $housings)
+    private function totalTime(array $housings): float
     {
         $totalTime = 0;
         foreach ($housings as $housing) {
@@ -87,7 +87,7 @@ class CalculatingManager
      * @param array $housings
      * @return int
      */
-    private function totalLots(array $housings)
+    private function totalLots(array $housings): int
     {
         $totalLots = 0;
         foreach ($housings as $housing) {
@@ -100,9 +100,9 @@ class CalculatingManager
     /**
      * Compute total cost of activities for the whole portfolio
      * @param array $housings
-     * @return float|int
+     * @return float
      */
-    private function globalCost(array $housings)
+    private function globalCost(array $housings): float
     {
         return $this->getHourlyRateRepo->findOneBy([])->getRate() * $this->totalTime($housings);
     }
