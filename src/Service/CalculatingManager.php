@@ -3,20 +3,35 @@
 
 namespace App\Service;
 
+use App\Entity\HourlyRate;
+use App\Repository\HourlyRateRepository;
+
 class CalculatingManager
 {
-    public function profitLot(array $housings): array
+    /**
+     * @var HourlyRateRepository
+     */
+    private $getHourlyRateRepo;
+
+    public function __construct(HourlyRateRepository $hourlyRateRepository)
     {
-        $profit = $this->profit($housings);
-        $totalTime = $this->totalTime($housings);
-        $totalLots = $this->totalLots($housings);
-        dd($profit, $totalTime, $totalLots);
-
-
-        return $housings;
+        $this->getHourlyRateRepo = $hourlyRateRepository;
     }
 
-    private function profit(array $housings)
+    public function profitLot(array $housings): float
+    {
+        $totalLots = $this->totalLots($housings);
+        $profit = $this->profit($this->revenue($housings), $this->globalCost($housings));
+
+        return round($profit / $totalLots, 2);
+    }
+
+    private function profit(float $revenue, float $cost)
+    {
+        return $revenue - $cost;
+    }
+
+    private function revenue(array $housings)
     {
         $profit = 0;
         foreach ($housings as $housing) {
@@ -46,17 +61,14 @@ class CalculatingManager
     private function totalLots(array $housings)
     {
         $totalLots = 0;
-        dd($housings);
         foreach ($housings as $housing) {
             $totalLots += $housing->getNumberLot();
-            var_dump($totalLots);
         }
-        exit();
+        return $totalLots;
     }
 
-
-//    private function globalCost(array $activity)
-//    {
-//
-//    }
+    private function globalCost(array $housings)
+    {
+        return $this->getHourlyRateRepo->findOneBy([])->getRate() * $this->totalTime($housings);
+    }
 }

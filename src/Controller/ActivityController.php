@@ -53,11 +53,6 @@ class ActivityController extends AbstractController
             $housingActivities = $parsingManager->slugArrayKey($parsingManager->activityToKey($housingActivities));
 
             $session->set('housingActivities', $housingActivities);
-            $condos = $parsingManager->mergeActivitiesIntoHousing(
-                $session->get('userHousing'),
-                $session->get('housingActivities')
-            );
-            dd($condos);
 
             $session->set(
                 'condos',
