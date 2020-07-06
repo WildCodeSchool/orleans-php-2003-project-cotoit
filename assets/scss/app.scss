@@ -10,20 +10,8 @@
 @import "activity/activity";
 @import "home_admin";
 
-
-$theme-colors: (
-    "primary": $primary-color,
-    "secondary": $secondary-color,
-);
-
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
-
-@mixin text ($font-weight, $font-size) {
-    font-family: $main-font;
-    font-weight: $font-weight;
-    font-size: $font-size;
-}
 
 html {
     height: 100%;
