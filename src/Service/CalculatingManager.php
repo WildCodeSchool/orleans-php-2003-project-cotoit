@@ -79,7 +79,7 @@ class CalculatingManager
             $hours += $minutes / 60;
             $totalTime += $hours;
         }
-        return round($totalTime, 2);
+        return $totalTime;
     }
 
     /**
