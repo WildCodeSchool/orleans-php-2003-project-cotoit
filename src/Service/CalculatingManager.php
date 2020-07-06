@@ -4,6 +4,7 @@
 namespace App\Service;
 
 use App\Repository\HourlyRateRepository;
+use DivisionByZeroError;
 
 class CalculatingManager
 {
@@ -31,7 +32,11 @@ class CalculatingManager
         $totalLots = $this->totalLots($housings);
         $profit = $this->profit($this->revenue($housings), $this->globalCost($housings));
 
-        return round($profit / $totalLots, 2);
+        if ($totalLots > 0) {
+            return round($profit / $totalLots, 2);
+        } else {
+            throw new DivisionByZeroError('Le nombre total de lots ne peut pas être égal à 0');
+        }
     }
 
     /**
