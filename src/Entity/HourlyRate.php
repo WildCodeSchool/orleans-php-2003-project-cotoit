@@ -18,7 +18,7 @@ class HourlyRate
     private $id;
 
     /**
-     * @ORM\Column(type="float", nullable="false")
+     * @ORM\Column(type="float")
      */
     private $rate;
 

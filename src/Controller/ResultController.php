@@ -25,10 +25,10 @@ class ResultController extends AbstractController
     ) {
         $condos = $session->get('condos');
         $profit = $calculatingManager->profitLot($condos);
-        dd($profit);
 
         return $this->render('result/index.html.twig', [
-            'controller_name' => 'ResultController',
+            'profit' => $profit,
+            'condos' => $condos,
         ]);
     }
 }
