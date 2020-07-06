@@ -13,10 +13,18 @@ class ManualType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('instruction')
-            ->add('calculation')
-        ;
+        $builder->add('instruction', TextareaType::class, [
+            'attr' => [
+                'class' => 'tinymce',
+                'data-theme' => 'advanced',
+            ],
+        ]);
+        $builder->add('calculation', TextareaType::class, [
+            'attr' => [
+                'class' => 'tinymce',
+                'data-theme' => 'advanced',
+            ],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
