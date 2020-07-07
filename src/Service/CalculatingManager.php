@@ -112,7 +112,7 @@ class CalculatingManager
             $hoursTotal = $this->getHourActivities($activities);
 
             $profit = $housing->getFee() - ($hoursTotal * $this->getHourlyRateRepo->findOneBy([])->getRate());
-            $condoProfit[$housing->getName()] = $profit;
+            $condoProfit[$housing->getName()] = round($profit, 2);
         }
         return $condoProfit;
     }
