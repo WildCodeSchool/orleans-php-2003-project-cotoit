@@ -87,6 +87,7 @@ class ParsingManager
 
     public function mergeActivitiesIntoHousing(array $housings, array $activities)
     {
+        $newHousing = [];
         foreach ($housings as $housing) {
             $housingActivities = $housing->getHousingActivities();
 
@@ -98,8 +99,8 @@ class ParsingManager
             $newHousingActivities = $this->slugArrayKey($this->activityToKey($newHousingActivities));
 
             $housing->setHousingActivities($newHousingActivities);
-            array_push($housings, $housing);
+            array_push($newHousing, $housing);
         }
-        return $housings;
+        return $newHousing;
     }
 }

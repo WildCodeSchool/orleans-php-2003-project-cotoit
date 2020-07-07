@@ -75,7 +75,7 @@ class ActivityController extends AbstractController
 
             $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('result_index');
         }
 
         return $this->render('activity/userActivity.html.twig', [
