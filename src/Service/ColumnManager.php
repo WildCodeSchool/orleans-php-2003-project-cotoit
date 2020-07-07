@@ -50,20 +50,19 @@ class ColumnManager
         }
 
         $errorColumn = [];
-        foreach ($columns as $column) {
-            if (!array_key_exists($column, $input)) {
-                $column = $this->unslugify($column);
-                array_push($errorColumn, 'Le nom de la colonne pour "'.$column.'" ne correspond pas au modèle.');
-            }
+        $incorrectColumns = array_diff(array_keys($input), $columns);
+        foreach ($incorrectColumns as $incorrectColumn) {
+            $errorColumn[$this->unslugify($incorrectColumn)] =
+                'Ce nom de colonne ne fait pas partie du modèle. Merci de vous reporter au mode d\'emploi.';
         }
         return $errorColumn;
     }
 
     /**
-     * @param string $input
-     * @return string
+     * @param mixed $input
+     * @return mixed
      */
-    private function unslugify(string $input): string
+    private function unslugify($input)
     {
         return str_replace('-', ' ', $input);
     }
