@@ -104,6 +104,11 @@ class CalculatingManager
         return $this->getHourlyRateRepo->findOneBy([])->getRate() * $this->totalTime($housings);
     }
 
+    /**
+     * Compute profits for each condo
+     * @param array $housings
+     * @return array
+     */
     public function profitabilityCondo(array $housings): array
     {
         $condoProfit = [];
@@ -117,6 +122,11 @@ class CalculatingManager
         return $condoProfit;
     }
 
+    /**
+     * Compute total hours spent on activities for one condo
+     * @param array $activities
+     * @return float
+     */
     private function getHourActivities(array $activities): float
     {
         $hoursTotal = 0;
