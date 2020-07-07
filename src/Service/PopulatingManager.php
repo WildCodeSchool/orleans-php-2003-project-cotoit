@@ -48,7 +48,6 @@ class PopulatingManager
 
             array_push($userHousings, $housing);
         }
-        array_pop($userHousings);
         return $userHousings;
     }
 }
