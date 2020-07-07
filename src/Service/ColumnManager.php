@@ -52,7 +52,7 @@ class ColumnManager
         $errorColumn = [];
         $incorrectColumns = array_diff(array_keys($housings), $columns);
         foreach ($incorrectColumns as $incorrectColumn) {
-            $errorColumn[$this->unslugify($incorrectColumn)] =
+            $errorColumn[$this->removeDash($incorrectColumn)] =
                 'Ce nom de colonne ne fait pas partie du modèle. Merci de vous reporter au mode d\'emploi.';
         }
         return $errorColumn;
@@ -62,7 +62,7 @@ class ColumnManager
      * @param mixed $input
      * @return mixed
      */
-    private function unslugify($input)
+    private function removeDash($input)
     {
         return str_replace('-', ' ', $input);
     }
