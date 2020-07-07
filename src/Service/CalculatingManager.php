@@ -112,11 +112,12 @@ class CalculatingManager
     public function profitabilityCondo(array $housings): array
     {
         $condoProfit = [];
+        $hourlyRate = $this->getHourlyRateRepo->findOneBy([])->getRate();
         foreach ($housings as $housing) {
             $activities = $housing->getHousingActivities();
             $hoursTotal = $this->getHourActivities($activities);
 
-            $profit = $housing->getFee() - ($hoursTotal * $this->getHourlyRateRepo->findOneBy([])->getRate());
+            $profit = $housing->getFee() - ($hoursTotal * $hourlyRate);
             $condoProfit[$housing->getName()] = round($profit, 2);
         }
         return $condoProfit;
