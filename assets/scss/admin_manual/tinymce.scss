@@ -1,0 +1,6 @@
+@import "../vars";
+
+.mce-content-body table tbody tr td,
+.mce-content-body table tbody tr th, {
+    @include text (400, 14px);
+}

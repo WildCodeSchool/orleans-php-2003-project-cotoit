@@ -5,7 +5,7 @@
                     <h3 class="card-title my-auto">Mode de calcul</h3>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">{{ manual.calculation}}</p>
+                    <div class="card-text">{{ manual.calculation | raw}}</div>
                 </div>
             </div>
             <div class="manual card">
@@ -13,7 +13,7 @@
                     <h3 class="card-title my-auto">Mode d'emploi</h3>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">{{ manual.instruction}}</p>
+                    <div class="card-text">{{ manual.instruction | raw}}</div>
                 </div>
             </div>
     </div>

@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Modifier{% endblock %}
+{% block title %}Admin - Index manuels{% endblock %}
 
 {% block main %}
     <div class="adminManuals col">
@@ -12,7 +12,7 @@
                             <h2 class="card-title my-auto">Mode d'emploi</h2>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">{{ manual.instruction}}</p>
+                            {{ manual.instruction | raw}}
                         </div>
                     </div>
                     <div class="adminManuals card">
@@ -20,7 +20,7 @@
                             <h2 class="card-title my-auto">Mode de calcul</h2>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">{{ manual.calculation}}</p>
+                            {{ manual.calculation | raw}}
                         </div>
                     </div>
 
