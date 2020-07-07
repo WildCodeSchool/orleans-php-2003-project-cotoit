@@ -33,7 +33,6 @@ class PopulatingManager
     {
         $userHousings = [];
         foreach ($housings as $property) {
-            array_shift($property);
             $property = $this->parsing->slugArrayKey($property);
             $property['immeuble-de-moins-de-2-ans'] =
                 $this->parsing->convertToZeroOrOne($property['immeuble-de-moins-de-2-ans']);
@@ -49,7 +48,6 @@ class PopulatingManager
 
             array_push($userHousings, $housing);
         }
-        array_pop($userHousings);
         return $userHousings;
     }
 }

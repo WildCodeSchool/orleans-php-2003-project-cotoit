@@ -25,10 +25,16 @@ class ResultController extends AbstractController
     ) {
         $condos = $session->get('condos');
         $profit = $calculatingManager->profitLot($condos);
+        $profitCondo = $calculatingManager->profitabilityCondo($condos);
+
+        arsort($profitCondo, SORT_NUMERIC);
+        $topTenCondos = array_slice($profitCondo, 0, 10, true);
 
         return $this->render('result/index.html.twig', [
-            'profit' => $profit,
             'condos' => $condos,
+            'profit' => $profit,
+            'profitCondo' => $profitCondo,
+            'topTenCondos' => $topTenCondos,
         ]);
     }
 }
