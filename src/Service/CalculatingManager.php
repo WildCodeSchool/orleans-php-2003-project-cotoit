@@ -73,16 +73,8 @@ class CalculatingManager
     {
         $totalTime = 0;
         foreach ($housings as $housing) {
-            $hours = 0;
-            $minutes = 0;
             $activities = $housing->getHousingActivities();
-
-            foreach ($activities as $activity) {
-                $hours += $activity->getHour();
-                $minutes += $activity->getMinute();
-            }
-            $hours += $minutes / 60;
-            $totalTime += $hours;
+            $totalTime += $this->getHourActivities($activities);
         }
         return $totalTime;
     }
@@ -110,5 +102,30 @@ class CalculatingManager
     private function globalCost(array $housings): float
     {
         return $this->getHourlyRateRepo->findOneBy([])->getRate() * $this->totalTime($housings);
+    }
+
+    public function profitabilityCondo(array $housings): array
+    {
+        $condoProfit = [];
+        foreach ($housings as $housing) {
+            $activities = $housing->getHousingActivities();
+            $hoursTotal = $this->getHourActivities($activities);
+
+            $profit = $housing->getFee() - ($hoursTotal * $this->getHourlyRateRepo->findOneBy([])->getRate());
+            $condoProfit[$housing->getName()] = $profit;
+        }
+        return $condoProfit;
+    }
+
+    private function getHourActivities(array $activities): float
+    {
+        $hoursTotal = 0;
+        foreach ($activities as $activity) {
+            $hours = $activity->getHour();
+            $minutes = $activity->getMinute();
+            $hours += $minutes / 60;
+            $hoursTotal += $hours * $activity->getNumber();
+        }
+        return $hoursTotal;
     }
 }
