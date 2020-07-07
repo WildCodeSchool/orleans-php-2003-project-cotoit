@@ -29,10 +29,10 @@ class ColumnManager
     }
 
     /**
-     * @param array $input
+     * @param array $housings
      * @return array
      */
-    public function sameColumn(array $input): array
+    public function sameColumn(array $housings): array
     {
         $columns = $this->populate->getFixedColumn();
 
@@ -45,12 +45,12 @@ class ColumnManager
         $columns = $this->parsing->slugArrayKey($columns);
         $columns = array_flip($columns);
 
-        foreach ($input as $data) {
-            $input = $this->parsing->slugArrayKey($data);
+        foreach ($housings as $housing) {
+            $housings = $this->parsing->slugArrayKey($housing);
         }
 
         $errorColumn = [];
-        $incorrectColumns = array_diff(array_keys($input), $columns);
+        $incorrectColumns = array_diff(array_keys($housings), $columns);
         foreach ($incorrectColumns as $incorrectColumn) {
             $errorColumn[$this->unslugify($incorrectColumn)] =
                 'Ce nom de colonne ne fait pas partie du modèle. Merci de vous reporter au mode d\'emploi.';
