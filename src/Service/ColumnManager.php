@@ -35,15 +35,7 @@ class ColumnManager
     public function sameColumn(array $housings): array
     {
         $columns = $this->populate->getFixedColumn();
-
-        $activities = $this->activityRepository->findBy([]);
-        foreach ($activities as $activity) {
-            array_push($columns, $activity->getName());
-        }
-
-        $columns = array_flip($columns);
-        $columns = $this->parsing->slugArrayKey($columns);
-        $columns = array_flip($columns);
+        $columns = $this->getSluggedColumns($columns);
 
         foreach ($housings as $housing) {
             $housings = $this->parsing->slugArrayKey($housing);
@@ -65,5 +57,21 @@ class ColumnManager
     private function removeDash($input)
     {
         return str_replace('-', ' ', $input);
+    }
+
+    /**
+     * @param array $columns
+     * @return array
+     */
+    private function getSluggedColumns(array $columns): array
+    {
+        $activities = $this->activityRepository->findBy([]);
+        foreach ($activities as $activity) {
+            array_push($columns, $activity->getName());
+        }
+
+        $columns = array_flip($columns);
+        $columns = $this->parsing->slugArrayKey($columns);
+        return array_flip($columns);
     }
 }
