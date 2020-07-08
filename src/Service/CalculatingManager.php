@@ -231,6 +231,7 @@ class CalculatingManager
     }
 
     /**
+     * Compute cost percentage of total cost per activity
      * @param array $deficitHousings
      * @param array $deficitHousingArray
      * @return array
