@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-use App\Entity\Housing;
 use App\Entity\UserActivity;
 use App\Repository\HourlyRateRepository;
 use DivisionByZeroError;
@@ -197,7 +196,7 @@ class CalculatingManager
      * @param array $deficitHousingArray
      * @return array
      */
-    public function costPerCondo(array $deficitHousings, array $deficitHousingArray)
+    public function costsPerCondo(array $deficitHousings, array $deficitHousingArray)
     {
         foreach ($deficitHousings as $deficitHousing) {
             $condoName = $deficitHousing->getName();
@@ -228,6 +227,26 @@ class CalculatingManager
         }
         $deficitHousingArray[$condoName]['totalCost'] = $totalCost;
 
+        return $deficitHousingArray;
+    }
+
+    /**
+     * @param array $deficitHousings
+     * @param array $deficitHousingArray
+     * @return array
+     */
+    public function percentageLossActivity(array $deficitHousings, array $deficitHousingArray): array
+    {
+        $deficitHousingArray = $this->costsPerCondo($deficitHousings, $deficitHousingArray);
+
+        foreach ($deficitHousingArray as $deficitHousingName => $deficitHousing) {
+            $activities = $deficitHousing['activities'];
+            foreach ($activities as $activityName => $activityCost) {
+                $percentage = ($activityCost / $deficitHousing['totalCost']) * 100;
+                $activities[$activityName] = $percentage;
+            }
+            $deficitHousingArray[$deficitHousingName]['activities'] = $activities;
+        }
         return $deficitHousingArray;
     }
 }

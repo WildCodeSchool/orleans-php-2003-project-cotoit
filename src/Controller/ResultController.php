@@ -34,7 +34,8 @@ class ResultController extends AbstractController
         });
 
         $deficitHousings = $calculatingManager->getHousingFromName($condos, array_keys($nonProfitableCondos));
-        $calculatingManager->costPerCondo($deficitHousings, $nonProfitableCondos);
+        $nonProfitableCondos = $calculatingManager->percentageLossActivity($deficitHousings, $nonProfitableCondos);
+        dd($topTenCondos);
 
         return $this->render('result/index.html.twig', [
             'profit' => $profit,
