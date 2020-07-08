@@ -9,21 +9,10 @@
 @import "login";
 @import "activity/activity";
 @import "home_admin";
-
-
-$theme-colors: (
-    "primary": $primary-color,
-    "secondary": $secondary-color,
-);
+@import "admin_manual/tinymce";
 
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
-
-@mixin text ($font-weight, $font-size) {
-    font-family: $main-font;
-    font-weight: $font-weight;
-    font-size: $font-size;
-}
 
 html {
     height: 100%;
@@ -49,6 +38,16 @@ label {
     font-family: $main-font;
 }
 
-.btn.btn-primary {
+.btn {
     border-radius: 30px;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn:active:focus,
+.btn:focus,
+.btn:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
 }

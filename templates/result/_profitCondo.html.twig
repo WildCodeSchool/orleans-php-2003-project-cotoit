@@ -1,0 +1,19 @@
+<div class="top-ten-condo-profit mt-5">
+    <h3>Les 10 copropriétés les plus rentables</h3>
+    <table class="table table-hover">
+        <thead class="table-primary">
+        <tr>
+            <th>Nom copropriété</th>
+            <th>Bénéfices</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for topTenCondoKey, topTenCondoValue in topTenCondos %}
+            <tr>
+                <td>{{ topTenCondoKey }}</td>
+                <td>{{ topTenCondoValue }} €</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

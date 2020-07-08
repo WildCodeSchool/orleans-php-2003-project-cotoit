@@ -1,0 +1,155 @@
+<?php
+
+
+namespace App\Service;
+
+use App\Repository\HourlyRateRepository;
+use DivisionByZeroError;
+
+class CalculatingManager
+{
+    /**
+     * @var HourlyRateRepository
+     */
+    private $getHourlyRateRepo;
+
+    /**
+     * CalculatingManager constructor.
+     * @param HourlyRateRepository $hourlyRateRepository
+     */
+    public function __construct(HourlyRateRepository $hourlyRateRepository)
+    {
+        $this->getHourlyRateRepo = $hourlyRateRepository;
+    }
+
+    /**
+     * Compute profits per lot
+     * @param array $housings
+     * @return float
+     */
+    public function profitLot(array $housings): float
+    {
+        $totalLots = $this->totalLots($housings);
+        $profit = $this->profit($this->revenue($housings), $this->globalCost($housings));
+
+        if ($totalLots > 0) {
+            return round($profit / $totalLots, 2);
+        } else {
+            throw new DivisionByZeroError('Le nombre total de lots ne peut pas être égal à 0');
+        }
+    }
+
+    /**
+     * Compute profitability of whole portfolio
+     * @param array $housings
+     * @return float
+     */
+    public function profitability(array $housings): float
+    {
+        $revenue = $this->revenue($housings);
+        $profit = $this->profit($revenue, $this->globalCost($housings));
+
+        return ($profit / $revenue) * 100;
+    }
+
+    /**
+     * Compute total profit of portfolio
+     * @param float $revenue
+     * @param float $cost
+     * @return float
+     */
+    public function profit(float $revenue, float $cost): float
+    {
+        return $revenue - $cost;
+    }
+
+    /**
+     * Compute total revenue of portfolio
+     * @param array $housings
+     * @return float
+     */
+    public function revenue(array $housings): float
+    {
+        $revenue = 0;
+        foreach ($housings as $housing) {
+            $revenue += $housing->getFee();
+        }
+        return $revenue;
+    }
+
+    /**
+     * Compute total hours spent on activities for the whole portfolio
+     * @param array $housings
+     * @return float
+     */
+    private function totalTime(array $housings): float
+    {
+        $totalTime = 0;
+        foreach ($housings as $housing) {
+            $activities = $housing->getHousingActivities();
+            $totalTime += $this->getHourActivities($activities);
+        }
+        return $totalTime;
+    }
+
+    /**
+     * Compute total number of lots in portfolio
+     * @param array $housings
+     * @return int
+     */
+    private function totalLots(array $housings): int
+    {
+        $totalLots = 0;
+        foreach ($housings as $housing) {
+            $totalLots += $housing->getNumberLot();
+        }
+        return $totalLots;
+    }
+
+
+    /**
+     * Compute total cost of activities for the whole portfolio
+     * @param array $housings
+     * @return float
+     */
+    public function globalCost(array $housings): float
+    {
+        return $this->getHourlyRateRepo->findOneBy([])->getRate() * $this->totalTime($housings);
+    }
+
+    /**
+     * Compute profits for each condo
+     * @param array $housings
+     * @return array
+     */
+    public function profitabilityCondo(array $housings): array
+    {
+        $condoProfit = [];
+        $hourlyRate = $this->getHourlyRateRepo->findOneBy([])->getRate();
+        foreach ($housings as $housing) {
+            $activities = $housing->getHousingActivities();
+            $hoursTotal = $this->getHourActivities($activities);
+
+            $profit = $housing->getFee() - ($hoursTotal * $hourlyRate);
+            $condoProfit[$housing->getName()] = round($profit, 2);
+        }
+        return $condoProfit;
+    }
+
+    /**
+     * Compute total hours spent on activities for one condo
+     * @param array $activities
+     * @return float
+     */
+    private function getHourActivities(array $activities): float
+    {
+        $hoursTotal = 0;
+        foreach ($activities as $activity) {
+            $hours = $activity->getHour();
+            $minutes = $activity->getMinute();
+            $hours += $minutes / 60;
+            $hoursTotal += $hours * $activity->getNumber();
+        }
+        return $hoursTotal;
+    }
+}

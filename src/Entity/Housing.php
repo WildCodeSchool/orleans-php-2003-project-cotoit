@@ -13,21 +13,25 @@ class Housing
 
     /**
      * @var string
+     * @Assert\Length(max = 255, maxMessage="Le nom de la copropriété doit comporter {{ limit }} caractères maximum")
      */
     private $name;
 
     /**
      * @var string
+     * @Assert\Length(max = 100, maxMessage="Le code postal doit comporter {{ limit }} caractères maximum")
      */
     private $postCode;
 
     /**
      * @var float
+     * @Assert\PositiveOrZero(message="L'honoraire doit être égal à 0 ou positif")
      */
     private $fee;
 
     /**
      * @var int
+     * @Assert\PositiveOrZero(message="Le nombre de lot doit être égal à 0 ou positif")
      */
     private $numberLot;
 

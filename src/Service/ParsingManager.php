@@ -43,7 +43,7 @@ class ParsingManager
                                 '#[\s-]+#'
                             ],
                             [
-                                '',
+                                ' ',
                                 '-'
                             ],
                             $this->removeSpecialCharacters($oldKey)
@@ -83,5 +83,24 @@ class ParsingManager
             array_push($newKeys, $activity->getActivity());
         }
         return array_combine($newKeys, $activities);
+    }
+
+    public function mergeActivitiesIntoHousing(array $housings, array $activities)
+    {
+        $newHousing = [];
+        foreach ($housings as $housing) {
+            $housingActivities = $housing->getHousingActivities();
+
+            $newHousingActivities = [];
+            foreach ($activities as $activityKey => $activityValue) {
+                $activityValue->setNumber($housingActivities[$activityKey]);
+                array_push($newHousingActivities, clone $activityValue);
+            }
+            $newHousingActivities = $this->slugArrayKey($this->activityToKey($newHousingActivities));
+
+            $housing->setHousingActivities($newHousingActivities);
+            array_push($newHousing, $housing);
+        }
+        return $newHousing;
     }
 }
