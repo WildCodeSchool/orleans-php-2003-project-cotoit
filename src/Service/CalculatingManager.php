@@ -46,8 +46,8 @@ class CalculatingManager
      */
     public function profitability(array $housings): float
     {
-        $profit = $this->profit($this->revenue($housings), $this->globalCost($housings));
         $revenue = $this->revenue($housings);
+        $profit = $this->profit($revenue, $this->globalCost($housings));
 
         return round(($profit / $revenue) * 100, 1);
     }
