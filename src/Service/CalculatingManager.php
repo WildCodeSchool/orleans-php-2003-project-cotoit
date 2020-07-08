@@ -58,7 +58,7 @@ class CalculatingManager
      * @param float $cost
      * @return float
      */
-    private function profit(float $revenue, float $cost): float
+    public function profit(float $revenue, float $cost): float
     {
         return $revenue - $cost;
     }
@@ -68,13 +68,13 @@ class CalculatingManager
      * @param array $housings
      * @return float
      */
-    private function revenue(array $housings): float
+    public function revenue(array $housings): float
     {
-        $profit = 0;
+        $revenue = 0;
         foreach ($housings as $housing) {
-            $profit += $housing->getFee();
+            $revenue += $housing->getFee();
         }
-        return $profit;
+        return $revenue;
     }
 
     /**
@@ -112,7 +112,7 @@ class CalculatingManager
      * @param array $housings
      * @return float
      */
-    private function globalCost(array $housings): float
+    public function globalCost(array $housings): float
     {
         return $this->getHourlyRateRepo->findOneBy([])->getRate() * $this->totalTime($housings);
     }
