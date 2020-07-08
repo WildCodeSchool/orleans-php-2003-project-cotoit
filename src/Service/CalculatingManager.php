@@ -155,9 +155,7 @@ class CalculatingManager
     {
         $hoursTotal = 0;
         foreach ($activities as $activity) {
-            $hours = $activity->getHour();
-            $minutes = $activity->getMinute();
-            $hours += $this->minutesToHours($minutes);
+            $hours = $this->timeActivity($activity);
             $hoursTotal += $hours * $activity->getNumber();
         }
         return $hoursTotal;
@@ -170,17 +168,7 @@ class CalculatingManager
      */
     private function timeActivity(UserActivity $activity): float
     {
-        return $activity->getHour() + $this->minutesToHours($activity->getMinute());
-    }
-
-    /**
-     * Transform minutes into an hour float
-     * @param int $minutes
-     * @return float
-     */
-    private function minutesToHours(int $minutes): float
-    {
-        return $minutes / 60;
+        return $activity->getHour() + ($activity->getMinute() / 60);
     }
 
     /**
