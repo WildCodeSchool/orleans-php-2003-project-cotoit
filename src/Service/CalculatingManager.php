@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use App\Entity\UserActivity;
 use App\Repository\HourlyRateRepository;
 use DivisionByZeroError;
 
@@ -118,6 +119,16 @@ class CalculatingManager
     }
 
     /**
+     * Compute cost for one activity
+     * @param float $hours
+     * @return float
+     */
+    private function costActivity(float $hours): float
+    {
+        return $hours * $this->getHourlyRateRepo->findOneBy([])->getRate();
+    }
+
+    /**
      * Compute profits for each condo
      * @param array $housings
      * @return array
@@ -151,5 +162,56 @@ class CalculatingManager
             $hoursTotal += $hours * $activity->getNumber();
         }
         return $hoursTotal;
+    }
+
+    /**
+     * Compute hours spent on one activity
+     * @param UserActivity $activity
+     * @return float
+     */
+    private function timeActivity(UserActivity $activity): float
+    {
+        return ($activity->getHour() + ($activity->getMinute() / 60)) * $activity->getNumber();
+    }
+
+    /**
+     * Compute percentage of total cost per activity, globally
+     * @param array $housings
+     * @return array
+     */
+    public function globalPercentageCostActivities(array $housings): array
+    {
+        $activitiesPercent = [];
+        $activitiesPercent['activities'] = [];
+        foreach ($housings as $housing) {
+            $housingActivities = $housing->getHousingActivities();
+
+            $activities = [];
+            foreach ($housingActivities as $housingActivity) {
+                $activities[$housingActivity->getActivity()] = $this->timeActivity($housingActivity);
+            }
+
+            foreach ($activities as $activityName => $activityTime) {
+                if (!array_key_exists($activityName, $activitiesPercent['activities'])) {
+                    $activitiesPercent['activities'][$activityName] = 0;
+                }
+                $activitiesPercent['activities'][$activityName] += $this->costActivity($activityTime);
+            }
+        }
+
+        $activitiesPercent['globalCost'] = $this->globalCost($housings);
+
+        foreach ($activitiesPercent['activities'] as $activityName => $activityCost) {
+            $activitiesPercent['activities'][$activityName] = ($activityCost / $activitiesPercent['globalCost']) * 100;
+        }
+
+        arsort($activitiesPercent['activities'], SORT_NUMERIC);
+        $activitiesPercent['activities'] = array_slice(
+            $activitiesPercent['activities'],
+            0,
+            3,
+            true
+        );
+        return $activitiesPercent;
     }
 }

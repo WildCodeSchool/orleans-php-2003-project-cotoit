@@ -41,6 +41,8 @@ class ResultController extends AbstractController
             return $fee <= 0;
         });
 
+        $activitiesCost = $calculatingManager->globalPercentageCostActivities($condos);
+
         return $this->render('result/index.html.twig', [
             'totalRevenue' => number_format($totalRevenue, 2, '.', ' '),
             'totalProfit' => number_format($totalProfit, 2, '.', ' '),
@@ -50,6 +52,7 @@ class ResultController extends AbstractController
             'topTenCondos' => $topTenCondos,
             'numberCondos' => $numberCondos,
             'nonProfitableCondos' => $nonProfitableCondos,
+            'activitiesCost' => $activitiesCost['activities'],
         ]);
     }
 }
