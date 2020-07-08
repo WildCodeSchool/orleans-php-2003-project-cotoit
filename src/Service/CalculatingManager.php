@@ -204,30 +204,30 @@ class CalculatingManager
     }
 
     /**
-     * Compute the total cost for one condo
-     * @param array $deficitHousings
-     * @param array $deficitHousingArray
+     * Compute the total cost for each condo
+     * @param array $housings
+     * @param array $housingsArray
      * @return array
      */
-    public function costsPerCondo(array $deficitHousings, array $deficitHousingArray)
+    private function costsPerCondo(array $housings, array $housingsArray)
     {
-        foreach ($deficitHousings as $deficitHousing) {
-            $condoName = $deficitHousing->getName();
-            $housingActivities = $deficitHousing->getHousingActivities();
+        foreach ($housings as $housing) {
+            $condoName = $housing->getName();
+            $housingActivities = $housing->getHousingActivities();
 
-            $deficitHousingArray = $this->costPerActivity($deficitHousingArray, $housingActivities, $condoName);
+            $housingsArray = $this->costActivities($housingsArray, $housingActivities, $condoName);
         }
-        return $deficitHousingArray;
+        return $housingsArray;
     }
 
     /**
-     * Compute the cost for one activity
-     * @param array $deficitHousingArray
+     * Compute the total cost for activities of one condo
+     * @param array $housingsArray
      * @param array $activities
      * @param string $condoName
      * @return array
      */
-    private function costPerActivity(array $deficitHousingArray, array $activities, string $condoName): array
+    private function costActivities(array $housingsArray, array $activities, string $condoName): array
     {
         $totalCost = 0;
         foreach ($activities as $activity) {
@@ -236,11 +236,11 @@ class CalculatingManager
             $cost = $this->costActivity($hoursTotal);
             $totalCost += $cost;
 
-            $deficitHousingArray[$condoName]['activities'][$activity->getActivity()] = $cost;
+            $housingsArray[$condoName]['activities'][$activity->getActivity()] = $cost;
         }
-        $deficitHousingArray[$condoName]['totalCost'] = $totalCost;
+        $housingsArray[$condoName]['totalCost'] = $totalCost;
 
-        return $deficitHousingArray;
+        return $housingsArray;
     }
 
     /**
