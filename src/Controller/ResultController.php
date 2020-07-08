@@ -25,6 +25,8 @@ class ResultController extends AbstractController
     ) {
         $condos = $session->get('condos');
 
+        $numberCondos = count($condos);
+
         $totalRevenue = $calculatingManager->revenue($condos);
         $totalCost = $calculatingManager->globalCost($condos);
         $totalProfit = $calculatingManager->profit($totalRevenue, $totalCost);
@@ -46,6 +48,7 @@ class ResultController extends AbstractController
             'profit' => $profit,
             'profitCondo' => $profitCondo,
             'topTenCondos' => $topTenCondos,
+            'numberCondos' => $numberCondos,
             'nonProfitableCondos' => $nonProfitableCondos,
         ]);
     }
