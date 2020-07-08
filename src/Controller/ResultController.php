@@ -25,6 +25,12 @@ class ResultController extends AbstractController
     ) {
         $condos = $session->get('condos');
 
+        $numberCondos = count($condos);
+
+        $totalRevenue = $calculatingManager->revenue($condos);
+        $totalCost = $calculatingManager->globalCost($condos);
+        $totalProfit = $calculatingManager->profit($totalRevenue, $totalCost);
+
         $profit = $calculatingManager->profitLot($condos);
         $profitability = $calculatingManager->profitability($condos);
         $profitCondo = $calculatingManager->profitabilityCondo($condos);
@@ -39,10 +45,13 @@ class ResultController extends AbstractController
         $nonProfitableCondos = $calculatingManager->percentageLossActivity($deficitHousings, $nonProfitableCondos);
 
         return $this->render('result/index.html.twig', [
+            'totalRevenue' => number_format($totalRevenue, 2, '.', ' '),
+            'totalProfit' => number_format($totalProfit, 2, '.', ' '),
             'profitability' => $profitability,
             'profit' => $profit,
             'profitCondo' => $profitCondo,
             'topTenCondos' => $topTenCondos,
+            'numberCondos' => $numberCondos,
             'nonProfitableCondos' => $nonProfitableCondos,
         ]);
     }
