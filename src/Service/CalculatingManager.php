@@ -246,6 +246,14 @@ class CalculatingManager
                 $activities[$activityName] = $percentage;
             }
             $deficitHousingArray[$deficitHousingName]['activities'] = $activities;
+
+            arsort($deficitHousingArray[$deficitHousingName]['activities'], SORT_NUMERIC);
+            $deficitHousingArray[$deficitHousingName]['activities'] = array_slice(
+                $deficitHousingArray[$deficitHousingName]['activities'],
+                0,
+                3,
+                true
+            );
         }
         return $deficitHousingArray;
     }
