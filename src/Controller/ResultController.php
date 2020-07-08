@@ -29,12 +29,15 @@ class ResultController extends AbstractController
 
         arsort($profitCondo, SORT_NUMERIC);
         $topTenCondos = array_slice($profitCondo, 0, 10, true);
+        $nonProfitableCondos = array_filter($profitCondo, function ($fee) {
+            return $fee <= 0;
+        });
 
         return $this->render('result/index.html.twig', [
-            'condos' => $condos,
             'profit' => $profit,
             'profitCondo' => $profitCondo,
             'topTenCondos' => $topTenCondos,
+            'nonProfitableCondos' => $nonProfitableCondos,
         ]);
     }
 }
