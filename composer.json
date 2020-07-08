@@ -5,6 +5,7 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "dompdf/dompdf": "^0.8.5",
         "phpmd/phpmd": "^2.6",
         "sensio/framework-extra-bundle": "^5.1",
         "stfalcon/tinymce-bundle": "2.5",
