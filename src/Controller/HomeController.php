@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Service\ColumnManager;
 use App\Service\PopulatingManager;
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
+use App\Service\ValidatingManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +25,9 @@ class HomeController extends AbstractController
      * @param DecoderInterface $decoder
      * @param ManualRepository $manualRepository
      * @param SessionInterface $session
+     * @param ValidatingManager $validatingManager
      * @param PopulatingManager $populatingManager
+     * @param ColumnManager $columnManager
      * @return Response
      */
     public function index(
@@ -31,7 +35,9 @@ class HomeController extends AbstractController
         DecoderInterface $decoder,
         ManualRepository $manualRepository,
         SessionInterface $session,
-        PopulatingManager $populatingManager
+        ValidatingManager $validatingManager,
+        PopulatingManager $populatingManager,
+        ColumnManager $columnManager
     ) {
         $manual = $manualRepository->findOneBy([]);
 
@@ -45,12 +51,22 @@ class HomeController extends AbstractController
                 'csv'
             ));
 
-            $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
+            $errors = $columnManager->sameColumn($session->get('portfolio'));
+            if (empty($errors)) {
+                $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
+                $errors = $validatingManager->validationLoopForPortfolio($session->get('userHousing'));
+            }
+            if (!empty($errors)) {
+                return $this->render('home/index.html.twig', [
+                    'form' => $form->createView(),
+                    'manual' => $manual,
+                    'errors' => $errors,
+                ]);
+            }
 
             $this->addFlash('success', 'Le fichier a bien été envoyé');
             return $this->redirectToRoute('activity_user_form');
         }
-
         return $this->render('home/index.html.twig', [
             'manual' => $manual,
             'form' => $form->createView(),
