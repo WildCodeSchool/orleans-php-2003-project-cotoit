@@ -4,6 +4,7 @@
 namespace App\Service;
 
 use App\Entity\Housing;
+use App\Entity\UserActivity;
 use App\Repository\HourlyRateRepository;
 use DivisionByZeroError;
 
@@ -94,7 +95,6 @@ class CalculatingManager
         return $totalLots;
     }
 
-
     /**
      * Compute total cost of activities for the whole portfolio
      * @param array $housings
@@ -103,6 +103,16 @@ class CalculatingManager
     private function globalCost(array $housings): float
     {
         return $this->getHourlyRateRepo->findOneBy([])->getRate() * $this->totalTime($housings);
+    }
+
+    /**
+     * Compute cost for one activity
+     * @param float $hours
+     * @return float
+     */
+    private function costActivity(float $hours): float
+    {
+        return $hours * $this->getHourlyRateRepo->findOneBy([])->getRate();
     }
 
     /**
@@ -119,7 +129,7 @@ class CalculatingManager
             $hoursTotal = $this->getHourActivities($activities);
 
             $profit = $housing->getFee() - ($hoursTotal * $hourlyRate);
-            $condoProfit[$housing->getName()] = round($profit, 2);
+            $condoProfit[$housing->getName()]['profit'] = round($profit, 2);
         }
         return $condoProfit;
     }
@@ -135,10 +145,30 @@ class CalculatingManager
         foreach ($activities as $activity) {
             $hours = $activity->getHour();
             $minutes = $activity->getMinute();
-            $hours += $minutes / 60;
+            $hours += $this->minutesToHours($minutes);
             $hoursTotal += $hours * $activity->getNumber();
         }
         return $hoursTotal;
+    }
+
+    /**
+     * Compute hours spent on one activity
+     * @param UserActivity $activity
+     * @return float
+     */
+    private function timeActivity(UserActivity $activity): float
+    {
+        return $activity->getHour() + $this->minutesToHours($activity->getMinute());
+    }
+
+    /**
+     * Transform minutes into an hour float
+     * @param int $minutes
+     * @return float
+     */
+    private function minutesToHours(int $minutes): float
+    {
+        return $minutes / 60;
     }
 
     /**
@@ -159,5 +189,45 @@ class CalculatingManager
             }
         }
         return $selectedHousings;
+    }
+
+    /**
+     * Compute the total cost for one condo
+     * @param array $deficitHousings
+     * @param array $deficitHousingArray
+     * @return array
+     */
+    public function costPerCondo(array $deficitHousings, array $deficitHousingArray)
+    {
+        foreach ($deficitHousings as $deficitHousing) {
+            $condoName = $deficitHousing->getName();
+            $housingActivities = $deficitHousing->getHousingActivities();
+
+            $deficitHousingArray = $this->costPerActivity($deficitHousingArray, $housingActivities, $condoName);
+        }
+        return $deficitHousingArray;
+    }
+
+    /**
+     * Compute the cost for one activity
+     * @param array $deficitHousingArray
+     * @param array $activities
+     * @param string $condoName
+     * @return array
+     */
+    private function costPerActivity(array $deficitHousingArray, array $activities, string $condoName): array
+    {
+        $totalCost = 0;
+        foreach ($activities as $activity) {
+            $hours = $this->timeActivity($activity);
+            $hoursTotal = ($hours * $activity->getNumber());
+            $cost = $this->costActivity($hoursTotal);
+            $totalCost += $cost;
+
+            $deficitHousingArray[$condoName]['activities'][$activity->getActivity()] = $cost;
+        }
+        $deficitHousingArray[$condoName]['totalCost'] = $totalCost;
+
+        return $deficitHousingArray;
     }
 }
