@@ -44,9 +44,9 @@ class ResultController extends AbstractController
     }
 
     /**
-     * @Route("/pdf", name="pdf")
+     * @Route("/pdfResult", name="pdfResult")
      */
-    public function resultpdf()
+    public function exportResutToPDF()
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -55,9 +55,7 @@ class ResultController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('result/pdfResult.html.twig', [
-            'title' => "Welcome to our PDF Test"
-        ]);
+        $html = $this->renderView('result/pdfResult.html.twig');
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
