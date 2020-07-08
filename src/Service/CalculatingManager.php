@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use App\Entity\Housing;
 use App\Repository\HourlyRateRepository;
 use DivisionByZeroError;
 
@@ -138,5 +139,25 @@ class CalculatingManager
             $hoursTotal += $hours * $activity->getNumber();
         }
         return $hoursTotal;
+    }
+
+    /**
+     * Get an array of housing objects based on their name
+     * @param array $housings
+     * @param array $housingNames
+     * @return array
+     */
+    public function getHousingFromName(array $housings, array $housingNames): array
+    {
+        $selectedHousings = [];
+        for ($i = 0; $i < count($housingNames); $i++) {
+            foreach ($housings as $housing) {
+                if ($housing->getName() == $housingNames[$i]) {
+                    $selectedHousings[] = clone $housing;
+                    continue;
+                }
+            }
+        }
+        return $selectedHousings;
     }
 }

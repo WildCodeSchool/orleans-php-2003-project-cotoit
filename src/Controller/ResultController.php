@@ -33,6 +33,9 @@ class ResultController extends AbstractController
             return $fee <= 0;
         });
 
+        $deficitHousings = $calculatingManager->getHousingFromName($condos, array_keys($nonProfitableCondos));
+        dd($deficitHousings);
+
         return $this->render('result/index.html.twig', [
             'profit' => $profit,
             'profitCondo' => $profitCondo,
