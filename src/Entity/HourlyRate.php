@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\HourlyRateRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=HourlyRateRepository::class)
@@ -19,6 +20,8 @@ class HourlyRate
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Le taux horaire ne doit pas être vide")
+     * @Assert\PositiveOrZero(message="Le taux horaire doit être égal à 0 ou positif")
      */
     private $rate;
 
