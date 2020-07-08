@@ -43,7 +43,7 @@ class ParsingManager
                                 '#[\s-]+#'
                             ],
                             [
-                                '',
+                                ' ',
                                 '-'
                             ],
                             $this->removeSpecialCharacters($oldKey)

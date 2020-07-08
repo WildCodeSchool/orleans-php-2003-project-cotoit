@@ -41,6 +41,19 @@ class CalculatingManager
     }
 
     /**
+     * Compute profitability of whole portfolio
+     * @param array $housings
+     * @return float
+     */
+    public function profitability(array $housings): float
+    {
+        $revenue = $this->revenue($housings);
+        $profit = $this->profit($revenue, $this->globalCost($housings));
+
+        return ($profit / $revenue) * 100;
+    }
+
+    /**
      * Compute total profit of portfolio
      * @param float $revenue
      * @param float $cost
