@@ -49,7 +49,7 @@ class CalculatingManager
         $revenue = $this->revenue($housings);
         $profit = $this->profit($revenue, $this->globalCost($housings));
 
-        return round(($profit / $revenue) * 100, 1);
+        return ($profit / $revenue) * 100;
     }
 
     /**
