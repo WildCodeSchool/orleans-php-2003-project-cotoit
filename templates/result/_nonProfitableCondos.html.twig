@@ -1,0 +1,23 @@
+<div class="non-profitable-condo mt-5">
+    <h3>Liste copropriétés non rentables</h3>
+    {% if nonProfitableCondos is not empty %}
+    <table class="table table-hover">
+        <thead class="table-primary">
+        <tr>
+            <th>Nom copropriété</th>
+            <th>Pertes</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for nonProfitableCondosKey, nonProfitableCondosValue in nonProfitableCondos %}
+            <tr>
+                <td>{{ nonProfitableCondosKey }}</td>
+                <td>{{ nonProfitableCondosValue }} €</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {% else %}
+        <p>Aucune copropriété n'est non rentable</p>
+    {% endif %}
+</div>
