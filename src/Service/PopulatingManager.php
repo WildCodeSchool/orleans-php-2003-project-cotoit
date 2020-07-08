@@ -50,4 +50,9 @@ class PopulatingManager
         }
         return $userHousings;
     }
+
+    public function getFixedColumn()
+    {
+        return self::FIXED_COLUMNS;
+    }
 }
