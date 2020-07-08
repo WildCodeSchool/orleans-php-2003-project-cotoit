@@ -27,6 +27,10 @@ class ResultController extends AbstractController
 
         $numberCondos = count($condos);
 
+        $totalRevenue = $calculatingManager->revenue($condos);
+        $totalCost = $calculatingManager->globalCost($condos);
+        $totalProfit = $calculatingManager->profit($totalRevenue, $totalCost);
+
         $profit = $calculatingManager->profitLot($condos);
         $profitability = $calculatingManager->profitability($condos);
         $profitCondo = $calculatingManager->profitabilityCondo($condos);
@@ -38,6 +42,8 @@ class ResultController extends AbstractController
         });
 
         return $this->render('result/index.html.twig', [
+            'totalRevenue' => number_format($totalRevenue, 2, '.', ' '),
+            'totalProfit' => number_format($totalProfit, 2, '.', ' '),
             'profitability' => $profitability,
             'profit' => $profit,
             'profitCondo' => $profitCondo,
