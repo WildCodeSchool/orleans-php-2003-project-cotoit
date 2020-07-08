@@ -24,7 +24,9 @@ class ResultController extends AbstractController
         CalculatingManager $calculatingManager
     ) {
         $condos = $session->get('condos');
+
         $profit = $calculatingManager->profitLot($condos);
+        $profitability = $calculatingManager->profitability($condos);
         $profitCondo = $calculatingManager->profitabilityCondo($condos);
 
         arsort($profitCondo, SORT_NUMERIC);
@@ -34,6 +36,7 @@ class ResultController extends AbstractController
         });
 
         return $this->render('result/index.html.twig', [
+            'profitability' => $profitability,
             'profit' => $profit,
             'profitCondo' => $profitCondo,
             'topTenCondos' => $topTenCondos,
