@@ -9,10 +9,10 @@
         </tr>
         </thead>
         <tbody>
-        {% for nonProfitableCondosKey, nonProfitableCondosValue in nonProfitableCondos %}
+        {% for nonProfitableCondosKey, nonProfitableCondo in nonProfitableCondos %}
             <tr>
                 <td>{{ nonProfitableCondosKey }}</td>
-                <td>{{ nonProfitableCondosValue }} €</td>
+                <td>{{ nonProfitableCondo.profit }} €</td>
             </tr>
         {% endfor %}
         </tbody>

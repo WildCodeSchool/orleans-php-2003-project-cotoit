@@ -8,10 +8,10 @@
         </tr>
         </thead>
         <tbody>
-        {% for topTenCondoKey, topTenCondoValue in topTenCondos %}
+        {% for topTenCondoKey, topTenCondo in topTenCondos %}
             <tr>
                 <td>{{ topTenCondoKey }}</td>
-                <td>{{ topTenCondoValue }} €</td>
+                <td>{{ topTenCondo.profit }} €</td>
             </tr>
         {% endfor %}
         </tbody>
