@@ -107,7 +107,6 @@ class CalculatingManager
         return $totalLots;
     }
 
-
     /**
      * Compute total cost of activities for the whole portfolio
      * @param array $housings
@@ -142,7 +141,7 @@ class CalculatingManager
             $hoursTotal = $this->getHourActivities($activities);
 
             $profit = $housing->getFee() - ($hoursTotal * $hourlyRate);
-            $condoProfit[$housing->getName()] = round($profit, 2);
+            $condoProfit[$housing->getName()]['profit'] = round($profit, 2);
         }
         return $condoProfit;
     }
@@ -156,9 +155,7 @@ class CalculatingManager
     {
         $hoursTotal = 0;
         foreach ($activities as $activity) {
-            $hours = $activity->getHour();
-            $minutes = $activity->getMinute();
-            $hours += $minutes / 60;
+            $hours = $this->timeActivity($activity);
             $hoursTotal += $hours * $activity->getNumber();
         }
         return $hoursTotal;
@@ -171,7 +168,96 @@ class CalculatingManager
      */
     private function timeActivity(UserActivity $activity): float
     {
-        return ($activity->getHour() + ($activity->getMinute() / 60)) * $activity->getNumber();
+        return $activity->getHour() + ($activity->getMinute() / 60);
+    }
+
+    /**
+     * Get an array of housing objects based on their name
+     * @param array $housings
+     * @param array $housingNames
+     * @return array
+     */
+    public function getHousingFromName(array $housings, array $housingNames): array
+    {
+        $selectedHousings = [];
+        for ($i = 0; $i < count($housingNames); $i++) {
+            foreach ($housings as $housing) {
+                if ($housing->getName() == $housingNames[$i]) {
+                    $selectedHousings[] = clone $housing;
+                    continue;
+                }
+            }
+        }
+        return $selectedHousings;
+    }
+
+    /**
+     * Compute the total cost for each condo
+     * @param array $housings
+     * @param array $housingsArray
+     * @return array
+     */
+    private function costsPerCondo(array $housings, array $housingsArray)
+    {
+        foreach ($housings as $housing) {
+            $condoName = $housing->getName();
+            $housingActivities = $housing->getHousingActivities();
+
+            $housingsArray = $this->costActivities($housingsArray, $housingActivities, $condoName);
+        }
+        return $housingsArray;
+    }
+
+    /**
+     * Compute the total cost for activities of one condo
+     * @param array $housingsArray
+     * @param array $activities
+     * @param string $condoName
+     * @return array
+     */
+    private function costActivities(array $housingsArray, array $activities, string $condoName): array
+    {
+        $totalCost = 0;
+        foreach ($activities as $activity) {
+            $hours = $this->timeActivity($activity);
+            $hoursTotal = ($hours * $activity->getNumber());
+            $cost = $this->costActivity($hoursTotal);
+            $totalCost += $cost;
+
+            $housingsArray[$condoName]['activities'][$activity->getActivity()] = $cost;
+        }
+        $housingsArray[$condoName]['totalCost'] = $totalCost;
+
+        return $housingsArray;
+    }
+
+    /**
+     * Compute cost percentage of total cost per activity
+     * @param array $deficitHousings
+     * @param array $deficitHousingArray
+     * @return array
+     */
+    public function percentageLossActivity(array $deficitHousings, array $deficitHousingArray): array
+    {
+        $deficitHousingArray = $this->costsPerCondo($deficitHousings, $deficitHousingArray);
+
+        foreach ($deficitHousingArray as $deficitHousingName => $deficitHousing) {
+            $activities = $deficitHousing['activities'];
+            foreach ($activities as $activityName => $activityCost) {
+                $percentage = ($activityCost / $deficitHousing['totalCost']) * 100;
+                $activities[$activityName] = $percentage;
+            }
+            $deficitHousingArray[$deficitHousingName]['activities'] = $activities;
+
+            arsort($deficitHousingArray[$deficitHousingName]['activities'], SORT_NUMERIC);
+            $deficitHousingArray[$deficitHousingName]['activities'] = array_slice(
+                $deficitHousingArray[$deficitHousingName]['activities'],
+                0,
+                3,
+                true
+            );
+        }
+        return $deficitHousingArray;
     }
 
     /**
