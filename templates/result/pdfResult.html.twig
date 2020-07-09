@@ -1,9 +1,9 @@
-<html>
-<head>
-    <title>Résultats en PDF</title>
-</head>
-<body>
-<h2></h2>
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ absolute_url(asset('build/app.css')) }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
 <div class="container">
     <h1 class="my-5 pb-4">Résultats de l'analyse</h1>
     {% include 'result/_number_condos.html.twig' %}
@@ -15,5 +15,5 @@
     {% include 'result/_activities_cost_percentage.html.twig' %}
     {% include 'result/_nonProfitableCondos.html.twig' %}
 </div>
-</body>
-</html>
+{% endblock main %}
+
