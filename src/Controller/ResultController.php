@@ -38,8 +38,11 @@ class ResultController extends AbstractController
         arsort($profitCondo, SORT_NUMERIC);
         $topTenCondos = array_slice($profitCondo, 0, 10, true);
         $nonProfitableCondos = array_filter($profitCondo, function ($fee) {
-            return $fee <= 0;
+            return $fee['profit'] <= 0;
         });
+
+        $deficitHousings = $calculatingManager->getHousingFromName($condos, array_keys($nonProfitableCondos));
+        $nonProfitableCondos = $calculatingManager->percentageLossActivity($deficitHousings, $nonProfitableCondos);
 
         return $this->render('result/index.html.twig', [
             'totalRevenue' => number_format($totalRevenue, 2, '.', ' '),
