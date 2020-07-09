@@ -89,6 +89,6 @@ class ColumnManager
             array_push($template, $activity->getName());
         }
 
-        return implode(', ', $template);
+        return implode(',', $template);
     }
 }

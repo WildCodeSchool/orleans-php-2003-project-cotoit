@@ -76,6 +76,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/template", name="template")
      * @param ColumnManager $columnManager
+     * @return Response
      */
     public function template(ColumnManager $columnManager)
     {
