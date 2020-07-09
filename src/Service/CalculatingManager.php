@@ -274,7 +274,8 @@ class CalculatingManager
 
             $activities = [];
             foreach ($housingActivities as $housingActivity) {
-                $activities[$housingActivity->getActivity()] = $this->timeActivity($housingActivity);
+                $activities[$housingActivity->getActivity()] =
+                    $this->timeActivity($housingActivity) * $housingActivity->getNumber();
             }
 
             foreach ($activities as $activityName => $activityTime) {
