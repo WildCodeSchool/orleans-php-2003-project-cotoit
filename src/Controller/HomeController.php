@@ -7,13 +7,12 @@ use App\Service\PopulatingManager;
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
 use App\Service\ValidatingManager;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Manual;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 use App\Repository\ManualRepository;
 
@@ -71,5 +70,26 @@ class HomeController extends AbstractController
             'manual' => $manual,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/template", name="template_csv")
+     * @param ColumnManager $columnManager
+     * @return Response
+     */
+    public function template(ColumnManager $columnManager)
+    {
+        $template = $columnManager->getTemplateCsv();
+
+        $response = new Response($template);
+        $response->headers->set('Content-Type', 'text/csv');
+
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_ATTACHMENT,
+            'template.csv'
+        );
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
     }
 }
