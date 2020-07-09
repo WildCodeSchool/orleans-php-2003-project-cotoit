@@ -1,0 +1,19 @@
+<div class="activity-cost mt-5">
+    <h3>Les 3 activités les plus coûteuses du portefeuille</h3>
+    <table class="table table-hover">
+        <thead class="table-primary">
+        <tr>
+            <th>Activité</th>
+            <th>Pourcentage du coût global</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for activity, activity_percent in app.session.get('activitiesCost') %}
+            <tr>
+                <td>{{ activity }}</td>
+                <td>{{ activity_percent|number_format(1, '.') }} %</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

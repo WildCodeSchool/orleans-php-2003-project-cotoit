@@ -1,3 +1,3 @@
 <div class="results-profit">
-    <h2 class="mt-5">Taux de rentabilité portefeuille : {{ profitability|number_format(2, '.') }} %</h2>
+    <h2 class="mt-5">Taux de rentabilité portefeuille : {{ app.session.get('profitability')|number_format(2, '.') }} %</h2>
 </div>
