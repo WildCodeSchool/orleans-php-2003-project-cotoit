@@ -26,19 +26,38 @@ class ResultController extends AbstractController
         CalculatingManager $calculatingManager
     ) {
         $condos = $session->get('condos');
+
+        $numberCondos = count($condos);
+
+        $totalRevenue = $calculatingManager->revenue($condos);
+        $totalCost = $calculatingManager->globalCost($condos);
+        $totalProfit = $calculatingManager->profit($totalRevenue, $totalCost);
+
         $profit = $calculatingManager->profitLot($condos);
+        $profitability = $calculatingManager->profitability($condos);
         $profitCondo = $calculatingManager->profitabilityCondo($condos);
 
         arsort($profitCondo, SORT_NUMERIC);
         $topTenCondos = array_slice($profitCondo, 0, 10, true);
         $nonProfitableCondos = array_filter($profitCondo, function ($fee) {
-            return $fee <= 0;
+            return $fee['profit'] <= 0;
         });
+
+        $activitiesCost = $calculatingManager->globalPercentageCostActivities($condos);
+
+        $deficitHousings = $calculatingManager->getHousingFromName($condos, array_keys($nonProfitableCondos));
+        $nonProfitableCondos = $calculatingManager->percentageLossActivity($deficitHousings, $nonProfitableCondos);
+
 
         $session->set('profit', $profit);
         $session->set('profitCondo', $profitCondo);
         $session->set('topTenCondos', $topTenCondos);
         $session->set('nonProfitableCondos', $nonProfitableCondos);
+        $session->set('totalRevenue', $totalRevenue);
+        $session->set('totalProfit', $totalProfit);
+        $session->set('profitability', $profitability);
+        $session->set('numberCondos', $numberCondos);
+        $session->set('activitiesCost', $activitiesCost['activities']);
 
         return $this->render('result/index.html.twig');
     }
