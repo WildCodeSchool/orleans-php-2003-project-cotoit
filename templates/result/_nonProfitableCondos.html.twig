@@ -1,6 +1,6 @@
 <div class="non-profitable-condo mt-5">
     <h3>Liste copropriétés non rentables</h3>
-    {% if nonProfitableCondos is not empty %}
+    {% if app.session.get('nonProfitableCondos') is not empty %}
     <table class="table table-hover">
         <thead class="table-primary">
         <tr>
@@ -9,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for nonProfitableCondosKey, nonProfitableCondosValue in nonProfitableCondos %}
+        {% for nonProfitableCondosKey, nonProfitableCondosValue in  app.session.get('nonProfitableCondos')  %}
             <tr>
                 <td>{{ nonProfitableCondosKey }}</td>
                 <td>{{ nonProfitableCondosValue }} €</td>

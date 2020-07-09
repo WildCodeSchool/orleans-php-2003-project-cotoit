@@ -35,24 +35,26 @@ class ResultController extends AbstractController
             return $fee <= 0;
         });
 
-        return $this->render('result/index.html.twig', [
-            'profit' => $profit,
-            'profitCondo' => $profitCondo,
-            'topTenCondos' => $topTenCondos,
-            'nonProfitableCondos' => $nonProfitableCondos,
-        ]);
+        $session->set('profit', $profit);
+        $session->set('profitCondo', $profitCondo);
+        $session->set('topTenCondos', $topTenCondos);
+        $session->set('nonProfitableCondos', $nonProfitableCondos);
+
+        return $this->render('result/index.html.twig');
     }
 
-    /**
+
+     /**
      * @Route("/pdfResult", name="pdfResult")
      */
-    public function exportResutToPDF()
+    public function exportResultToPDF()
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
 
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
+
 
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('result/pdfResult.html.twig');

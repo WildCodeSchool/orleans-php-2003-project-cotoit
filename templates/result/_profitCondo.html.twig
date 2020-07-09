@@ -8,8 +8,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for topTenCondoKey, topTenCondoValue in topTenCondos %}
-            <tr>
+        {% for topTenCondoKey, topTenCondoValue in  app.session.get('topTenCondos')  %}
                 <td>{{ topTenCondoKey }}</td>
                 <td>{{ topTenCondoValue }} €</td>
             </tr>
