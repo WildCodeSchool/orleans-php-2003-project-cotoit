@@ -168,7 +168,48 @@ class CalculatingManager
      */
     private function timeActivity(UserActivity $activity): float
     {
-        return $activity->getHour() + ($activity->getMinute() / 60);
+        return ($activity->getHour() + ($activity->getMinute() / 60)) * $activity->getNumber();
+    }
+
+    /**
+     * Compute percentage of total cost per activity, globally
+     * @param array $housings
+     * @return array
+     */
+    public function globalPercentageCostActivities(array $housings): array
+    {
+        $activitiesPercent = [];
+        $activitiesPercent['activities'] = [];
+        foreach ($housings as $housing) {
+            $housingActivities = $housing->getHousingActivities();
+
+            $activities = [];
+            foreach ($housingActivities as $housingActivity) {
+                $activities[$housingActivity->getActivity()] = $this->timeActivity($housingActivity);
+            }
+
+            foreach ($activities as $activityName => $activityTime) {
+                if (!array_key_exists($activityName, $activitiesPercent['activities'])) {
+                    $activitiesPercent['activities'][$activityName] = 0;
+                }
+                $activitiesPercent['activities'][$activityName] += $this->costActivity($activityTime);
+            }
+        }
+
+        $activitiesPercent['globalCost'] = $this->globalCost($housings);
+
+        foreach ($activitiesPercent['activities'] as $activityName => $activityCost) {
+            $activitiesPercent['activities'][$activityName] = ($activityCost / $activitiesPercent['globalCost']) * 100;
+        }
+
+        arsort($activitiesPercent['activities'], SORT_NUMERIC);
+        $activitiesPercent['activities'] = array_slice(
+            $activitiesPercent['activities'],
+            0,
+            3,
+            true
+        );
+        return $activitiesPercent;
     }
 
     /**
