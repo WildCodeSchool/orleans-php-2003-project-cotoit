@@ -74,4 +74,21 @@ class ColumnManager
         $columns = $this->parsing->slugArrayKey($columns);
         return array_flip($columns);
     }
+
+    public function getTemplateCsv(): string
+    {
+        $template = [];
+
+        $fixedColumns = $this->populate->getFixedColumn();
+        foreach ($fixedColumns as $fixedColumn) {
+            array_push($template, ucfirst($this->removeDash($fixedColumn)));
+        }
+
+        $activities = $this->activityRepository->findBy([]);
+        foreach ($activities as $activity) {
+            array_push($template, $activity->getName());
+        }
+
+        return implode(', ', $template);
+    }
 }

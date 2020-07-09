@@ -72,4 +72,17 @@ class HomeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/template", name="template")
+     * @param ColumnManager $columnManager
+     */
+    public function template(ColumnManager $columnManager)
+    {
+        $template = $columnManager->getTemplateCsv();
+        $response = new Response($template);
+        $response->headers->set('Content-Type', 'text/csv');
+
+        return $response;
+    }
 }
