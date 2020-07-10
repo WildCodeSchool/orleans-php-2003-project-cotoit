@@ -103,4 +103,24 @@ class ParsingManager
         }
         return $newHousing;
     }
+
+    /**
+     * @param array $profitCondos
+     * @return array
+     */
+    public function sortProfitCondo(array $profitCondos): array
+    {
+        $unsortedCondos = [];
+        foreach ($profitCondos as $profitCondoKey => $profitCondo) {
+            $unsortedCondos[$profitCondoKey] = $profitCondo['profit'];
+        }
+        arsort($unsortedCondos, SORT_NUMERIC);
+
+        $sortedCondos = [];
+        foreach ($unsortedCondos as $unsortedCondoKey => $unsortedCondo) {
+            $sortedCondos[$unsortedCondoKey]['profit'] = $unsortedCondo;
+        }
+
+        return $sortedCondos;
+    }
 }
