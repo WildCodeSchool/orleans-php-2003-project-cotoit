@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\ParsingManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -21,7 +22,8 @@ class ResultController extends AbstractController
      */
     public function index(
         SessionInterface $session,
-        CalculatingManager $calculatingManager
+        CalculatingManager $calculatingManager,
+        ParsingManager $parsingManager
     ) {
         $condos = $session->get('condos');
 
@@ -34,8 +36,8 @@ class ResultController extends AbstractController
         $profit = $calculatingManager->profitLot($condos);
         $profitability = $calculatingManager->profitability($condos);
         $profitCondo = $calculatingManager->profitabilityCondo($condos);
+        $profitCondo = $parsingManager->sortProfitCondo($profitCondo);
 
-        arsort($profitCondo, SORT_NUMERIC);
         $topTenCondos = array_slice($profitCondo, 0, 10, true);
         $nonProfitableCondos = array_filter($profitCondo, function ($fee) {
             return $fee['profit'] <= 0;
