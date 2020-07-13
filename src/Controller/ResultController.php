@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ParsingManager;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -20,7 +21,9 @@ class ResultController extends AbstractController
      * @Route("/", name="index")
      * @param SessionInterface $session
      * @param CalculatingManager $calculatingManager
+     * @param ParsingManager $parsingManager
      * @return Response
+     * @throws Exception
      */
     public function index(
         SessionInterface $session,
@@ -29,43 +32,47 @@ class ResultController extends AbstractController
     ) {
         $condos = $session->get('condos');
 
-        $numberCondos = count($condos);
+        if (empty($session->get('condos'))) {
+            throw new Exception('Fichier vide. Merci de charger un fichier depuis la page d\'accueil.');
+        } else {
+            $numberCondos = count($condos);
 
-        $totalRevenue = $calculatingManager->revenue($condos);
-        $totalCost = $calculatingManager->globalCost($condos);
-        $totalProfit = $calculatingManager->profit($totalRevenue, $totalCost);
+            $totalRevenue = $calculatingManager->revenue($condos);
+            $totalCost = $calculatingManager->globalCost($condos);
+            $totalProfit = $calculatingManager->profit($totalRevenue, $totalCost);
 
-        $profit = $calculatingManager->profitLot($condos);
-        $profitability = $calculatingManager->profitability($condos);
-        $profitCondo = $calculatingManager->profitabilityCondo($condos);
-        $profitCondo = $parsingManager->sortProfitCondo($profitCondo);
+            $profit = $calculatingManager->profitLot($condos);
+            $profitability = $calculatingManager->profitability($condos);
+            $profitCondo = $calculatingManager->profitabilityCondo($condos);
+            $profitCondo = $parsingManager->sortProfitCondo($profitCondo);
 
-        $topTenCondos = array_slice($profitCondo, 0, 10, true);
-        $nonProfitableCondos = array_filter($profitCondo, function ($fee) {
-            return $fee['profit'] <= 0;
-        });
+            $topTenCondos = array_slice($profitCondo, 0, 10, true);
+            $nonProfitableCondos = array_filter($profitCondo, function ($fee) {
+                return $fee['profit'] <= 0;
+            });
 
-        $activitiesCost = $calculatingManager->globalPercentageCostActivities($condos);
+            $activitiesCost = $calculatingManager->globalPercentageCostActivities($condos);
 
-        $deficitHousings = $calculatingManager->getHousingFromName($condos, array_keys($nonProfitableCondos));
-        $nonProfitableCondos = $calculatingManager->percentageLossActivity($deficitHousings, $nonProfitableCondos);
+            $deficitHousings = $calculatingManager->getHousingFromName($condos, array_keys($nonProfitableCondos));
+            $nonProfitableCondos = $calculatingManager->percentageLossActivity($deficitHousings, $nonProfitableCondos);
 
 
-        $session->set('profit', $profit);
-        $session->set('profitCondo', $profitCondo);
-        $session->set('topTenCondos', $topTenCondos);
-        $session->set('nonProfitableCondos', $nonProfitableCondos);
-        $session->set('totalRevenue', $totalRevenue);
-        $session->set('totalProfit', $totalProfit);
-        $session->set('profitability', $profitability);
-        $session->set('numberCondos', $numberCondos);
-        $session->set('activitiesCost', $activitiesCost['activities']);
+            $session->set('profit', $profit);
+            $session->set('profitCondo', $profitCondo);
+            $session->set('topTenCondos', $topTenCondos);
+            $session->set('nonProfitableCondos', $nonProfitableCondos);
+            $session->set('totalRevenue', $totalRevenue);
+            $session->set('totalProfit', $totalProfit);
+            $session->set('profitability', $profitability);
+            $session->set('numberCondos', $numberCondos);
+            $session->set('activitiesCost', $activitiesCost['activities']);
 
-        return $this->render('result/index.html.twig');
+            return $this->render('result/index.html.twig');
+        }
     }
 
 
-     /**
+    /**
      * @Route("/pdfResult", name="pdfResult")
      */
     public function exportResultToPDF()
