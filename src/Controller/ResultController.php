@@ -49,7 +49,7 @@ class ResultController extends AbstractController
             $topTenCondos = $calculatingManager->topTen($profitCondo);
 
             $nonProfitableCondos = array_filter($profitCondo, function ($fee) {
-            return $fee['profit'] <= 0;
+                return $fee['profit'] <= 0;
             });
 
             $activitiesCost = $calculatingManager->globalPercentageCostActivities($condos);
