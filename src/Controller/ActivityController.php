@@ -8,6 +8,7 @@ use App\Form\HousingActivityType;
 use App\Repository\ActivityRepository;
 use App\Service\ParsingManager;
 use App\Service\ValidatingManager;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class ActivityController extends AbstractController
      * @param ValidatingManager $validatingManager
      * @param ParsingManager $parsingManager
      * @return Response
+     * @throws Exception
      */
     public function customise(
         ActivityRepository $activityRepository,
@@ -51,31 +53,35 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $housingActivities = $housingActivity->getActivities()->toArray();
+            if (empty($session->get('userHousing'))) {
+                throw new Exception('Fichier vide. Merci de charger un fichier depuis la page d\'accueil.');
+            } else {
+                $housingActivities = $housingActivity->getActivities()->toArray();
 
-            $errorMessages = $validatingManager->validationLoop($housingActivities);
+                $errorMessages = $validatingManager->validationLoop($housingActivities);
 
-            if (!empty($errorMessages)) {
-                return $this->render('activity/userActivity.html.twig', [
-                    'form' => $form->createView(),
-                    'errors' => $errorMessages,
-                ]);
+                if (!empty($errorMessages)) {
+                    return $this->render('activity/userActivity.html.twig', [
+                        'form' => $form->createView(),
+                        'errors' => $errorMessages,
+                    ]);
+                }
+
+                $housingActivities = $parsingManager->slugArrayKey($parsingManager->activityToKey($housingActivities));
+                $session->set('housingActivities', $housingActivities);
+
+                $session->set(
+                    'condos',
+                    $parsingManager->mergeActivitiesIntoHousing(
+                        $session->get('userHousing'),
+                        $session->get('housingActivities')
+                    )
+                );
+
+                $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
+
+                return $this->redirectToRoute('result_index');
             }
-
-            $housingActivities = $parsingManager->slugArrayKey($parsingManager->activityToKey($housingActivities));
-            $session->set('housingActivities', $housingActivities);
-
-            $session->set(
-                'condos',
-                $parsingManager->mergeActivitiesIntoHousing(
-                    $session->get('userHousing'),
-                    $session->get('housingActivities')
-                )
-            );
-
-            $this->addFlash('success', 'Le temps dédié pour chaque activité a bien été enregistré');
-
-            return $this->redirectToRoute('result_index');
         }
 
         return $this->render('activity/userActivity.html.twig', [
