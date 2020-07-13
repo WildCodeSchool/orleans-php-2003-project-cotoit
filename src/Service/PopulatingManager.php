@@ -26,7 +26,15 @@ class PopulatingManager
 
     private function stringToInteger(array $activities)
     {
-        return $activities = array_map('intval', $activities);
+        foreach ($activities as $activityName => $activity) {
+            if (is_numeric($activity)) {
+                $activity = intval($activity);
+            } else {
+                $activity = $this->parsing->convertToZeroOrOne($activity);
+            }
+            $activities[$activityName] = $activity;
+        }
+        return $activities;
     }
 
     public function populateHousing(array $housings)
@@ -34,8 +42,6 @@ class PopulatingManager
         $userHousings = [];
         foreach ($housings as $property) {
             $property = $this->parsing->slugArrayKey($property);
-            $property['immeuble-de-moins-de-2-ans'] =
-                $this->parsing->convertToZeroOrOne($property['immeuble-de-moins-de-2-ans']);
 
             $activities = $this->stringToInteger(array_slice($property, count(self::FIXED_COLUMNS), null, true));
 
