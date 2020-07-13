@@ -1,3 +1,7 @@
-<div class="results-profit">
-    <h2 class="mt-5">Taux de rentabilité portefeuille : {{ app.session.get('profitability')|number_format(2, '.') }} %</h2>
+<div class="results-profitability d-flex justify-content-center">
+    <img src="{{ asset('build/images/parler-aux-voisins.png') }}" alt="pouce vers le haut">
+    <div class="ml-3">
+        <h2 class="mt-5">{{ app.session.get('profitability')|number_format(2, '.') }} %</h2>
+        <p>Taux de rentabilité</p>
+    </div>
 </div>

@@ -6,6 +6,7 @@
     <div class="container">
         <h1 class="my-5 pb-4">Résultats de l'analyse</h1>
         <a href="{{ path("result_pdfResult") }}">Résultats en PDF</a>
+
         <div class="results">
             <div class="condos-infos d-flex">
                 <i class="fas fa-building fa-5x"></i>
@@ -23,10 +24,13 @@
                 </div>
             </div>
         </div>
+
         {% include 'result/_profitability.html.twig' %}
 
-        {% include 'result/_profitCondo.html.twig' %}
-        {% include 'result/_activities_cost_percentage.html.twig' %}
-        {% include 'result/_nonProfitableCondos.html.twig' %}
+        <div class="results-table">
+            {% include 'result/_profitCondo.html.twig' %}
+            {% include 'result/_nonProfitableCondos.html.twig' %}
+            {% include 'result/_activities_cost_percentage.html.twig' %}
+        </div>
     </div>
 {% endblock %}
