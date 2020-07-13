@@ -1,3 +1,4 @@
 <div class="total-revenue">
-    <h2 class="mt-5">Chiffre d'affaires du portefeuille : {{ app.session.get('totalRevenue') }} €</h2>
+    <h2>{{ app.session.get('totalRevenue')|number_format(0, '.', ' ') }} €</h2>
+    <p>Chiffre d'affaire du portefeuille</p>
 </div>
