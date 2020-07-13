@@ -1,16 +1,17 @@
 .condos-infos {
     padding: 30px;
-    width: 45%;
+    width: 500px;
     background-color: #F4D049;
-    position: relative;
+    position: absolute;
 }
 
 .cost-result {
     padding: 30px;
-    width: 34%;
+    width: 500px;
     background-color: #FFA9B5;
-    position: absolute;
-
+    position: relative;
+    top: 100px;
+    left: 400px;
 }
 
 .number-condos h2,

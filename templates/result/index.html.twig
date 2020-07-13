@@ -6,23 +6,25 @@
     <div class="container">
         <h1 class="my-5 pb-4">Résultats de l'analyse</h1>
         <a href="{{ path("result_pdfResult") }}">Résultats en PDF</a>
-        <div class="condos-infos d-flex">
-            <i class="fas fa-building fa-5x"></i>
-            <div class="ml-3 col">
-                {% include 'result/_number_condos.html.twig' %}
-                {% include 'result/_total_revenue.html.twig' %}
+        <div class="results">
+            <div class="condos-infos d-flex">
+                <i class="fas fa-building fa-5x"></i>
+                <div class="ml-3 col">
+                    {% include 'result/_number_condos.html.twig' %}
+                    {% include 'result/_total_revenue.html.twig' %}
+                </div>
+            </div>
+
+            <div class="cost-result d-flex">
+                <i class="fas fa-euro-sign fa-5x"></i>
+                <div class="ml-3 col">
+                    {% include 'result/_profit.html.twig' %}
+                    {% include 'result/_total_profit.html.twig' %}
+                </div>
             </div>
         </div>
-
-        <div class="cost-result d-flex">
-            <i class="fas fa-euro-sign fa-5x"></i>
-            <div class="ml-3 col">
-                {% include 'result/_profit.html.twig' %}
-                {% include 'result/_total_profit.html.twig' %}
-            </div>
-        </div>
-
         {% include 'result/_profitability.html.twig' %}
+
         {% include 'result/_profitCondo.html.twig' %}
         {% include 'result/_activities_cost_percentage.html.twig' %}
         {% include 'result/_nonProfitableCondos.html.twig' %}
