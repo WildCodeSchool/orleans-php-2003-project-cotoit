@@ -93,7 +93,11 @@ class ParsingManager
 
             $newHousingActivities = [];
             foreach ($activities as $activityKey => $activityValue) {
-                $activityValue->setNumber($housingActivities[$activityKey]);
+                if (is_int($housingActivities[$activityKey])) {
+                    $activityValue->setNumber($housingActivities[$activityKey]);
+                } else {
+                    $activityValue->setNumber($housingActivities[$activityKey]->getNumber());
+                }
                 array_push($newHousingActivities, clone $activityValue);
             }
             $newHousingActivities = $this->slugArrayKey($this->activityToKey($newHousingActivities));
