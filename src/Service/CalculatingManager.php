@@ -301,4 +301,12 @@ class CalculatingManager
         );
         return $activitiesPercent;
     }
+
+    public function topTen(array $condos): array
+    {
+        $topTenCondos = array_slice($condos, 0, 10, true);
+        return array_filter($topTenCondos, function ($condo) {
+            return $condo['profit'] > 0;
+        });
+    }
 }
