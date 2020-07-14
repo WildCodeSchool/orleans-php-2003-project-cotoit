@@ -46,7 +46,8 @@ class ResultController extends AbstractController
             $profitCondo = $calculatingManager->profitabilityCondo($condos);
             $profitCondo = $parsingManager->sortProfitCondo($profitCondo);
 
-            $topTenCondos = array_slice($profitCondo, 0, 10, true);
+            $topTenCondos = $calculatingManager->topTen($profitCondo);
+
             $nonProfitableCondos = array_filter($profitCondo, function ($fee) {
                 return $fee['profit'] <= 0;
             });
