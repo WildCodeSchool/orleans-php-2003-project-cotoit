@@ -1,18 +1,5 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 <section class="portfolio my-5">
-    <h3 class="mb-4 text-center">Charger mon portefeuille de copropriété</h3>
-    {{ form_start(form) }}
-    <div class="inner-form">
-        {{ form_errors(form.portfolioFileName) }}
-        <div class="my-3">
-            {{ form_widget(form.portfolioFileName) }}
-        </div>
-    </div>
-    <div class="d-flex justify-content-around">
-        <button class="btn btn-primary px-5 mt-2">{{ button_label|default('Valider') }}</button>
-    </div>
-    {{ form_end(form) }}
-
     {% if columnErrors is defined %}
         <div class="d-flex align-items-center flex-column my-5">
             <div class="bubble">
@@ -35,4 +22,17 @@
             </div>
         </div>
     {% endif %}
+
+    <h3 class="mb-4 text-center">Charger mon portefeuille de copropriété</h3>
+    {{ form_start(form) }}
+    <div class="inner-form">
+        {{ form_errors(form.portfolioFileName) }}
+        <div class="my-3">
+            {{ form_widget(form.portfolioFileName) }}
+        </div>
+    </div>
+    <div class="d-flex justify-content-around">
+        <button class="btn btn-primary px-5 mt-2">{{ button_label|default('Valider') }}</button>
+    </div>
+    {{ form_end(form) }}
 </section>
