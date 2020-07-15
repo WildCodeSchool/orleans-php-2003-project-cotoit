@@ -44,6 +44,11 @@ class Activity
      */
     private $minute;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $slug;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,6 +86,18 @@ class Activity
     public function setMinute(int $minute): self
     {
         $this->minute = $minute;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
