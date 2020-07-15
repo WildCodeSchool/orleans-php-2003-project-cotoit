@@ -128,7 +128,7 @@ class ColumnManager
     {
         $errors = [];
         if (empty($housings)) {
-            return 'Le fichier est vide. Merci de vous reporter au mode d\'emploi';
+            array_push($errors, 'Le fichier est vide. Merci de vous reporter au mode d\'emploi');
         } else {
             foreach ($housings as $housingIndex => $housing) {
                 $length = count($this->populate->getFixedColumn());
