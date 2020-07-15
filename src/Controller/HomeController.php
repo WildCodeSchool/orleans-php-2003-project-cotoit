@@ -50,6 +50,15 @@ class HomeController extends AbstractController
                 'csv'
             ));
 
+            $emptyErrors = $columnManager->emptyCheck($session->get('portfolio'));
+            if (!empty($emptyErrors)) {
+                return $this->render('home/index.html.twig', [
+                    'form' => $form->createView(),
+                    'manual' => $manual,
+                    'emptyErrors' => $emptyErrors,
+                ]);
+            }
+
             $columnErrors = $columnManager->sameColumn($session->get('portfolio'));
             if (empty($columnErrors)) {
                 $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
