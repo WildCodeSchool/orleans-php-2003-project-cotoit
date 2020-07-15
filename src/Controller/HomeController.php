@@ -19,7 +19,7 @@ use App\Repository\ManualRepository;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/accueil", name="home")
      * @param Request $request
      * @param DecoderInterface $decoder
      * @param ManualRepository $manualRepository
@@ -73,7 +73,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/template", name="template_csv")
+     * @Route("modele", name="template_csv")
      * @param ColumnManager $columnManager
      * @return Response
      */

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/activity", name="admin_activity_")
+ * @Route("/admin/activite", name="admin_activity_")
  */
 class AdminActivityController extends AbstractController
 {
@@ -29,7 +29,7 @@ class AdminActivityController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier", name="edit", methods={"GET","POST"})
      * @param Request $request
      * @param Activity $activity
      * @return Response
@@ -79,7 +79,7 @@ class AdminActivityController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="new", methods={"GET","POST"})
+     * @Route("/creer", name="new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */

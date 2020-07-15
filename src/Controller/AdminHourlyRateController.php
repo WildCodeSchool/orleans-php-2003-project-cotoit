@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/hourlyRate", name="admin_hourlyRate_")
+ * @Route("/admin/tauxHoraire", name="admin_hourlyRate_")
  */
 class AdminHourlyRateController extends AbstractController
 {
     /**
-     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier", name="edit", methods={"GET","POST"})
      * @param HourlyRate $hourlyRate
      * @param Request $request
      * @return Response

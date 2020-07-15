@@ -74,7 +74,7 @@ class ResultController extends AbstractController
 
 
     /**
-     * @Route("/pdfResult", name="pdfResult")
+     * @Route("/pdfResultat", name="pdfResult")
      */
     public function exportResultToPDF()
     {
