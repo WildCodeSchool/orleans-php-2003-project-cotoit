@@ -131,7 +131,8 @@ class ColumnManager
             return 'Le fichier est vide. Merci de vous reporter au mode d\'emploi';
         } else {
             foreach ($housings as $housingIndex => $housing) {
-                $housingInfos = array_slice($housing, 0, 4, true);
+                $length = count($this->populate->getFixedColumn());
+                $housingInfos = array_slice($housing, 0, $length, true);
                 foreach ($housingInfos as $housingInfoName => $housingInfo) {
                     if (empty($housingInfo)) {
                         array_push(
