@@ -81,12 +81,12 @@ class ColumnManager
 
         $fixedColumns = $this->populate->getFixedColumn();
         foreach ($fixedColumns as $fixedColumn) {
-            array_push($template, ucfirst($this->removeDash($fixedColumn)));
+            array_push($template, $fixedColumn);
         }
 
         $activities = $this->activityRepository->findBy([]);
         foreach ($activities as $activity) {
-            array_push($template, $activity->getName());
+            array_push($template, $activity->getSlug());
         }
 
         return implode(',', $template);
