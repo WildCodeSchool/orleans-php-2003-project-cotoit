@@ -118,4 +118,30 @@ class ColumnManager
 
         return implode(',', $template);
     }
+
+    /**
+     * Check if fixed columns are not empty
+     * @param array $housings
+     * @return array|string
+     */
+    public function emptyCheck(array $housings)
+    {
+        $errors = [];
+        if (empty($housings)) {
+            return 'Le fichier est vide. Merci de vous reporter au mode d\'emploi';
+        } else {
+            foreach ($housings as $housingIndex => $housing) {
+                $housingInfos = array_slice($housing, 0, 4, true);
+                foreach ($housingInfos as $housingInfoName => $housingInfo) {
+                    if (empty($housingInfo)) {
+                        array_push(
+                            $errors,
+                            'Ligne ' . (intval($housingIndex) + 2) . ' : la colonne ' . $housingInfoName . ' est vide.'
+                        );
+                    }
+                }
+            }
+        }
+        return $errors;
+    }
 }

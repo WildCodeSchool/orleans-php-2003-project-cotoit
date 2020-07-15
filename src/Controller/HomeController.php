@@ -50,6 +50,8 @@ class HomeController extends AbstractController
                 'csv'
             ));
 
+//            $emptyCheck = $columnManager->emptyCheck($session->get('portfolio'));
+
             $columnErrors = $columnManager->sameColumn($session->get('portfolio'));
             if (empty($columnErrors)) {
                 $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
