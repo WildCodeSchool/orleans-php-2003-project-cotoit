@@ -1,5 +1,24 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 <section class="portfolio my-5">
+    {% if columnErrors is defined %}
+        <div class="d-flex align-items-center flex-column my-5">
+            <div class="bubble">
+                <div class="bubble-text">
+                    <div class="d-flex align-items-center mx-3">
+                        <i class="fas fa-exclamation-triangle fa-3x mr-3"></i>
+                        <h3 class="mb-0">Votre fichier contient des erreurs</h3>
+                    </div>
+                    <ul class="m-3 p-0">
+                        {% for column, columnError in columnErrors %}
+                            <li class="my-2"><i class="fas fa-caret-square-right mr-2"></i><b>{{ column is empty ? '': column ~ ' : '  }}</b>{{ columnError }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <img src="{{ asset('build/images/Fanny_Cotoit.png') }}" alt="Fanny de Cotoit">
+            </div>
+        </div>
+    {% endif %}
+
     <h3 class="mb-4 text-center">Charger mon portefeuille de copropriété</h3>
     {{ form_start(form) }}
     <div class="inner-form">
@@ -13,3 +32,4 @@
     </div>
     {{ form_end(form) }}
 </section>
+

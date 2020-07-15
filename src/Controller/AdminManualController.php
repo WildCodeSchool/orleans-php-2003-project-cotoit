@@ -24,7 +24,7 @@ class AdminManualController extends AbstractController
     {
 
         $manual = $manualRepository->findOneBy([]);
-        return $this->render('manual/index.html.twig', [
+        return $this->render('admin_manual/index.html.twig', [
             'manual' => $manual,
         ]);
     }
