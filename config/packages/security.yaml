@@ -42,3 +42,5 @@ security:
     - { path: ^/home, role: ROLE_USER }
     - { path: ^/admin, role: ROLE_ADMIN }
     - { path: ^/result, role: ROLE_USER }
+    - { path: ^/activity, role: ROLE_USER }
+
