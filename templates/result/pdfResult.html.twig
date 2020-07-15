@@ -27,7 +27,7 @@
             </div>
 
             <div class="cost-result cost-result-PDF d-flex">
-                <div class="ml-3 col">
+                <div class="col">
                     <div class="results-profit mb-4">
                         <h2>{{ app.session.get('profit')|number_format(0) }} €</h2>
                         <p>Bénéfice moyen par lot</p>
@@ -130,5 +130,6 @@
                 </table>
             </div>
         </div>
+        <p class="text-right"><i>PDF généré par Cotoit</i></p>
     </section>
 {% endblock main %}
