@@ -43,4 +43,5 @@ security:
     - { path: ^/admin, role: ROLE_ADMIN }
     - { path: ^/resultat, role: ROLE_USER }
     - { path: ^/activite, role: ROLE_USER }
-
+    - { path: ^/pdfResultat, role: ROLE_USER }
+    - { path: ^/modele, role: ROLE_USER }
