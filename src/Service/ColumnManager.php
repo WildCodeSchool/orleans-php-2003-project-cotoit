@@ -38,13 +38,9 @@ class ColumnManager
         $columns = $this->populate->getFixedColumn();
         $columns = $this->getSluggedColumns($columns);
 
-        foreach ($housings as $housing) {
-            $housings = $this->parsing->slugArrayKey($housing);
-        }
-
         $errorColumn = [];
 
-        $incorrectColumns = array_diff(array_keys($housings), $columns);
+        $incorrectColumns = array_diff(array_keys($housings[0]), $columns);
         foreach ($incorrectColumns as $incorrectColumn) {
             if (!empty($incorrectColumn)) {
                 $errorColumn[$this->removeDash($incorrectColumn)] =
@@ -55,7 +51,7 @@ class ColumnManager
             }
         }
 
-        $errorColumn = array_merge($errorColumn, $this->missingColumn($columns, $housings));
+        $errorColumn = array_merge($errorColumn, $this->missingColumn($columns, $housings[0]));
         return $errorColumn;
     }
 
@@ -94,12 +90,10 @@ class ColumnManager
     {
         $activities = $this->activityRepository->findBy([]);
         foreach ($activities as $activity) {
-            array_push($columns, $activity->getName());
+            array_push($columns, $activity->getSlug());
         }
 
-        $columns = array_flip($columns);
-        $columns = $this->parsing->slugArrayKey($columns);
-        return array_flip($columns);
+        return $columns;
     }
 
     public function getTemplateCsv(): string
@@ -108,12 +102,12 @@ class ColumnManager
 
         $fixedColumns = $this->populate->getFixedColumn();
         foreach ($fixedColumns as $fixedColumn) {
-            array_push($template, ucfirst($this->removeDash($fixedColumn)));
+            array_push($template, $fixedColumn);
         }
 
         $activities = $this->activityRepository->findBy([]);
         foreach ($activities as $activity) {
-            array_push($template, $activity->getName());
+            array_push($template, $activity->getSlug());
         }
 
         return implode(',', $template);

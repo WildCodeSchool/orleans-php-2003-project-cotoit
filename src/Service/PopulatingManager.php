@@ -41,8 +41,6 @@ class PopulatingManager
     {
         $userHousings = [];
         foreach ($housings as $property) {
-            $property = $this->parsing->slugArrayKey($property);
-
             $activities = $this->stringToInteger(array_slice($property, count(self::FIXED_COLUMNS), null, true));
 
             $housing = new Housing();
