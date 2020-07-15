@@ -48,7 +48,7 @@ class AdminManualController extends AbstractController
             return $this->redirectToRoute('admin_manual_index');
         }
 
-        return $this->render('manual/edit.html.twig', [
+        return $this->render('admin_manual/edit.html.twig', [
             'manual' => $manual,
             'form' => $form->createView(),
         ]);
