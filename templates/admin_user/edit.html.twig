@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Modifier utilisateurs{% endblock %}
+
+{% block main %}
+    <h1>Modifier utilisateur</h1>
+
+    {{ include('admin_user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_user_index') }}">Retour</a>
+
+{% endblock %}
