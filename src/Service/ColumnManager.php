@@ -37,10 +37,6 @@ class ColumnManager
         $columns = $this->populate->getFixedColumn();
         $columns = $this->getSluggedColumns($columns);
 
-        foreach ($housings as $housing) {
-            $housings = $this->parsing->slugArrayKey($housing);
-        }
-
         $errorColumn = [];
         $incorrectColumns = array_diff(array_keys($housings), $columns);
         foreach ($incorrectColumns as $incorrectColumn) {
@@ -67,12 +63,10 @@ class ColumnManager
     {
         $activities = $this->activityRepository->findBy([]);
         foreach ($activities as $activity) {
-            array_push($columns, $activity->getName());
+            array_push($columns, $activity->getSlug());
         }
 
-        $columns = array_flip($columns);
-        $columns = $this->parsing->slugArrayKey($columns);
-        return array_flip($columns);
+        return $columns;
     }
 
     public function getTemplateCsv(): string
