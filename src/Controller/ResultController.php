@@ -87,7 +87,7 @@ class ResultController extends AbstractController
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('result/pdfResult.html.twig');
 
-        $html .= '<link type="text/css" href="/./build/app.css" rel="stylesheet" />';
+        $dompdf->setPaper('A4', 'portrait');
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);

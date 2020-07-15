@@ -4,19 +4,132 @@
 
 {% block stylesheets %}
     <link href="{{ absolute_url(asset('build/app.css')) }}" rel="stylesheet">
+    <style>
+        body {padding-bottom: 0}
+    </style>
 {% endblock %}
 
 {% block main %}
-<div class="container">
-    <h1 class="my-5 pb-4">Résultats de l'analyse</h1>
-    {% include 'result/_number_condos.html.twig' %}
-    {% include 'result/_total_revenue.html.twig' %}
-    {% include 'result/_total_profit.html.twig' %}
-    {% include 'result/_profit.html.twig' %}
-    {% include 'result/_profitability.html.twig' %}
-    {% include 'result/_profitCondo.html.twig' %}
-    {% include 'result/_activities_cost_percentage.html.twig' %}
-    {% include 'result/_nonProfitableCondos.html.twig' %}
-</div>
-{% endblock main %}
+    <section class="m-2">
+        <h1>Résultats de l'analyse</h1>
+        <div class="results-PDF mt-5">
+            <div class="condos-infos condos-infos-PDF d-flex">
+                <div class="col">
+                    <div class="number-condos mb-4">
+                        <h2>{{ app.session.get('numberCondos') }}</h2>
+                        <p>Copropriétés</p>
+                    </div>
+                    <div class="total-revenue">
+                        <h2>{{ app.session.get('totalRevenue')|number_format(0, '.', ' ') }} €</h2>
+                        <p>Chiffre d'affaire du portefeuille</p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="cost-result cost-result-PDF d-flex">
+                <div class="col">
+                    <div class="results-profit mb-4">
+                        <h2>{{ app.session.get('profit')|number_format(0) }} €</h2>
+                        <p>Bénéfice moyen par lot</p>
+                    </div>
+                    <div class="total-profit">
+                        <h2>{{ app.session.get('totalProfit')|number_format(0, '.', ' ') }} €</h2>
+                        <p>Bénéfice total du portefeuille</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-profitability results-profitability-PDF">
+            <div>
+                <h2>{{ app.session.get('profitability')|number_format(1, '.') }} %</h2>
+                <p>Taux de rentabilité</p>
+            </div>
+        </div>
+
+        <div class="results-table results-table-PDF">
+            <div class="top-ten-condo-profit mt-5">
+                {% if app.session.get('topTenCondos') is defined %}
+                    <div class="d-flex align-items-center my-2">
+                        <h3>Le top 10</h3>
+                    </div>
+                    <table class="table table-hover">
+                        <thead class="table-primary">
+                        <tr>
+                            <th>Copropriété</th>
+                            <th>Bénéfices</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for topTenCondoKey, topTenCondo in  app.session.get('topTenCondos') %}
+                            <tr>
+                                <td>{{ topTenCondoKey }}</td>
+                                <td>{{ topTenCondo.profit|number_format(0, '.', ' ') }} €</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucune copropriété n'est rentable</p>
+                {% endif %}
+            </div>
+            <div class="non-profitable-condo mt-5">
+                <div class="d-flex align-items-center my-2">
+                    <h3>Les copropriétés non rentables</h3>
+                </div>
+                {% if app.session.get('nonProfitableCondos') is not empty %}
+                    <table class="table table-hover">
+                        <thead class="table-primary">
+                        <tr>
+                            <th>Copropriété</th>
+                            <th class="text-center">Pertes</th>
+                            <th class="text-center">Coût total copropriété</th>
+                            <th>Activité</th>
+                            <th class="text-center">Pourcentage du coût total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for non_profitable_condo_name, non_profitable_condo in  app.session.get('nonProfitableCondos')  %}
+                            <tr>
+                                <td rowspan="4">{{ non_profitable_condo_name }}</td>
+                                <td rowspan="4" class="text-center">{{ non_profitable_condo.profit|number_format(0, '.', ' ') }} €</td>
+                                <td rowspan="4" class="text-center">{{ non_profitable_condo.totalCost|number_format(0, '.', ' ') }} €</td>
+                            </tr>
+                            {% for activity_name, activity_percentage in non_profitable_condo.activities %}
+                                <tr>
+                                    <td>{{ activity_name }}</td>
+                                    <td class="text-center">{{ activity_percentage|number_format(1, '.') }} %</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucune copropriété n'est non rentable</p>
+                {% endif %}
+            </div>
+            <div class="activity-cost my-5">
+                <div class="d-flex align-items-center my-2">
+                    <h3>Les 3 activités les plus coûteuses du portefeuille</h3>
+                </div>
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                    <tr>
+                        <th>Activité</th>
+                        <th>Pourcentage du coût global</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for activity, activity_percent in app.session.get('activitiesCost') %}
+                        <tr>
+                            <td>{{ activity }}</td>
+                            <td>{{ activity_percent|number_format(1, '.') }} %</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="text-right"><i>PDF généré par Cotoit</i></p>
+    </section>
+{% endblock main %}
