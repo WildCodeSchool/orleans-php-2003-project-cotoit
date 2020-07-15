@@ -51,8 +51,6 @@ class HomeController extends AbstractController
             ));
 
             $emptyErrors = $columnManager->emptyCheck($session->get('portfolio'));
-            dd($emptyErrors);
-
             if (!empty($emptyErrors)) {
                 return $this->render('home/index.html.twig', [
                     'form' => $form->createView(),
