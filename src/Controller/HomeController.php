@@ -50,16 +50,16 @@ class HomeController extends AbstractController
                 'csv'
             ));
 
-            $errors = $columnManager->sameColumn($session->get('portfolio'));
-            if (empty($errors)) {
+            $columnErrors = $columnManager->sameColumn($session->get('portfolio'));
+            if (empty($columnErrors)) {
                 $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
-                $errors = $validatingManager->validationLoopForPortfolio($session->get('userHousing'));
+                $columnErrors = $validatingManager->validationLoopForPortfolio($session->get('userHousing'));
             }
-            if (!empty($errors)) {
+            if (!empty($columnErrors)) {
                 return $this->render('home/index.html.twig', [
                     'form' => $form->createView(),
                     'manual' => $manual,
-                    'errors' => $errors,
+                    'columnErrors' => $columnErrors,
                 ]);
             }
 
