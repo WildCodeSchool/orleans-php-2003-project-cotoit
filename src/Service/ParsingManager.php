@@ -59,25 +59,22 @@ class ParsingManager
 
     public function slug(string $input): string
     {
-
-                trim(
-                    strtolower(
-                        preg_replace(
-                            [
-                                '#[^A-Za-z0-9 \']+#',
-                                '#[\s-]+#'
-                            ],
-                            [
-                                ' ',
-                                '-'
-                            ],
-                            $this->removeSpecialCharacters($input)
-                        )
-                    ),
-                    '-'
-                );
-
-        return $input;
+        return trim(
+            strtolower(
+                preg_replace(
+                    [
+                        '#[^A-Za-z0-9 \']+#',
+                        '#[\s-]+#'
+                    ],
+                    [
+                        ' ',
+                        '-'
+                    ],
+                    $this->removeSpecialCharacters($input)
+                )
+            ),
+            '-'
+        );
     }
 
     public function convertToZeroOrOne(string $input): int
