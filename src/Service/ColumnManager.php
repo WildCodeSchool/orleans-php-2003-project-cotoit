@@ -44,10 +44,10 @@ class ColumnManager
         foreach ($incorrectColumns as $incorrectColumn) {
             if (!empty($incorrectColumn)) {
                 $errorColumn[$this->removeDash($incorrectColumn)] =
-                    'Ce nom de colonne ne fait pas partie du modèle. Merci de vous reporter au mode d\'emploi.';
+                    'Ce nom de colonne ne fait pas partie du modèle.';
             } else {
                 $errorColumn[$this->removeDash($incorrectColumn)] =
-                    'Le nom d\'une colonne est vide. Merci de vous reporter au mode d\'emploi.';
+                    'Le nom d\'une colonne est vide.';
             }
         }
 
@@ -67,7 +67,7 @@ class ColumnManager
         foreach ($columns as $column) {
             if (!array_key_exists($column, $housings)) {
                 $errorColumn[$this->removeDash($column)] =
-                    "Cette colonne est manquante. Merci de vous reporter au mode d'emploi.";
+                    "Cette colonne est manquante.";
             }
         }
         return $errorColumn;
