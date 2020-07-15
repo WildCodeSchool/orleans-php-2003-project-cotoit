@@ -89,6 +89,8 @@ class ResultController extends AbstractController
 
         $html .= '<link type="text/css" href="/./build/app.css" rel="stylesheet" />';
 
+//        $dompdf->setBasePath('/public/build');
+
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
 

@@ -46,3 +46,31 @@
 .results-table img {
     width: 64px;
 }
+
+//PDF view
+.results-PDF {
+    margin: 0;
+}
+
+.results-PDF h2 {
+    color: $primary-color;
+}
+
+.results-profitability-PDF {
+    margin-top: 0;
+    text-align: center;
+}
+
+.results-profitability-PDF h2 {
+    font-size: 40px;
+}
+
+.results-PDF h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.results-PDF p,
+.results-table-PDF h3 {
+    font-size: 16px;
+}
