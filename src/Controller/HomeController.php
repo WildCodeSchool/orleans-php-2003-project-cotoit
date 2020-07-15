@@ -73,7 +73,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("modele", name="template_csv")
+     * @Route("/modele", name="template_csv")
      * @param ColumnManager $columnManager
      * @return Response
      */
