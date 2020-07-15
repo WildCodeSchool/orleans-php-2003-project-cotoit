@@ -4,6 +4,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Activity;
+use App\Service\ParsingManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -60,6 +61,19 @@ class ActivityFixtures extends Fixture
         ],
     ];
 
+    /**
+     * @var ParsingManager
+     */
+    private $parsing;
+
+    public function __construct(ParsingManager $parsing)
+    {
+        $this->parsing = $parsing;
+    }
+
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         foreach (self::ACTIVITIES as $activityName => $time) {
@@ -67,6 +81,7 @@ class ActivityFixtures extends Fixture
             $activity->setName($activityName);
             $activity->setHour($time['hour']);
             $activity->setMinute($time['minute']);
+            $activity->setSlug($this->parsing->slug($activityName));
 
             $manager->persist($activity);
         }
