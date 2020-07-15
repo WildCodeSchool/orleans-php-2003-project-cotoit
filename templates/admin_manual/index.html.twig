@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Admin - Index manuels{% endblock %}
+
+{% block main %}
+    <section class="adminManuals col my-5">
+
+        <div class="row justify-content-md-center">
+            <div class="adminManuals col-6">
+                <h1 class="ml-3 mt-4 mb-5">Administration - Modifier le texte</h1>
+                <div class="adminManuals card">
+                    <div class="card-header">
+                        <h2 class="card-title my-auto">Mode d'emploi</h2>
+                    </div>
+                    <div class="card-body">
+                        {{ manual.instruction | raw }}
+                    </div>
+                </div>
+                <div class="adminManuals card mt-5">
+                    <div class="card-header">
+                        <h2 class="card-title my-auto">Mode de calcul</h2>
+                    </div>
+                    <div class="card-body">
+                        {{ manual.calculation | raw }}
+                    </div>
+                </div>
+                <div class="float-right mr-4">
+                    <a class="btn btn-primary my-5 mr-5"
+                       href="{{ path('admin') }}">Retour</a>
+                    <a class="btn btn-primary my-5 mr-5"
+                       href="{{ path('admin_manual_edit', {'id': manual.id}) }}">Modifier le texte</a>
+                    <a class="btn btn-primary my-5" href="{{ path('admin') }}">Retour accueil administrateur</a>
+                </div>
+            </div>
+            <div class="image">
+                <img src="{{ asset('build/images/girl_with_headphones.png') }}" alt="girl with headphones">
+            </div>
+        </div>
+    </section>
+{% endblock %}

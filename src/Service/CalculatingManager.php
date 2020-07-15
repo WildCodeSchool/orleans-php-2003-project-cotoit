@@ -301,4 +301,17 @@ class CalculatingManager
         );
         return $activitiesPercent;
     }
+
+    /**
+     * Filter 10 most profitable condos
+     * @param array $condos
+     * @return array
+     */
+    public function topTen(array $condos): array
+    {
+        $topTenCondos = array_slice($condos, 0, 10, true);
+        return array_filter($topTenCondos, function ($condo) {
+            return $condo['profit'] > 0;
+        });
+    }
 }

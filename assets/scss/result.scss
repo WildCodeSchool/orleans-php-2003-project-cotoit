@@ -1,0 +1,48 @@
+.results {
+    margin-left: 10%;
+}
+
+.condos-infos,
+.cost-result {
+    padding: 30px;
+    width: 500px;
+}
+
+.condos-infos {
+    background-color: $second-result-color;
+    position: absolute;
+}
+
+.cost-result {
+    background-color: $first-result-color;
+    position: relative;
+    top: 100px;
+    left: 400px;
+}
+
+.number-condos h2,
+.results-profit h2,
+.results-table h3 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.number-condos p,
+.results-profit p,
+.results-profitability p {
+    font-size: 20px;
+}
+
+.results-profitability {
+    margin-top: 120px;
+}
+
+.results-profitability h2 {
+    font-size: 60px;
+    font-weight: bold;
+    color: $primary-color;
+}
+
+.results-table img {
+    width: 64px;
+}
