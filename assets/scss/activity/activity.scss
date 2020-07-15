@@ -8,7 +8,7 @@
     background-color: $secondary-color;
 }
 
-.housing-activity-form .form-fields, {
+.housing-activity-form .form-fields {
     display: flex;
     justify-content: flex-end;
 }
@@ -18,13 +18,13 @@
 }
 
 .housing-activity-form div[id*="housing_activity_activities"],
-.housing-activity-form div[id*="housing_activity_activities"] div,
+.housing-activity-form div[id*="housing_activity_activities"] div
 {
     display: flex;
     justify-content: center;
 }
 
-.housing-activity-form div[id*="housing_activity_activities"] div label, {
+.housing-activity-form div[id*="housing_activity_activities"] div label {
     margin-bottom: 0;
     margin-right: $spacing-sm;
     align-self: center;
