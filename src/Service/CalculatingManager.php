@@ -34,7 +34,7 @@ class CalculatingManager
         $profit = $this->profit($this->revenue($housings), $this->globalCost($housings));
 
         if ($totalLots > 0) {
-            return round($profit / $totalLots, 2);
+            return $profit / $totalLots;
         } else {
             throw new DivisionByZeroError('Le nombre total de lots ne peut pas être égal à 0');
         }
@@ -141,7 +141,7 @@ class CalculatingManager
             $hoursTotal = $this->getHourActivities($activities);
 
             $profit = $housing->getFee() - ($hoursTotal * $hourlyRate);
-            $condoProfit[$housing->getName()]['profit'] = round($profit, 2);
+            $condoProfit[$housing->getName()]['profit'] = $profit;
         }
         return $condoProfit;
     }
