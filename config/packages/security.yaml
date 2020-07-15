@@ -39,8 +39,9 @@ security:
 
   access_control:
     - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/home, role: ROLE_USER }
+    - { path: ^/accueil, role: ROLE_USER }
     - { path: ^/admin, role: ROLE_ADMIN }
-    - { path: ^/result, role: ROLE_USER }
-    - { path: ^/activity, role: ROLE_USER }
-
+    - { path: ^/resultat, role: ROLE_USER }
+    - { path: ^/activite, role: ROLE_USER }  
+    - { path: ^/pdfResultat, role: ROLE_USER }
+    - { path: ^/modele, role: ROLE_USER }

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/manual", name="admin_manual_")
+ * @Route("/admin/manuel", name="admin_manual_")
  */
 class AdminManualController extends AbstractController
 {
@@ -30,7 +30,7 @@ class AdminManualController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Manual $manual): Response
     {
@@ -48,7 +48,7 @@ class AdminManualController extends AbstractController
             return $this->redirectToRoute('admin_manual_index');
         }
 
-        return $this->render('manual/edit.html.twig', [
+        return $this->render('admin_manual/edit.html.twig', [
             'manual' => $manual,
             'form' => $form->createView(),
         ]);

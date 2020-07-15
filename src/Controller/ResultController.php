@@ -13,7 +13,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 /**
- * @Route("/result", name="result_")
+ * @Route("/resultat", name="result_")
  */
 class ResultController extends AbstractController
 {
@@ -74,7 +74,7 @@ class ResultController extends AbstractController
 
 
     /**
-     * @Route("/pdfResult", name="pdfResult")
+     * @Route("/pdfResultat", name="pdfResult")
      */
     public function exportResultToPDF()
     {
