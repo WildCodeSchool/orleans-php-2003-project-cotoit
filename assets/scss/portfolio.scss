@@ -21,3 +21,35 @@ label.custom-file-label {
     left: 100px;
     border: none;
 }
+
+.bubble {
+    width: 600px;
+}
+
+.bubble-text {
+    background-color: $first-result-color;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.bubble-text::after {
+    content: '';
+    margin-left: 150px;
+    margin-top: 14px;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid $first-result-color;
+    position: absolute;
+}
+
+.bubble-text ul {
+    list-style: none;
+}
+
+.bubble-text i {
+    color: $primary-color;
+}
+
+.portfolio img {
+    width: 220px;
+}

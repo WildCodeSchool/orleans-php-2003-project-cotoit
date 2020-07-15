@@ -4,6 +4,7 @@
 
 {% block main %}
     <section class="adminManuals col my-5">
+
         <div class="row justify-content-md-center">
             <div class="adminManuals col-6">
                 <h1 class="ml-3 mt-4 mb-5">Administration - Modifier le texte</h1>
@@ -26,8 +27,9 @@
                 <div class="float-right mr-4">
                     <a class="btn btn-primary my-5 mr-5"
                        href="{{ path('admin') }}">Retour</a>
-                    <a class="btn btn-primary my-5"
+                    <a class="btn btn-primary my-5 mr-5"
                        href="{{ path('admin_manual_edit', {'id': manual.id}) }}">Modifier le texte</a>
+                    <a class="btn btn-primary my-5" href="{{ path('admin') }}">Retour accueil administrateur</a>
                 </div>
             </div>
             <div class="image">
