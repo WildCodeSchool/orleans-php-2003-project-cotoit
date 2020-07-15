@@ -40,7 +40,7 @@ class ColumnManager
 
         $errorColumn = [];
 
-        $incorrectColumns = array_diff(array_keys($housings), $columns);
+        $incorrectColumns = array_diff(array_keys($housings[0]), $columns);
         foreach ($incorrectColumns as $incorrectColumn) {
             if (!empty($incorrectColumn)) {
                 $errorColumn[$this->removeDash($incorrectColumn)] =
@@ -51,7 +51,7 @@ class ColumnManager
             }
         }
 
-        $errorColumn = array_merge($errorColumn, $this->missingColumn($columns, $housings));
+        $errorColumn = array_merge($errorColumn, $this->missingColumn($columns, $housings[0]));
         return $errorColumn;
     }
 
