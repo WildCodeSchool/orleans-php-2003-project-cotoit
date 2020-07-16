@@ -18,7 +18,7 @@ class HousingActivityType extends AbstractType
             'entry_options' => ['label' => false],
         ]);
         $builder->add('Enregistrer', SubmitType::class, [
-            'attr' => ['class' => 'btn btn-primary row ml-2 mb-3'],
+            'attr' => ['class' => 'btn btn-primary row mr-5'],
         ]);
     }
 
