@@ -15,7 +15,7 @@
             {% for topTenCondoKey, topTenCondo in  app.session.get('topTenCondos') %}
                 <tr>
                     <td>{{ topTenCondoKey }}</td>
-                    <td>{{ topTenCondo.profit }} €</td>
+                    <td>{{ topTenCondo.profit|number_format(0, '.', ' ') }} €</td>
                 </tr>
             {% endfor %}
             </tbody>

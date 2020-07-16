@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/activity", name="activity_")
+ * @Route("/activite", name="activity_")
  */
 class ActivityController extends AbstractController
 {

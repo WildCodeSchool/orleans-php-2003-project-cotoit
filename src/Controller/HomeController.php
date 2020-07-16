@@ -19,7 +19,7 @@ use App\Repository\ManualRepository;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/accueil", name="home")
      * @param Request $request
      * @param DecoderInterface $decoder
      * @param ManualRepository $manualRepository
@@ -50,16 +50,25 @@ class HomeController extends AbstractController
                 'csv'
             ));
 
-            $errors = $columnManager->sameColumn($session->get('portfolio'));
-            if (empty($errors)) {
-                $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
-                $errors = $validatingManager->validationLoopForPortfolio($session->get('userHousing'));
-            }
-            if (!empty($errors)) {
+            $emptyErrors = $columnManager->emptyCheck($session->get('portfolio'));
+            if (!empty($emptyErrors)) {
                 return $this->render('home/index.html.twig', [
                     'form' => $form->createView(),
                     'manual' => $manual,
-                    'errors' => $errors,
+                    'emptyErrors' => $emptyErrors,
+                ]);
+            }
+
+            $columnErrors = $columnManager->sameColumn($session->get('portfolio'));
+            if (empty($columnErrors)) {
+                $session->set('userHousing', $populatingManager->populateHousing($session->get('portfolio')));
+                $columnErrors = $validatingManager->validationLoopForPortfolio($session->get('userHousing'));
+            }
+            if (!empty($columnErrors)) {
+                return $this->render('home/index.html.twig', [
+                    'form' => $form->createView(),
+                    'manual' => $manual,
+                    'columnErrors' => $columnErrors,
                 ]);
             }
 
@@ -73,7 +82,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/template", name="template_csv")
+     * @Route("/modele", name="template_csv")
      * @param ColumnManager $columnManager
      * @return Response
      */

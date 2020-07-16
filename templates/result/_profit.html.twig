@@ -1,4 +1,4 @@
 <div class="results-profit mb-4">
-    <h2>{{ app.session.get('profit') }} €</h2>
+    <h2>{{ app.session.get('profit')|number_format(0) }} €</h2>
     <p>Bénéfice moyen par lot</p>
 </div>

@@ -38,24 +38,20 @@ class ColumnManager
         $columns = $this->populate->getFixedColumn();
         $columns = $this->getSluggedColumns($columns);
 
-        foreach ($housings as $housing) {
-            $housings = $this->parsing->slugArrayKey($housing);
-        }
-
         $errorColumn = [];
 
-        $incorrectColumns = array_diff(array_keys($housings), $columns);
+        $incorrectColumns = array_diff(array_keys($housings[0]), $columns);
         foreach ($incorrectColumns as $incorrectColumn) {
             if (!empty($incorrectColumn)) {
                 $errorColumn[$this->removeDash($incorrectColumn)] =
-                    'Ce nom de colonne ne fait pas partie du modèle. Merci de vous reporter au mode d\'emploi.';
+                    'Ce nom de colonne ne fait pas partie du modèle.';
             } else {
                 $errorColumn[$this->removeDash($incorrectColumn)] =
-                    'Le nom d\'une colonne est vide. Merci de vous reporter au mode d\'emploi.';
+                    'Le nom d\'une colonne est vide.';
             }
         }
 
-        $errorColumn = array_merge($errorColumn, $this->missingColumn($columns, $housings));
+        $errorColumn = array_merge($errorColumn, $this->missingColumn($columns, $housings[0]));
         return $errorColumn;
     }
 
@@ -71,7 +67,7 @@ class ColumnManager
         foreach ($columns as $column) {
             if (!array_key_exists($column, $housings)) {
                 $errorColumn[$this->removeDash($column)] =
-                    "Cette colonne est manquante. Merci de vous reporter au mode d'emploi.";
+                    "Cette colonne est manquante.";
             }
         }
         return $errorColumn;
@@ -94,12 +90,10 @@ class ColumnManager
     {
         $activities = $this->activityRepository->findBy([]);
         foreach ($activities as $activity) {
-            array_push($columns, $activity->getName());
+            array_push($columns, $activity->getSlug());
         }
 
-        $columns = array_flip($columns);
-        $columns = $this->parsing->slugArrayKey($columns);
-        return array_flip($columns);
+        return $columns;
     }
 
     public function getTemplateCsv(): string
@@ -108,14 +102,41 @@ class ColumnManager
 
         $fixedColumns = $this->populate->getFixedColumn();
         foreach ($fixedColumns as $fixedColumn) {
-            array_push($template, ucfirst($this->removeDash($fixedColumn)));
+            array_push($template, $fixedColumn);
         }
 
         $activities = $this->activityRepository->findBy([]);
         foreach ($activities as $activity) {
-            array_push($template, $activity->getName());
+            array_push($template, $activity->getSlug());
         }
 
         return implode(',', $template);
+    }
+
+    /**
+     * Check if fixed columns are not empty
+     * @param array $housings
+     * @return array|string
+     */
+    public function emptyCheck(array $housings)
+    {
+        $errors = [];
+        if (empty($housings)) {
+            array_push($errors, 'Le fichier est vide. Merci de vous reporter au mode d\'emploi');
+        } else {
+            foreach ($housings as $housingIndex => $housing) {
+                $length = count($this->populate->getFixedColumn());
+                $housingInfos = array_slice($housing, 0, $length, true);
+                foreach ($housingInfos as $housingInfoName => $housingInfo) {
+                    if (empty($housingInfo)) {
+                        array_push(
+                            $errors,
+                            'Ligne ' . (intval($housingIndex) + 2) . ' : la colonne ' . $housingInfoName . ' est vide.'
+                        );
+                    }
+                }
+            }
+        }
+        return $errors;
     }
 }

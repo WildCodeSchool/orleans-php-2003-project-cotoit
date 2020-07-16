@@ -24,6 +24,11 @@ class Activity
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="L'activité doit comporter un nom")
      * @Assert\Length(max="100", maxMessage="Le nom de l'activité doit comporter {{ limit }} caractères maximum")
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z0-9]+/",
+     *     match=true,
+     *     message="Le nom de l'activité ne peut contenir uniquement des lettres, des chiffres et des espaces"
+     * )
      */
     private $name;
 
@@ -43,6 +48,11 @@ class Activity
      * )
      */
     private $minute;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -81,6 +91,18 @@ class Activity
     public function setMinute(int $minute): self
     {
         $this->minute = $minute;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
