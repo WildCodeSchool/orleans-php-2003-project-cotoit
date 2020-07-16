@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Page non trouvée{% endblock %}
+
+{% block main %}
+    <section class="my-5 text-center">
+        <div>
+            <h1>Oups...</h1>
+            <h2>La page que vous cherchez semble ne pas exister.</h2>
+            <img class="not-found-img" src="{{ asset('build/images/not-found-img.png') }}" alt="Page non trouvée">
+        </div>
+        <div class="mt-5">
+            <a class="btn btn-outline-primary" href="{{ path('home') }}">Retour à la page d'accueil</a>
+        </div>
+    </section>
+{% endblock %}
