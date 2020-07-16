@@ -28,10 +28,12 @@
                     </p>
                 </div>
             </div>
-            <button class="btn btn-secondary float-right mb-5">Enregistrer</button>
-            <a class="btn text-primary float-right mb-5" href="{{ path('admin_manual_index') }}">Retour</a>
 
-
+            <div class="d-flex justify-content-end mr-5 mb-5">
+                <a class="btn btn-primary mr-5"
+                   href="{{ path('admin_manual_index') }}">Retour</a>
+                <button class="btn btn-primary mr-2">Enregistrer</button>
+            </div>
             {{ form_end(form) }}
         </div>
         <div class="image">
