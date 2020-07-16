@@ -30,6 +30,9 @@ class AdminUserController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
      */
     public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -39,6 +42,9 @@ class AdminUserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $pseudo = $user->getUsername();
+            $user->setUsername($pseudo);
+
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
