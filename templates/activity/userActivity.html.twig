@@ -24,7 +24,10 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="buttons d-flex ml-2">
+            {{ form_widget(form.Enregistrer) }}
+            <a class="btn btn-sm btn-primary my-auto" href="{{ path('home') }}">Retour accueil</a>
+        </div>
         {{ form_end(form) }}
-        <a class="btn btn-secondary float-right mb-5" href="{{ path('home') }}">Retour accueil</a>
     </section>
 {% endblock %}

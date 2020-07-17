@@ -3,9 +3,12 @@
 {% block title %}Résultats{% endblock %}
 
 {% block main %}
-    <div class="container">
+    <div class="container" id="top">
         <h1 class="my-5">Résultats de l'analyse</h1>
-        <a class="btn btn-primary" href="{{ path("result_pdfResult") }}">Résultats en PDF</a>
+        <div class="buttons d-flex justify-content-between">
+            <a class="btn btn-outline-primary mr-5" href="{{ path('result_pdfResult') }}">Résultats en PDF</a>
+            <a class="btn btn-sm btn-primary my-auto mr-5" href="{{ path('activity_user_form') }}">Retour formulaire</a>
+        </div>
 
         <div class="results mt-5">
             <div class="condos-infos d-flex">
@@ -33,4 +36,6 @@
             {% include 'result/_activities_cost_percentage.html.twig' %}
         </div>
     </div>
+    <a href="#nav" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 {% endblock %}
+
