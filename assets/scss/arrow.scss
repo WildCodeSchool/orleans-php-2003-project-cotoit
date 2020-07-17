@@ -9,14 +9,13 @@
     height: 50px;
     display: block;
     text-decoration: none;
-    -webkit-border-radius: 35px;
-    -moz-border-radius: 35px;
     border-radius: 35px;
     transition: all 0.3s ease;
+    z-index: 1;
 }
 
 #return-to-top i {
-    color: #fff;
+    color: $secondary-background-color;
     margin: 0;
     position: relative;
     left: 16px;
@@ -30,6 +29,6 @@
 }
 
 #return-to-top:hover i {
-    color: #fff;
+    color: $secondary-background-color;
     top: 5px;
 }

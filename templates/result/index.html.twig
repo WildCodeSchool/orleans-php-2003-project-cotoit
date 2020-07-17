@@ -3,7 +3,7 @@
 {% block title %}Résultats{% endblock %}
 
 {% block main %}
-    <div class="container">
+    <div class="container" id="top">
         <h1 class="my-5">Résultats de l'analyse</h1>
         <div class="buttons d-flex justify-content-between">
             <a class="btn btn-outline-primary mr-5" href="{{ path('result_pdfResult') }}">Résultats en PDF</a>
@@ -36,9 +36,6 @@
             {% include 'result/_activities_cost_percentage.html.twig' %}
         </div>
     </div>
-    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+    <a href="#nav" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 {% endblock %}
-    {% block javascripts %}
-        {{ encore_entry_script_tags('arrow') }}
-    {% endblock %}
 
