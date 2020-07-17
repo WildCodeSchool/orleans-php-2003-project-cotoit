@@ -1,7 +1,6 @@
 const $ = require('jquery');
 
-function checkScroll()
-{
+function checkScroll() {
     if ($(this).scrollTop() >= 50) {
         $('#return-to-top').fadeIn(200);
     } else {
