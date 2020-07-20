@@ -15,12 +15,13 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('password', RepeatedType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passse doivent corresponde',
                 'required' => true,
                 'first_options' => ['label' => 'Nouveau mot de passe'],
-                'second_options' => ['label' => 'Répétez le mot de passe'], ])
+                'second_options' => ['label' => 'Répétez le mot de passe'],
+                'mapped' => false, ])
         ;
     }
 
