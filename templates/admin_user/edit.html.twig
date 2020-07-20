@@ -3,10 +3,10 @@
 {% block title %}Modifier utilisateurs{% endblock %}
 
 {% block main %}
-    <h1>Modifier utilisateur</h1>
+    <section class="admin-activity-form container my-4">
+        <h1>Modifier utilisateur</h1>
 
-    {{ include('admin_user/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('admin_user/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a class="btn btn-primary" href="{{ path('admin_user_index') }}">Retour</a>
-
+    </section>
 {% endblock %}
