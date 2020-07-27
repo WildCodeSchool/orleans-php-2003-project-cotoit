@@ -21,10 +21,8 @@
                     <td>{{ user.username }}</td>
                     {% if user.roles == ["ROLE_USER"] %}
                         <td>Utilisateur</td>
-                    {% elseif user.roles == ["ROLE_ADMIN"] %}
-                        <td>Administrateur</td>
                     {% else %}
-                        <td>Non défini</td>
+                        <td>Administrateur</td>
                     {% endif %}
                     <td>
                         <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><i class="fas fa-edit"></i></a>
