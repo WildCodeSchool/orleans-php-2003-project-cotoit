@@ -1,33 +1,31 @@
-<section class="manuals container-fluid">
+<section class="admin-index container text-center my-5">
+    <h1>Bienvenue sur l'espace administrateur</h1>
+    <img class="logo-edit my-4" src="{{ asset('build/images/edit.png') }}" alt="Logo-Cotoit">
 
-    <h1 class="mt-5 text-center">Bienvenue sur l'espace administrateur</h1>
+    <div class="row text-center mb-5">
+        <div class="col">
+            <a href="{{ path('admin_activity_index') }}">
+                Modifier les activités
+            </a>
+        </div>
+        
+        <div class="col">
+            <a href="{{ path('admin_manual_index') }}">
+                Modifier le manuel
+            </a>
+        </div>
+    </div>
 
-    <img class="logo-edit mt-5" src="{{ asset('build/images/edit.png') }}" alt="Logo-Cotoit">
-
-    <div class="row">
-
-        <div class="card col mx-3 px-0 col-5 mb-5 ml-5 mt-5 text-center">
-                <div class="card-body">
-                    <a href="{{ path('admin_activity_index') }}" class="card-text">Modifier les activités</a>
-                </div>
-            </div>
-
-            <div class="card col mx-3 px-0 col-5 mb-5 ml-5 mt-5 text-center">
-                <div class="card-body">
-                    <a href="{{ path('admin_manual_index') }}" class="card-text">Modifier le manuel</a>
-                </div>
-            </div>
-
-            <div class="card col mx-3 px-0 col-5 mb-5 ml-5 mt-5 text-center">
-                <div class="card-body">
-                    <a href="{{ path('admin_hourlyRate_edit', {'id': hourlyRate.id}) }}" class="card-text">Modifier le taux horaire</a>
-                </div>
-            </div>
-
-            <div class="card col mx-3 px-0 col-5 mb-5 ml-5 mt-5 text-center">
-                <div class="card-body">
-                    <a href="{{ path('admin_user_index') }}" class="card-text">Modifier les identifiants</a>
-                </div>
-            </div>
+    <div class="row text-center">
+        <div class="col">
+            <a href="{{ path('admin_hourlyRate_edit', {'id': hourlyRate.id}) }}">
+                Modifier le taux horaire
+            </a>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_user_index') }}">
+                Modifier les identifiants
+            </a>
+        </div>
     </div>
 </section>
