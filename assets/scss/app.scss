@@ -5,6 +5,7 @@
 @import "footer";
 @import "admin_activity/index";
 @import "admin_activity/form";
+@import "admin_hourly_rate/form";
 @import "portfolio";
 @import "login";
 @import "activity/activity";
@@ -12,12 +13,14 @@
 @import "admin_manual/tinymce";
 @import "result";
 @import "error";
+@import "arrow";
 
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
 
 html {
     height: 100%;
+    scroll-behavior: smooth;
 }
 
 body {

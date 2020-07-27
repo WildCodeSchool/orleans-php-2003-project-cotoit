@@ -1,0 +1,34 @@
+@import "vars";
+
+#return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: $secondary-color;
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    border-radius: 35px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+#return-to-top i {
+    color: $secondary-background-color;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    transition: all 0.3s ease;
+}
+
+#return-to-top:hover {
+    background: $primary-color;
+}
+
+#return-to-top:hover i {
+    color: $secondary-background-color;
+    top: 5px;
+}
