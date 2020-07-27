@@ -2,22 +2,29 @@
     <h1>Bienvenue sur l'espace administrateur</h1>
     <img class="logo-edit my-4" src="{{ asset('build/images/edit.png') }}" alt="Logo-Cotoit">
 
-    <div class="row text-center">
-        <div class="col mr-3">
+    <div class="row text-center mb-5">
+        <div class="col">
             <a href="{{ path('admin_activity_index') }}">
                 Modifier les activités
             </a>
         </div>
         
-        <div class="col mr-3">
+        <div class="col">
             <a href="{{ path('admin_manual_index') }}">
                 Modifier le manuel
             </a>
         </div>
-        
+    </div>
+
+    <div class="row text-center">
         <div class="col">
             <a href="{{ path('admin_hourlyRate_edit', {'id': hourlyRate.id}) }}">
                 Modifier le taux horaire
+            </a>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_user_index') }}">
+                Modifier les identifiants
             </a>
         </div>
     </div>
