@@ -11,14 +11,19 @@
             <thead>
             <tr>
                 <th>Nom d'utilisateur</th>
+                <th>Rôle</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for user in users %}
                 <tr>
-
                     <td>{{ user.username }}</td>
+                    {% if user.roles == ["ROLE_USER"] %}
+                        <td>Utilisateur</td>
+                    {% else %}
+                        <td>Administrateur</td>
+                    {% endif %}
                     <td>
                         <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><i class="fas fa-edit"></i></a>
                     </td>
