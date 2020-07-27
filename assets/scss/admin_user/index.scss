@@ -1,0 +1,19 @@
+@import "../vars";
+
+.admin-user-index thead tr th {
+  background-color: $secondary-color;
+}
+
+.admin-user-index:hover thead tr th {
+  background-color: $secondary-color;
+}
+
+.admin-user-index .fa-edit,
+.admin-user-index .fa-trash-alt {
+  font-size: 16px;
+  color: $secondary-color;
+}
+
+.admin-user-index .table td {
+  vertical-align: middle;
+}
