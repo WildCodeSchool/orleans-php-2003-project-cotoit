@@ -3,39 +3,42 @@
 {% block title %}Résultats{% endblock %}
 
 {% block main %}
-    <div class="container" id="top">
-        <h1 class="my-5">Résultats de l'analyse</h1>
-        <div class="buttons d-flex justify-content-between">
-            <a class="btn btn-outline-primary mr-5" href="{{ path('result_pdfResult') }}">Résultats en PDF</a>
-            <a class="btn btn-sm btn-primary my-auto mr-5" href="{{ path('activity_user_form') }}">Retour formulaire</a>
-        </div>
+    <section class="all-results">
+        <div class="container" id="top">
+            <h1 class="my-5">Résultats de l'analyse</h1>
+            <div class="buttons d-flex justify-content-between">
+                <a class="btn btn-outline-primary mr-5" href="{{ path('result_pdfResult') }}">Résultats en PDF</a>
+                <a class="btn btn-sm btn-primary my-auto mr-5" href="{{ path('activity_user_form') }}">Retour
+                    formulaire</a>
+            </div>
 
-        <div class="results mt-5">
-            <div class="condos-infos d-flex">
-                <i class="fas fa-building fa-5x"></i>
-                <div class="ml-3 col">
-                    {% include 'result/_number_condos.html.twig' %}
-                    {% include 'result/_total_revenue.html.twig' %}
+            <div class="results mt-5">
+                <div class="condos-infos d-flex">
+                    <i class="fas fa-building fa-5x"></i>
+                    <div class="ml-3 col">
+                        {% include 'result/_number_condos.html.twig' %}
+                        {% include 'result/_total_revenue.html.twig' %}
+                    </div>
+                </div>
+
+                <div class="cost-result d-flex">
+                    <i class="fas fa-euro-sign fa-5x"></i>
+                    <div class="ml-3 col">
+                        {% include 'result/_profit.html.twig' %}
+                        {% include 'result/_total_profit.html.twig' %}
+                    </div>
                 </div>
             </div>
 
-            <div class="cost-result d-flex">
-                <i class="fas fa-euro-sign fa-5x"></i>
-                <div class="ml-3 col">
-                    {% include 'result/_profit.html.twig' %}
-                    {% include 'result/_total_profit.html.twig' %}
-                </div>
+            {% include 'result/_profitability.html.twig' %}
+
+            <div class="results-table">
+                {% include 'result/_profitCondo.html.twig' %}
+                {% include 'result/_nonProfitableCondos.html.twig' %}
+                {% include 'result/_activities_cost_percentage.html.twig' %}
             </div>
         </div>
-
-        {% include 'result/_profitability.html.twig' %}
-
-        <div class="results-table">
-            {% include 'result/_profitCondo.html.twig' %}
-            {% include 'result/_nonProfitableCondos.html.twig' %}
-            {% include 'result/_activities_cost_percentage.html.twig' %}
-        </div>
-    </div>
-    <a href="#nav" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+        <a href="#nav" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+    </section>
 {% endblock %}
 
