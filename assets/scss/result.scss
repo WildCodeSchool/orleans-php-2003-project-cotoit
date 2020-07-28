@@ -47,6 +47,24 @@
     width: 64px;
 }
 
+.all-results thead tr th {
+    background-color: $secondary-color;
+}
+
+.all-results:hover thead tr th {
+    background-color: $secondary-color;
+}
+
+.all-results .fa-edit,
+.all-results .fa-trash-alt {
+    font-size: 16px;
+    color: $secondary-color;
+}
+
+.all-results .table td {
+    vertical-align: middle;
+}
+
 //PDF view
 .results-PDF {
     margin: 0;
