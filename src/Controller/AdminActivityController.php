@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
-use App\Form\UserActivityType;
+use App\Service\ParsingManager;
 use App\Form\AdminActivityType;
 use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,14 +32,16 @@ class AdminActivityController extends AbstractController
      * @Route("/{id}/modifier", name="edit", methods={"GET","POST"})
      * @param Request $request
      * @param Activity $activity
+     * @param ParsingManager $parsingManager
      * @return Response
      */
-    public function edit(Request $request, Activity $activity): Response
+    public function edit(Request $request, Activity $activity, ParsingManager $parsingManager): Response
     {
         $form = $this->createForm(AdminActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $activity->setSlug($parsingManager->slug($activity->getName() ?? ''));
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(
@@ -81,15 +83,17 @@ class AdminActivityController extends AbstractController
     /**
      * @Route("/creer", name="new", methods={"GET","POST"})
      * @param Request $request
+     * @param ParsingManager $parsingManager
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ParsingManager $parsingManager): Response
     {
         $activity = new Activity();
         $form = $this->createForm(AdminActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $activity->setSlug($parsingManager->slug($activity->getName() ?? ''));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($activity);
             $entityManager->flush();
